@@ -15,7 +15,6 @@ public class SystemUIEditor : Editor
     [InitializeOnLoadMethod]
     private static void InitEditor()
     {
-        Debug.Log("SystemUIEditor Init");
         //监听heirarchy面板事件，当hierarchy面板发生改变时触发
         EditorApplication.hierarchyChanged += HandleTextOrImageRaycast;
         EditorApplication.hierarchyChanged += LoadWindowCamera;

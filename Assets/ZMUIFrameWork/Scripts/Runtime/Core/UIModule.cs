@@ -53,9 +53,9 @@ public class UIModule : Singleton<UIModule>
     public void Initialize()
     {
         // 获取 UI 摄像机
-        this.mUICamera = GameObject.Find("UICamera").GetComponent<Camera>();
+        this.mUICamera = GameObject.Find("GameMain/UICamera").GetComponent<Camera>();
         // 获取 UI 根节点
-        this.mUIRoot = GameObject.Find("UIRoot").transform;
+        this.mUIRoot = GameObject.Find("GameMain/UIRoot").transform;
         // 加载窗口配置表
         this.mwindowConfig = Resources.Load<WindowConfig>("WindowConfig");
 

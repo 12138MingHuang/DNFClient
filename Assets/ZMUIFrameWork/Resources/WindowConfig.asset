@@ -13,21 +13,5 @@ MonoBehaviour:
   m_Name: WindowConfig
   m_EditorClassIdentifier: 
   windowPathList:
-  - TestWindow
-  windowList:
-  - name: AccountWindow
-    path: TestWindow/AccountWindow
-  - name: ChatWindow
-    path: TestWindow/ChatWindow
-  - name: FriendWindow
-    path: TestWindow/FriendWindow
-  - name: HallWindow
-    path: TestWindow/HallWindow
-  - name: LoginWindow
-    path: TestWindow/LoginWindow
-  - name: SettingWindow
-    path: TestWindow/SettingWindow
-  - name: SignUpWindow
-    path: TestWindow/SignUpWindow
-  - name: UserInfoWindow
-    path: TestWindow/UserInfoWindow
+  - Window
+  windowList: []

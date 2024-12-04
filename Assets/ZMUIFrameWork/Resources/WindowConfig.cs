@@ -38,7 +38,8 @@ public class WindowConfig : ScriptableObject
         int count = 0;
         foreach (var item in windowPathList)
         {
-            string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item; // 简化路径拼接
+            // string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item; // 简化路径拼接
+            string folderPath = Application.dataPath + "/Resources/" + item; // 简化路径拼接
             string[] filePathArr = Directory.GetFiles(folderPath, "*.prefab", SearchOption.AllDirectories);
             foreach (var path in filePathArr)
             {
@@ -61,7 +62,8 @@ public class WindowConfig : ScriptableObject
         windowList.Clear();
         foreach (var item in windowPathList)
         {
-            string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item;
+            // string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item;
+            string folderPath = Application.dataPath + "/Resources/" + item;
             string[] fileArr = Directory.GetFiles(folderPath, "*.prefab", SearchOption.AllDirectories);
             foreach (var file in fileArr)
             {
