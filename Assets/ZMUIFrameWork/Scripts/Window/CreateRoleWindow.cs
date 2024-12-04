@@ -53,7 +53,8 @@ public class CreateRoleWindow : WindowBase
 
 	public void OnEnterGameButtonClick()
 	{
-
+		Debug.Log("进入游戏");
+		Main.Instance.LoadSceneAsync();
 	}
 
 	public void OnNameInputChange(string text)
