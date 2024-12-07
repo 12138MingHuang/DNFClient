@@ -57,8 +57,8 @@ public class LoadSceneManager : MonoSingleton<LoadSceneManager>
         // 激活已经加载完成的场景
         asyncOperation.allowSceneActivation = true;
 
-        //等待个空帧是为了让UI有渲染过程
-        await UniTask.WaitForEndOfFrame(this);
+        //等待个空帧是为了让场景有渲染过程
+        await UniTask.Yield();
         // 加载场景完成回调
         onFinishLoad?.Invoke();
     }

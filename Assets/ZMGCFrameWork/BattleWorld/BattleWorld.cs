@@ -12,7 +12,7 @@ namespace ZMGC.Battle
         {
             base.OnCreate();
             Debug.Log("BattleWorld OnCreate");
-            ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS_HERO+"Cube", null);
+            ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS_HERO + "1000", null);
         }
 
         public override void OnDestroy()
