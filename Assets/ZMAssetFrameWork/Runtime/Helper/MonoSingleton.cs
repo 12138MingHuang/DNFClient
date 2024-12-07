@@ -26,6 +26,7 @@ namespace ZMAssetFrameWork
                     if (_instance == null)
                     {
                         GameObject obj = new GameObject(typeof(T).Name);
+                        DontDestroyOnLoad(obj);
                         _instance = obj.AddComponent<T>();
                         _instance.OnAwake();
                     }
