@@ -20,6 +20,11 @@ public class Main : MonoBehaviour
         //不允许销毁当前节点
         DontDestroyOnLoad(gameObject);
     }
+
+    public void StartGame()
+    {
+        
+    }
     
     #region Unitask插件异步加载写法
     public async void LoadSceneAsync()
