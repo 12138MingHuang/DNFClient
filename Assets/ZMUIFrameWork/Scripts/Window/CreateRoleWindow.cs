@@ -9,6 +9,7 @@
  */
 using UnityEngine;
 using UnityEngine.UI;
+using ZMGC.Hall;
 using ZMUIFrameWork;
 
 public class CreateRoleWindow : WindowBase
@@ -65,7 +66,7 @@ public class CreateRoleWindow : WindowBase
 
 	public void OnNameInputEnd(string text)
 	{
-
+		HallWorld.GetExitsDataMgr<UserDataMgr>().UserName = text;
 	}
 
 	#endregion

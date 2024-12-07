@@ -12,8 +12,8 @@ public class GeneratorModuleWindow : EditorWindow
     private Vector2 scroll = Vector2.zero;
 
     private bool[] muduleToggleArr = new bool[4];
-    private string[] mModuleNameArr=new string[] { "HallWorld", "PockerWorld", "Fish3DWorld", "MajiangWorld" };
-    private string[] mMudileNameSpaceArr = new[] {"ZMGC.Hall", "ZMGC.Pocker", "ZMGC.Fish3", "ZMGC.Majiang" };
+    private string[] mModuleNameArr=new string[] { "HallWorld", "BattleWorld", "NewWorld1_SuggestedChange", "NewWorld2_SuggestedChange" };
+    private string[] mMudileNameSpaceArr = new[] {"ZMGC.Hall", "ZMGC.Battle", "ZMGC.NewWorld1_SuggestedChange", "ZMGC.NewWorld2_SuggestedChange" };
     private string[] folderArr = new string[] { "/DataMgr/","/MsgMgr/","/LogicCtrl/"};
     private int mlastIndex = -1;
     private int mlastIndex2 = -1;

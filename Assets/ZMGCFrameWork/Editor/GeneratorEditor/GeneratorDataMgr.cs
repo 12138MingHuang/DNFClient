@@ -46,22 +46,22 @@ public class GeneratorDataCtrl
         }
 
 
-        sb.AppendLine($"\tpublic  class {scriptsName} : IDataBehaviour");
+        sb.AppendLine($"\tpublic class {scriptsName} : IDataBehaviour");
         sb.AppendLine("\t{");
         sb.AppendLine("\t");
 
-        sb.AppendLine("\t\t" + " public  void OnCreate()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnCreate()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
         sb.AppendLine("\t\t");
 
   
 
-        sb.AppendLine("\t\t" + " public  void OnDestroy()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnDestroy()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
 
 
         sb.AppendLine("\t");

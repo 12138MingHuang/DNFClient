@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ZMGC.Battle;
+using ZMGC.Hall;
 
 public class Main : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class Main : MonoBehaviour
         Instance = this;
         //初始化UI框架
         UIModule.Instance.Initialize();
-        UIModule.Instance.PopUpWindow<CreateRoleWindow>();
+        WorldManager.CreateWorld<HallWorld>();
         //不允许销毁当前节点
         DontDestroyOnLoad(gameObject);
     }
@@ -58,6 +60,12 @@ public class Main : MonoBehaviour
 
         // 激活已经加载完成的场景
         asyncOperation.allowSceneActivation = true;
+
+        //等待个空帧是为了让UI有渲染过程
+        await UniTask.WaitForEndOfFrame(this);
+        
+        WorldManager.CreateWorld<BattleWorld>();
+        Debug.Log($"用户名：{HallWorld.GetExitsDataMgr<UserDataMgr>().UserName}");
 
         // 清理所有UI窗口
         UIModule.Instance.DestroyAllWindow();

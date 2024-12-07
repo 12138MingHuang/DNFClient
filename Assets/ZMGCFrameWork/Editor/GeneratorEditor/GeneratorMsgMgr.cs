@@ -46,22 +46,22 @@ public class GeneratorMsgCtrl
         }
 
 
-        sb.AppendLine($"\tpublic  class {scriptsName} : IMsgBehaviour");
+        sb.AppendLine($"\tpublic class {scriptsName} : IMsgBehaviour");
         sb.AppendLine("\t{");
         sb.AppendLine("\t");
 
-        sb.AppendLine("\t\t" + " public  void OnCreate()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnCreate()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
         sb.AppendLine("\t\t");
 
   
 
-        sb.AppendLine("\t\t" + " public  void OnDestroy()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnDestroy()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
 
 
         sb.AppendLine("\t");

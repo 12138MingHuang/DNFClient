@@ -46,26 +46,26 @@ public class GeneratorLogicCtrl
         }
 
 
-        sb.AppendLine($"\tpublic  class {scriptsName} : ILogicBehaviour");
+        sb.AppendLine($"\tpublic class {scriptsName} : ILogicBehaviour");
         sb.AppendLine("\t{");
         sb.AppendLine("\t");
 
-        sb.AppendLine("\t\t" + " public  void OnCreate()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnCreate()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
         sb.AppendLine("\t\t");
 
-        //sb.AppendLine("\t\t" + " public  void OnUpdate()");
-        //sb.AppendLine("\t\t" + " {");
+        //sb.AppendLine("\t\t" + "public void OnUpdate()");
+        //sb.AppendLine("\t\t" + "{");
         //sb.AppendLine("\t\t");
-        //sb.AppendLine("\t\t" + " }");
+        //sb.AppendLine("\t\t" + "}");
         //sb.AppendLine("\t\t");
 
-        sb.AppendLine("\t\t" + " public  void OnDestroy()");
-        sb.AppendLine("\t\t" + " {");
+        sb.AppendLine("\t\t" + "public void OnDestroy()");
+        sb.AppendLine("\t\t" + "{");
         sb.AppendLine("\t\t");
-        sb.AppendLine("\t\t" + " }");
+        sb.AppendLine("\t\t" + "}");
 
 
         sb.AppendLine("\t");
