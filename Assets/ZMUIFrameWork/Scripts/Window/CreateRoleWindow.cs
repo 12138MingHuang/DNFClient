@@ -55,8 +55,8 @@ public class CreateRoleWindow : WindowBase
 
 	public void OnEnterGameButtonClick()
 	{
-		Debug.Log("进入游戏");
-		Main.Instance.LoadSceneAsync();
+		Debug.Log("点击开始游戏");
+		HallWorld.EnterBattleWorld();
 	}
 
 	public void OnNameInputChange(string text)
