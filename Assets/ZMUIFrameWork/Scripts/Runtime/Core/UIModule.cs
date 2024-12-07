@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 /// <summary>
 /// UI 管理器类，负责整个所有面板的管理，并向外部提供一些 API 调用面板
@@ -35,7 +36,7 @@ public class UIModule : Singleton<UIModule>
     /// <summary>
     /// 窗口配置表
     /// </summary>
-    private WindowConfig mwindowConfig;
+    private WindowConfig mWindowConfig;
     
     /// <summary>
     /// 窗口堆栈，用于窗口的层级管理,弹窗的循环弹出
@@ -57,11 +58,11 @@ public class UIModule : Singleton<UIModule>
         // 获取 UI 根节点
         this.mUIRoot = GameObject.Find("GameMain/UIRoot").transform;
         // 加载窗口配置表
-        this.mwindowConfig = Resources.Load<WindowConfig>("WindowConfig");
+        this.mWindowConfig = Resources.Load<WindowConfig>("WindowConfig");
 
         // 只在编辑器环境下
 #if UNITY_EDITOR
-        this.mwindowConfig.GenerateWindowConfig();
+        this.mWindowConfig.GenerateWindowConfig();
 #endif
     }
     
@@ -80,7 +81,7 @@ public class UIModule : Singleton<UIModule>
         T newWindow = new T();
         
         // 生成对应的窗口预制体
-        GameObject goWindow = this.TempLoadWindow(windowName);
+        GameObject goWindow = this.LoadWindow(windowName);
         if (goWindow != null)
         {
             newWindow.gameObject = goWindow;
@@ -261,7 +262,8 @@ public class UIModule : Singleton<UIModule>
             this.SetWindowMaskVisiable();
             window.OnHide(); // 调用窗口的隐藏方法
             window.OnDestroy(); // 调用窗口的销毁方法
-            GameObject.Destroy(window.gameObject); // 销毁窗口的游戏对象
+            // GameObject.Destroy(window.gameObject); // 销毁窗口的游戏对象
+            ZMAssetsFrame.Release(window.gameObject, true);
 
             // 清理引用，帮助垃圾回收
             window = null;
@@ -343,7 +345,7 @@ public class UIModule : Singleton<UIModule>
     private WindowBase InitializeWindow(WindowBase windowBase, string windowName)
     {
         // 生成对应的窗口预制体
-        GameObject goWindow = this.TempLoadWindow(windowName);
+        GameObject goWindow = this.LoadWindow(windowName);
         if (goWindow != null)
         {
             windowBase.gameObject = goWindow;
@@ -427,10 +429,12 @@ public class UIModule : Singleton<UIModule>
     /// </summary>
     /// <param name="windowName">窗口名称。</param>
     /// <returns>返回加载的窗口预制体实例。</returns>
-    private GameObject TempLoadWindow(string windowName)
+    private GameObject LoadWindow(string windowName)
     {
         // 从资源中加载窗口预制体
-        GameObject window = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(this.mwindowConfig.GetWindowPath(windowName)), this.mUIRoot);
+        // GameObject window = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(this.mwindowConfig.GetWindowPath(windowName)), this.mUIRoot);
+        // 资源框架加载窗口
+        GameObject window = ZMAssetsFrame.Instantiate(mWindowConfig.GetWindowPath(windowName), mUIRoot);
         // 设置窗口的父节点、缩放、位置、旋转和名字
         //window.transform.SetParent(this.mUIRoot); //先实例化预制体再设置父节点时，Unity可能会在设置父节点之前对预制体进行一些默认的初始化操作，这可能会导致预制体在层级顺序上出现问题。直接在实例化时设置父节点可以确保预制体从一开始就处于正确的层级结构中。
         window.transform.localScale = Vector3.one;

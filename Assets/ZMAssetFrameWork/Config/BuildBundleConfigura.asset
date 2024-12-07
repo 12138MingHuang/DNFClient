@@ -16,9 +16,9 @@ MonoBehaviour:
   - bundleId: 0
     moduleName: Hall
     isBuild: 0
-    lastClickBtnTime: 0
+    lastClickBtnTime: 5.2703404
     prefabPathArr:
-    - Assets/BuildBundleDemo/Hall/Prefab
+    - Assets/GameData/Hall/Prefabs
     rootFolderPathArr:
     - Assets/BuildBundleDemo/Hall/Textures
     signFolderPathArr:

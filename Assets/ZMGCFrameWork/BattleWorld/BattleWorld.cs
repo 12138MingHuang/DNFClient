@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 namespace ZMGC.Battle
 {
@@ -11,6 +12,7 @@ namespace ZMGC.Battle
         {
             base.OnCreate();
             Debug.Log("BattleWorld OnCreate");
+            ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS_HERO+"Cube", null);
         }
 
         public override void OnDestroy()

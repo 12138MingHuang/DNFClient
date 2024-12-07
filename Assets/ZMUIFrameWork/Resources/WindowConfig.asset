@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: WindowConfig
   m_EditorClassIdentifier: 
   windowPathList:
-  - Window
+  - GameData/Hall/Prefabs/Window
+  - GameData/Game/Prefabs/Window
   windowList: []

@@ -39,7 +39,8 @@ public class WindowConfig : ScriptableObject
         foreach (var item in windowPathList)
         {
             // string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item; // 简化路径拼接
-            string folderPath = Application.dataPath + "/Resources/" + item; // 简化路径拼接
+            // string folderPath = Application.dataPath + "/Resources/" + item; // 简化路径拼接
+            string folderPath = "Assets/" + item;
             string[] filePathArr = Directory.GetFiles(folderPath, "*.prefab", SearchOption.AllDirectories);
             foreach (var path in filePathArr)
             {
@@ -63,7 +64,8 @@ public class WindowConfig : ScriptableObject
         foreach (var item in windowPathList)
         {
             // string folderPath = Application.dataPath + "/ZMUIFrameWork/Resources/" + item;
-            string folderPath = Application.dataPath + "/Resources/" + item;
+            // string folderPath = Application.dataPath + "/Resources/" + item;
+            string folderPath = "Assets/" + item;
             string[] fileArr = Directory.GetFiles(folderPath, "*.prefab", SearchOption.AllDirectories);
             foreach (var file in fileArr)
             {
@@ -74,7 +76,7 @@ public class WindowConfig : ScriptableObject
                 // 注意这里可能需要更改文件路径的构建方式，因为 item 不再是文件夹名的一部分（除非它恰好是）
                 string fileName = Path.GetFileNameWithoutExtension(file);
                 // 计算文件读取路径时，可能需要使用 file 的完整路径或者重新构建基于 item 的路径
-                string path = item; // 如果 item 实际上表示了完整的路径前缀，这里可能不需要更改
+                string path = folderPath; // 如果 item 实际上表示了完整的路径前缀，这里可能不需要更改
                 if (!item.EndsWith("/") && !item.EndsWith("\\")) // 确保路径分隔符
                 {
                     path += "/";
