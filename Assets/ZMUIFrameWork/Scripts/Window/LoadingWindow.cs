@@ -2,7 +2,7 @@
  *-------------------------
  *Title:UI表现层脚本自动生成工具
  *Author:ZHANGBIN
- *Date:2024/12/3 22:30:32
+ *Date:2024/12/8 0:24:16
  *Description:改脚本只负责UI界面的交互，表现上的更新，不建议在此填写业务层的相关逻辑
  *注意：以下文件是自动生成的，再次生成不会覆盖原有的代码，会在原有的代码上新增
  *--------------------------
@@ -11,9 +11,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using ZMUIFrameWork;
 
-public class CreateRoleWindow : WindowBase
+public class LoadingWindow : WindowBase
 {
-	public CreateRoleWindowDataComponent dataCompt = null;
+	public LoadingWindowDataComponent dataCompt = null;
 
 	#region 生命周期函数
 	//调用机制与Mono Awake一致
@@ -21,13 +21,14 @@ public class CreateRoleWindow : WindowBase
 	{
 		mDisableAnimation = true;
 		base.OnAwake();
-		dataCompt = gameObject.GetComponent<CreateRoleWindowDataComponent>();
+		dataCompt = gameObject.GetComponent<LoadingWindowDataComponent>();
 		dataCompt.InitComponent(this);
 	}
 	//当界面显示时调用。
 	public override void OnShow()
 	{
 		base.OnShow();
+		UIEventControl.AddEvent(UIEventEnum.OnLoadingProgressUpdate, OnLoadingProgressUpdate);
 	}
 	//当界面隐藏时调用。
 	public override void OnHide()
@@ -43,30 +44,13 @@ public class CreateRoleWindow : WindowBase
 
 	#region API Function
 
+	private void OnLoadingProgressUpdate(object data)
+	{
+		dataCompt.SliderImage.fillAmount = (float)data / 100f;
+	}
+	
 	#endregion
 
 	#region UI组件生成事件
-	public void OnCloseButtonClick()
-	{
-
-		HideWindow();
-	}
-
-	public void OnEnterGameButtonClick()
-	{
-		Debug.Log("进入游戏");
-		Main.Instance.LoadSceneAsync();
-	}
-
-	public void OnNameInputChange(string text)
-	{
-
-	}
-
-	public void OnNameInputEnd(string text)
-	{
-
-	}
-
 	#endregion
 }

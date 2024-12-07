@@ -4,5 +4,10 @@ using UnityEngine;
 
 public enum UIEventEnum
 {
-    LoginSuccess
+    LoginSuccess,
+    
+    /// <summary>
+    /// 加载进度更新
+    /// </summary>
+    OnLoadingProgressUpdate
 }

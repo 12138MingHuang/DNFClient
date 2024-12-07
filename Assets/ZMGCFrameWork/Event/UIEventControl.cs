@@ -7,7 +7,7 @@ public class UIEventControl
     /// <summary>
     /// 委托事件
     /// </summary>
-    public delegate void EventHandler(Object data);
+    public delegate void EventHandler(object data);
     
     /// <summary>
     /// 事件派发注册字典
@@ -47,7 +47,7 @@ public class UIEventControl
     /// </summary>
     /// <param name="eventType"></param>
     /// <param name="data"></param>
-    public static void DispensEvent(UIEventEnum eventType, Object data = null)
+    public static void DispensEvent(UIEventEnum eventType, object data = null)
     {
         List<EventHandler> eventList = null;
         if(_eventDic.ContainsKey(eventType))

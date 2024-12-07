@@ -22,6 +22,7 @@ public class Main : MonoBehaviour
     #region Unitask插件异步加载写法
     public async void LoadSceneAsync()
     {
+        UIModule.Instance.PopUpWindow<LoadingWindow>();
         await AsyncLoadScene();
     }
 
@@ -41,6 +42,7 @@ public class Main : MonoBehaviour
         while (asyncOperation.progress < 0.9f)
         {
             curProgress = asyncOperation.progress * 100.0f;
+            UIEventControl.DispensEvent(UIEventEnum.OnLoadingProgressUpdate, curProgress); // 响应进度条更新事件
             // 等待下一帧
             await UniTask.Yield();
         }
@@ -49,6 +51,7 @@ public class Main : MonoBehaviour
         while (curProgress < maxProgress)
         {
             curProgress++;
+            UIEventControl.DispensEvent(UIEventEnum.OnLoadingProgressUpdate, curProgress); // 响应进度条更新事件
             // 等待下一帧
             await UniTask.Yield();
         }
