@@ -10,6 +10,8 @@ public class SkillComplierWindow : OdinEditorWindow
 {
     [TabGroup("Skill", "Character", SdfIconType.PersonFill, TextColor = "orange")]
     public SkillCharacterConfig character = new SkillCharacterConfig();
+    [TabGroup("SkillComplier", "Skill", SdfIconType.Robot, TextColor = "lightmagenta")]
+    public SkillConfig skill = new SkillConfig();
 
     [MenuItem("Skill/技能编辑器")]
     public static SkillComplierWindow ShowWindow()
