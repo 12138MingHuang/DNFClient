@@ -28,6 +28,10 @@ public class SkillEffectConfig
 
     // Editor模式下克隆的特效对象
     private GameObject mCloneEffect;
+    // 动画代理
+    private AnimationAgent mAnimationAgent;
+    // 粒子代理
+    private ParticlesAgent mParticlesAgent;
     // 当前逻辑帧
     private int mCurLogicFrame = 0;
 
@@ -81,8 +85,12 @@ public class SkillEffectConfig
         {
             mCloneEffect = GameObject.Instantiate(skillEffect);
             mCloneEffect.transform.position = SkillComplierWindow.GetCharacterPos();
-            // TODO 在Editor模式下动画文件和例粒子特效都不会自动播放，需要手动通过代码进行播放
+
+            mAnimationAgent = new AnimationAgent();
+            mAnimationAgent.InitPlayAnim(mCloneEffect.transform);
             
+            mParticlesAgent = new ParticlesAgent();
+            mParticlesAgent.InitPlayParticles(mCloneEffect.transform);
         }
     }
 
@@ -95,6 +103,18 @@ public class SkillEffectConfig
         {
             GameObject.DestroyImmediate(mCloneEffect);
         }
+
+        if (mAnimationAgent != null)
+        {
+            mAnimationAgent.OnDestroy();
+            mAnimationAgent = null;
+        }
+        
+        if (mParticlesAgent != null)
+        {
+            mParticlesAgent.OnDestroy();
+            mParticlesAgent = null;
+        }    
     }
 
 #endif
