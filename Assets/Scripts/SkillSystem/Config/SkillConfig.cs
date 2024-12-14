@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+[Serializable] [HideMonoScript]
 public class SkillConfig
 {
     [HideInInspector]
@@ -76,6 +77,7 @@ public enum SkillType
 /// <summary>
 /// 蓄力技能阶段数据
 /// </summary>
+[Serializable]
 public class StockPileStageData
 {
     [LabelText("蓄力阶段id")]

@@ -71,13 +71,17 @@ public class SkillCharacterConfig
         skillDurationMS = (int)(isLoopAnim ? skillAnim.length * animLoopCount * 1000 : skillAnim.length * 1000);
         mLastRunTime = .0f;
         //开始播放角色动画
-        PlaySkillEnd(false);
+        mIsPlayAnim = true;
+        SkillComplierWindow window = SkillComplierWindow.GetWindow();
+        window?.StartPlaySkill();
     }
     
     [ButtonGroup("按钮数组")] [Button("暂停", ButtonSizes.Large)]
     public void Pause()
     {
-        PlaySkillEnd();
+        mIsPlayAnim = false;
+        SkillComplierWindow window = SkillComplierWindow.GetWindow();
+        window?.PausePlaySkill();
     }
     
     [ButtonGroup("按钮数组")] [Button("保存配置", ButtonSizes.Large)] [GUIColor(.0f, 1.0f, .0f)]
@@ -108,16 +112,13 @@ public class SkillCharacterConfig
             if (animProgress == 100)
             {
                 //动画播放完成
-                PlaySkillEnd();
+                mIsPlayAnim = false;
+                SkillComplierWindow window = SkillComplierWindow.GetWindow();
+                window?.EndPlaySkill();
             }
             //触发窗口聚焦回调，刷新窗口，主要解决动画进度条无法及时刷新的问题
             onProgressUpdate?.Invoke();
         }
-    }
-
-    public void PlaySkillEnd(bool isComplete = true)
-    {
-        mIsPlayAnim = !isComplete;
     }
 
     /// <summary>
