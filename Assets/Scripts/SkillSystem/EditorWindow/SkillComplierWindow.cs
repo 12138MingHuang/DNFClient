@@ -56,12 +56,20 @@ public class SkillComplierWindow : OdinEditorWindow
     protected override void OnEnable()
     {
         base.OnEnable();
+        foreach (var damage in damageList)
+        {
+            damage.OnInit();
+        }
         EditorApplication.update += OnEditorUpdate;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
+        foreach (var damage in damageList)
+        {
+            damage.OnRelease();
+        }
         EditorApplication.update -= OnEditorUpdate;
     }
     
@@ -71,6 +79,11 @@ public class SkillComplierWindow : OdinEditorWindow
     public void StartPlaySkill()
     {
         foreach (var item in effectList)
+        {
+            item.StartPlaySkill();
+        }
+
+        foreach (var item in damageList)
         {
             item.StartPlaySkill();
         }
@@ -89,6 +102,11 @@ public class SkillComplierWindow : OdinEditorWindow
         {
             item.SkillPause();
         }
+        
+        foreach (var item in damageList)
+        {
+            item.EndPlaySkill();
+        }
     }
 
     /// <summary>
@@ -99,6 +117,11 @@ public class SkillComplierWindow : OdinEditorWindow
         foreach (var item in effectList)
         {
             item.PlaySkillEnd();
+        }
+
+        foreach (var item in damageList)
+        {
+            item.EndPlaySkill();
         }
         isStartPlaySkill = false;
         mAccLogicRunTime = 0;
@@ -155,6 +178,11 @@ public class SkillComplierWindow : OdinEditorWindow
     private void OnLogicFrameUpdate()
     {
         foreach (var item in effectList)
+        {
+            item.OnLogicFrameUpdate();
+        }
+
+        foreach (var item in damageList)
         {
             item.OnLogicFrameUpdate();
         }
