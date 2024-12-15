@@ -2,16 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterRender : MonoBehaviour
+public class MonsterRender : RenderObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnCreate()
+    {
+        base.OnCreate();
+    }
+
+    public override void OnRelease()
+    {
+        base.OnRelease();
+    }
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        
+    }
+
+    private void OnDestroy()
     {
         
     }
