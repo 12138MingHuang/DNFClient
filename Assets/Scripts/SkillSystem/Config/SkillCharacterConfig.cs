@@ -87,7 +87,8 @@ public class SkillCharacterConfig
     [ButtonGroup("按钮数组")] [Button("保存配置", ButtonSizes.Large)] [GUIColor(.0f, 1.0f, .0f)]
     public void SaveAssets()
     {
-        
+        SkillComplierWindow window = SkillComplierWindow.GetWindow();
+        window?.SaveSkillData();
     }
 
     public void OnUpdate(Action onProgressUpdate)

@@ -29,6 +29,14 @@ public class SkillComplierWindow : OdinEditorWindow
     {
         return GetWindowWithRect<SkillComplierWindow>(new Rect(0, 0, 1000, 600));
     }
+
+    /// <summary>
+    /// 保存技能数据
+    /// </summary>
+    public void SaveSkillData()
+    {
+        SkillDataConfig.SaveSkillData(character, skill, effectList, damageList);
+    }
     
     /// <summary>
     /// 获取技能编辑窗口
