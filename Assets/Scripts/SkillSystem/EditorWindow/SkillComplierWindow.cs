@@ -39,6 +39,18 @@ public class SkillComplierWindow : OdinEditorWindow
     }
     
     /// <summary>
+    /// 加载技能数据
+    /// </summary>
+    /// <param name="skillData"> 技能数据 </param>
+    public void LoadSkillData(SkillDataConfig skillData)
+    {
+        character = skillData.character;
+        skill = skillData.skillConfig;
+        effectList = skillData.effectCfgList;
+        damageList = skillData.damageCfgList;
+    }
+    
+    /// <summary>
     /// 获取技能编辑窗口
     /// </summary>
     /// <returns> 技能编辑窗口 </returns>

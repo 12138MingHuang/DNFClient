@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -54,6 +55,13 @@ public class SkillDataConfig : ScriptableObject
             AssetDatabase.DeleteAsset(assetPath);
         }
         AssetDatabase.CreateAsset(skillDataCfg, assetPath);
+    }
+
+    [Button("配置技能" , ButtonSizes.Large), GUIColor("green")]
+    public void ShowSkillWindowButtonClick()
+    {
+        SkillComplierWindow window = SkillComplierWindow.ShowWindow();
+        window.LoadSkillData(this);
     }
     
 #endif
