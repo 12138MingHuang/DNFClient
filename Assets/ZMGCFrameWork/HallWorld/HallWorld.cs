@@ -23,7 +23,7 @@ namespace ZMGC.Hall
             LoadSceneManager.Instance.LoadSceneAsync(Enum.GetName(typeof(GameSceneEnum), GameSceneEnum.Battle), () =>
             {
                 // 清理所有UI窗口
-                UIModule.Instance.DestroyAllWindow();
+                UIModule.DestroyAllWindow();
                 WorldManager.CreateWorld<BattleWorld>();
                 Debug.Log($"用户名：{HallWorld.GetExitsDataMgr<UserDataMgr>().UserName}");
             });

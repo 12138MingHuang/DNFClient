@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -24,5 +25,10 @@ public class Main : MonoBehaviour
     public void StartGame()
     {
         
+    }
+
+    private void Update()
+    {
+        WorldManager.OnUpdate();
     }
 }

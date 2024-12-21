@@ -43,6 +43,14 @@ public class WorldManager
         return null;
     }
 
+    public static void OnUpdate()
+    {
+        foreach (var world in _worldList)
+        {
+            world.OnUpdate();
+        }
+    }
+
     public static void DestroyWorld<T>() where T : World
     {
         for (int i = 0; i < _worldList.Count; i++)

@@ -12,6 +12,8 @@ public class AssetPathConfig
     public const string GAME_PREFABS = GAME + "Prefabs/";
     //游戏内英雄预制体路径
     public const string GAME_PREFABS_HERO = GAME_PREFABS + "Hero/";
+    // 游戏内怪物预制体路径
+    public const string GAME_PREFABS_MONSTER = GAME_PREFABS + "Monster/";
     //游戏内大厅路径
     public const string HALL = GAMEDATA + "Hall/";
 }
