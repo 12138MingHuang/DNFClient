@@ -150,7 +150,7 @@ public class JoystickUGUI : MonoBehaviour
     {
         m_DefaultTriggerPos = triggerAreaTrans.transform.localPosition;
         
-        UIEventListener uiEventListener = transform.GetComponent<UIEventListener>();
+        UIEventListener uiEventListener = transform.GetComponentInChildren<UIEventListener>();
         
         Debug.Log("绑定委托");
         if (uiEventListener != null)
@@ -336,7 +336,7 @@ public class JoystickUGUI : MonoBehaviour
         // 设置虚拟摇杆 拖动 触发区域
         triggerAreaTrans.transform.localPosition = m_DefaultTriggerPos;
         Vector3 dir = m_JoystickDirection.normalized;
-        OnMoveCallBack.Invoke(new Vector3(dir.x, 0, dir.y));
+        OnMoveCallBack?.Invoke(new Vector3(dir.x, 0, dir.y));
     }
 
     private Vector2 GetMouseLocalPosition(Transform transform)

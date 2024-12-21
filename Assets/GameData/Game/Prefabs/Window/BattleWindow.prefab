@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -455,8 +455,8 @@ MonoBehaviour:
   directionTrans: {fileID: 3258393886305401152}
   joystickInitPosition: {x: -643, y: -288, z: 0}
   triggeredRange: {x: 500, y: 400}
-  showRangeMin: {x: 145, y: 145}
-  showRangeMax: {x: 350, y: 200}
+  showRangeMin: {x: -840, y: -425}
+  showRangeMax: {x: -265, y: -70}
   joystickState: 0
   stickMoveMin: 20
   stickMoveMax: 73
