@@ -5,6 +5,11 @@ using UnityEngine;
 public partial class World
 {
     /// <summary>
+    /// UI管理模块（仅限World和逻辑层访问，UI层应该调用UIModule.Instance） 目的：逻辑解耦。针对情况：UIModule改名，UI框架更换，只需要修改此处即可
+    /// </summary>
+    public static UIModule UIModule => UIModule.Instance;
+    
+    /// <summary>
     /// 逻辑层所有类的一个字典
     /// </summary>
     private static Dictionary<string, ILogicBehaviour> _logicBehaviourDic = new Dictionary<string, ILogicBehaviour>();
