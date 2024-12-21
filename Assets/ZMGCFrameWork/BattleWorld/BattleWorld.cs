@@ -28,7 +28,8 @@ namespace ZMGC.Battle
             
             HeroLogicCtrl.InitHero();
             MonsterLogicCtrl.InitMonster();
-            
+
+            UIModule.PopUpWindow<BattleWindow>();
             Debug.Log("BattleWorld OnCreate");
         }
 
