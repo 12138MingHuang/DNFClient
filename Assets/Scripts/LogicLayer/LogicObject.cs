@@ -12,8 +12,8 @@ public abstract class LogicObject
     private FixIntVector3 m_LogicPos; //逻辑对象逻辑位置
     private FixIntVector3 m_LogicDir; //逻辑对象朝向
     private FixIntVector3 m_LogicAngle; //逻辑对象旋转角度
-    private FixInt m_LogicMoveSpeed; //逻辑对象移动速度
-    private FixInt m_LogicAxis; //逻辑轴向
+    private FixInt m_LogicMoveSpeed = 2; //逻辑对象移动速度
+    private FixInt _mLogicXXAxis; //逻辑轴向
     private bool m_IsActive; //逻辑对象是否激活
     
     #region 公开属性
@@ -57,10 +57,10 @@ public abstract class LogicObject
     /// <summary>
     /// 逻辑轴向
     /// </summary>
-    public FixInt LogicAxis
+    public FixInt LogicXAxis
     {
-        get => m_LogicAxis;
-        set => m_LogicAxis = value;
+        get => _mLogicXXAxis;
+        set => _mLogicXXAxis = value;
     }
     
     /// <summary>

@@ -37,6 +37,11 @@ namespace ZMGC.Battle
 			heroRender.OnCreate(); 
 		}
 		
+		public void OnLogicFrameUpdate()
+		{
+			HeroLogic.OnLogicFrameUpdate();
+		}
+		
 		public void OnDestroy()
 		{
 		

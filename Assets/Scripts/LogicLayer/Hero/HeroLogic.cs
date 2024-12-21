@@ -1,3 +1,5 @@
+using FixMath;
+
 public class HeroLogic : LogicActor
 {
     /// <summary>

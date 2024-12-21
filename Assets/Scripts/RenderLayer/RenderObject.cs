@@ -9,6 +9,11 @@ using UnityEngine;
 public class RenderObject : MonoBehaviour
 {
     /// <summary>
+    /// 渲染朝向
+    /// </summary>
+    private Vector2 mRenderForwardDir;
+    
+    /// <summary>
     /// 逻辑对象
     /// </summary>
     public LogicObject logicObject;
@@ -16,7 +21,7 @@ public class RenderObject : MonoBehaviour
     /// <summary>
     /// 位置平滑插值速度
     /// </summary>
-    protected float m_SmoothPosSpeed;
+    protected float m_SmoothPosSpeed = 10f;
     
     /// <summary>
     /// 设置逻辑对象
@@ -48,7 +53,7 @@ public class RenderObject : MonoBehaviour
     /// <summary>
     /// Unity引擎的渲染帧，根据程序进行配置，一般为一秒30帧，60帧，120帧...
     /// </summary>
-    private void Update()
+    protected virtual void Update()
     {
         UpdatePosition();
         UpdateDir();
@@ -70,5 +75,8 @@ public class RenderObject : MonoBehaviour
     private void UpdateDir()
     {
         transform.rotation = Quaternion.Euler(logicObject.LogicDir.ToVector3());
+        mRenderForwardDir.x = logicObject.LogicXAxis >= 0f ? 0f : -20f;
+        mRenderForwardDir.y = logicObject.LogicXAxis >= 0f ? 0f : 180f;
+        transform.localEulerAngles = mRenderForwardDir;
     }
 }

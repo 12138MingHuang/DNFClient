@@ -19,9 +19,9 @@ public class MonsterRender : RenderObject
         
     }
 
-    private void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     private void OnDestroy()

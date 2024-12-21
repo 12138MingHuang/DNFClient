@@ -207,7 +207,7 @@ public class JoystickUGUI : MonoBehaviour
     /// </summary>
     private void Action()
     {
-        Debug.Log("Action JoystickState:"+ joystickState);
+        // Debug.Log("Action JoystickState:"+ joystickState);
 
         if (joystickState == JoystickState.Idle)
         {
