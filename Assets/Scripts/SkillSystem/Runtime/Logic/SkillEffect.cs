@@ -1,3 +1,4 @@
+using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public partial class Skill
     /// <summary>
     /// 特效对象字典，key为特效配置的Hashcode value为特效对象
     /// </summary>
-    private Dictionary<int, GameObject> mEffectDic = new Dictionary<int, GameObject>();
+    private Dictionary<int, SkillEffectRender> mEffectDic = new Dictionary<int, SkillEffectRender>();
 
     /// <summary>
     /// 逻辑帧更新特效
@@ -26,7 +27,16 @@ public partial class Skill
                     effectObj.transform.localRotation = Quaternion.identity;
                     effectObj.transform.localScale = Vector3.one;
 
-                    mEffectDic.Add(skillData.GetHashCode(), effectObj);
+                    SkillEffectRender effectRender = effectObj.GetComponent<SkillEffectRender>();
+                    if (effectRender == null)
+                    {
+                        effectRender = effectObj.AddComponent<SkillEffectRender>();
+                    }
+
+                    SkillEffectLogic effectLogic = new SkillEffectLogic(LogicObjectType.Effect, skillData, effectRender, mSkillCreator);
+                    effectRender.SetLogicObject(effectLogic);
+
+                    mEffectDic.Add(skillData.GetHashCode(), effectRender);
                 }
 
                 if (mCurLogicFrame == skillData.endFrame)
@@ -44,13 +54,13 @@ public partial class Skill
     /// <param name="skillEffectConfig"> 特效配置 </param>
     public void DestroyEffect(SkillEffectConfig skillEffectConfig)
     {
-        GameObject effect = null;
+        SkillEffectRender effect = null;
         int hashCode = skillEffectConfig.GetHashCode();
         mEffectDic.TryGetValue(hashCode, out effect);
         if (effect != null)
         {
             mEffectDic.Remove(hashCode);
-            GameObject.Destroy(effect);
+            effect.OnRelease();
         }
     }
 
