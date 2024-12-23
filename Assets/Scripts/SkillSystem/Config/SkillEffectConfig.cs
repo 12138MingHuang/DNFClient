@@ -23,7 +23,12 @@ public class SkillEffectConfig
     public bool isSetTransParent = false;
     [ToggleGroup("isSetTransParent", "节点类型")]
     public TransParentType transParent;
-
+    /// <summary>
+    /// 技能特效缓存对象
+    /// </summary>
+    [HideInInspector]
+    public GameObject gameEffectObj;
+    
 #if UNITY_EDITOR
 
     // Editor模式下克隆的特效对象

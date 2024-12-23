@@ -15,10 +15,10 @@ MonoBehaviour:
   character:
     skillCharacter: {fileID: 0}
     skillAnim: {fileID: 7400000, guid: 4a3916918c4bfd942af61149ea64ab91, type: 2}
-    animProgress: 0
+    animProgress: 100
     isLoopAnim: 0
     animLoopCount: 0
-    logicFrame: 0
+    logicFrame: 8
     animLength: 0.53333336
     skillDurationMS: 533
   skillConfig:
@@ -51,6 +51,7 @@ MonoBehaviour:
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
+    gameEffectObj: {fileID: 0}
   damageCfgList:
   - triggerFrame: 1
     endFrame: 3

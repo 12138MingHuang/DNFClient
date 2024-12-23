@@ -7,6 +7,7 @@ public partial class LogicActor : LogicObject
     public override void OnCreate()
     {
         base.OnCreate();
+        InitActorSkill();
     }
 
     public override void OnLogicFrameUpdate()
@@ -18,6 +19,15 @@ public partial class LogicActor : LogicObject
         OnLogicFrameUpdateSkill();
         // 更新重力帧
         OnLogicFrameUpdateGravity();
+    }
+    
+    /// <summary>
+    /// 播放动画
+    /// </summary>
+    /// <param name="characterSkillAnim"> 角色动画 </param>
+    public void PlayAnim(AnimationClip characterAnim)
+    {
+        RenderObject.PlayAnim(characterAnim);
     }
 
     public override void OnDestroy()

@@ -2,18 +2,21 @@
  *-------------------------
  *Title:UI表现层脚本自动生成工具
  *Author:ZHANGBIN
- *Date:2024/12/21 17:01:40
+ *Date:2024/12/23 17:42:47
  *Description:改脚本只负责UI界面的交互，表现上的更新，不建议在此填写业务层的相关逻辑
  *注意：以下文件是自动生成的，再次生成不会覆盖原有的代码，会在原有的代码上新增
  *--------------------------
  */
 using UnityEngine;
 using UnityEngine.UI;
+using ZMGC.Battle;
 using ZMUIFrameWork;
 
 public class BattleWindow : WindowBase
 {
 	public BattleWindowDataComponent dataCompt = null;
+	
+	private HeroLogic mHeroLogic = null;
 
 	#region 生命周期函数
 	//调用机制与Mono Awake一致
@@ -27,6 +30,7 @@ public class BattleWindow : WindowBase
 	public override void OnShow()
 	{
 		base.OnShow();
+		mHeroLogic = BattleWorld.GetExitsLogicCtrl<HeroLogicCtrl>().HeroLogic;
 	}
 	//当界面隐藏时调用。
 	public override void OnHide()
@@ -45,5 +49,11 @@ public class BattleWindow : WindowBase
 	#endregion
 
 	#region UI组件生成事件
+	public void OnNormalAttackButtonClick()
+	{
+		Debug.Log("普通攻击");
+		mHeroLogic.ReleaseSkill(1001);
+	}
+
 	#endregion
 }

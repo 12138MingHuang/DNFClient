@@ -79,4 +79,13 @@ public class RenderObject : MonoBehaviour
         mRenderForwardDir.y = logicObject.LogicXAxis >= 0f ? 0f : 180f;
         transform.localEulerAngles = mRenderForwardDir;
     }
+    
+    /// <summary>
+    /// 通过动画文件播放动画
+    /// </summary>
+    /// <param name="clip"> 动画片段 </param>
+    public virtual void PlayAnim(AnimationClip clip)
+    {
+        
+    }
 }
