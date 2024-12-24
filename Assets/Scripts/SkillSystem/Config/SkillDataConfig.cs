@@ -29,6 +29,11 @@ public class SkillDataConfig : ScriptableObject
     /// </summary>
     public List<SkillDamageConfig> damageCfgList;
 
+    /// <summary>
+    /// 技能音效数据配置列表
+    /// </summary>
+    public List<SkillAudioConfig> audioCfgList;
+
 #if UNITY_EDITOR
     
     /// <summary>
@@ -38,8 +43,9 @@ public class SkillDataConfig : ScriptableObject
     /// <param name="skillConfig"> 技能基础配置 </param>
     /// <param name="effectCfgList"> 技能特效配置列表 </param>
     /// <param name="damageCfgList"> 技能伤害配置列表 </param>
+    /// <param name="audioCfgList"> 技能音效配置列表 </param>
     public static void SaveSkillData(SkillCharacterConfig characterConfig, SkillConfig skillConfig,
-        List<SkillEffectConfig> effectCfgList, List<SkillDamageConfig> damageCfgList)
+        List<SkillEffectConfig> effectCfgList, List<SkillDamageConfig> damageCfgList, List<SkillAudioConfig> audioCfgList)
     {
         // 通过代码创建SkillDataConfig的实例，并对字段进行赋值存储
         SkillDataConfig skillDataCfg = CreateInstance<SkillDataConfig>();
@@ -47,6 +53,7 @@ public class SkillDataConfig : ScriptableObject
         skillDataCfg.skillConfig = skillConfig;
         skillDataCfg.effectCfgList = effectCfgList;
         skillDataCfg.damageCfgList = damageCfgList;
+        skillDataCfg.audioCfgList = audioCfgList;
         // 把当前实例存储为.asset文件 ,当作技能配置
         string assetPath = "Assets/GameData/Game/SkillSystem/" + skillConfig.skillId + ".asset";
         // 如果对象已经存在，则删除之前的，然后重新创建
