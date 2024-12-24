@@ -52,7 +52,7 @@ public class BattleWindow : WindowBase
 	public void OnNormalAttackButtonClick()
 	{
 		Debug.Log("普通攻击");
-		mHeroLogic.ReleaseSkill(1001);
+		mHeroLogic.ReleaseNormalAttack();
 	}
 
 	#endregion

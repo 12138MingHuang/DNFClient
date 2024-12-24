@@ -38,6 +38,12 @@ public class SkillSystem
         {
             if(skill.skillId == skillId)
             {
+                if (skill.skillState != SkillState.None && skill.skillState != SkillState.End)
+                {
+                    Debug.Log("skillId: " + skillId + " 技能正在释放中, 无法重复释放");
+                    return null;
+                }
+                
                 // 释放技能
                 skill.ReleaseSkill(onReleaseAfter, (sk, isCombinationSkill) =>
                 {

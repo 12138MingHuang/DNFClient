@@ -16,12 +16,17 @@ public partial class LogicActor
     /// <summary>
     /// 普通攻击技能id数组
     /// </summary>
-    private int[] mNormalSkillIdArr = new int[] { 1001 };
+    private int[] mNormalSkillIdArr = new int[] { 1001, 1002, 1003 };
 
     /// <summary>
     /// 正在释放的技能列表
     /// </summary>
     public List<Skill> releasingSkillList = new List<Skill>();
+    
+    /// <summary>
+    /// 当前普通攻击技能组合索引
+    /// </summary>
+    private int mCurNormalComboIndex = 0;
 
     /// <summary>
     /// 初始化技能
@@ -30,6 +35,14 @@ public partial class LogicActor
     {
         mSkillSystem = new SkillSystem(this);
         mSkillSystem.InitSkills(mNormalSkillIdArr);
+    }
+
+    /// <summary>
+    /// 释放普通攻击
+    /// </summary>
+    public void ReleaseNormalAttack()
+    {
+        ReleaseSkill(mNormalSkillIdArr[mCurNormalComboIndex]);
     }
 
     /// <summary>
@@ -42,7 +55,26 @@ public partial class LogicActor
         if (skill != null)
         {
             releasingSkillList.Add(skill);
+            if (!IsNormalAttackSkill(skill.skillId))
+            {
+                mCurNormalComboIndex = 0;
+            }
         }
+    }
+
+    /// <summary>
+    /// 是否是普通攻击技能
+    /// </summary>
+    /// <param name="skillId"> 技能id </param>
+    /// <returns> 是否是普通攻击技能 </returns>
+    private bool IsNormalAttackSkill(int skillId)
+    {
+        foreach (int id in mNormalSkillIdArr)
+        {
+            if (skillId == id)
+                return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -51,7 +83,17 @@ public partial class LogicActor
     /// <param name="skill"> 所释放技能 </param>
     private void OnSkillReleaseAfter(Skill skill)
     {
-        
+        if (!IsNormalAttackSkill(skill.skillId))
+        {
+            mCurNormalComboIndex = 0;
+        }
+        else
+        {
+            mCurNormalComboIndex++;
+            // 如果普通攻击技能组合索引大于等于普通攻击技能id数组长度，则重置为0
+            if (mCurNormalComboIndex >= mNormalSkillIdArr.Length)
+                mCurNormalComboIndex = 0;
+        }
     }
 
     /// <summary>
@@ -61,6 +103,10 @@ public partial class LogicActor
     private void OnSkillReleaseEnd(Skill skill)
     {
         releasingSkillList.Remove(skill);
+        if (releasingSkillList.Count == 0)
+        {
+            mCurNormalComboIndex = 0;
+        }
     }
     
     /// <summary>

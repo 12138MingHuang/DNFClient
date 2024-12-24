@@ -33,6 +33,7 @@ public class RenderObject : MonoBehaviour
         this.logicObject = logicObject;
         //初始化位置
         transform.position = logicObject.LogicPos.ToVector3();
+        UpdateDir();
     }
 
     /// <summary>

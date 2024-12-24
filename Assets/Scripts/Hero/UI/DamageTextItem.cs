@@ -30,7 +30,7 @@ public class DamageTextItem : MonoBehaviour
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 20f, 0f);
         transform.localScale = Vector3.one * 2f;
         transform.DOScale(1, 0.3f);
-        await UniTask.Delay(200);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
         _canvasGroup.DOFade(0, 0.3f);
         await transform.DOMoveY(transform.position.y + 1f, 0.2f).AsyncWaitForCompletion();
         _canvasGroup.DOKill();

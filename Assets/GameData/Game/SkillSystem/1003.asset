@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908a0070e7d26094c8f4f8df1c331203, type: 3}
+  m_Name: 1003
+  m_EditorClassIdentifier: 
+  character:
+    skillCharacter: {fileID: 0}
+    skillAnim: {fileID: 7400000, guid: 444cadff88f976748aa1d527e2f15a9a, type: 2}
+    animProgress: 100
+    isLoopAnim: 0
+    animLoopCount: 0
+    logicFrame: 10
+    animLength: 0.66666687
+    skillDurationMS: 666
+  skillConfig:
+    showStockPileData: 0
+    showSkillGuide: 0
+    skillIcon: {fileID: 0}
+    skillId: 1003
+    skillName: "\u91CC\u9B3C\u5149\u525103"
+    needMagicValue: 100
+    skillShakeBeforeTimeMs: 100
+    skillAttackDurationMs: 666
+    skillShakeAfterMs: 200
+    skillCdTimeMs: 3000
+    skillType: 0
+    stockPileStageData: []
+    skillGuideObj: {fileID: 0}
+    skillGuideRange: 0
+    combinationSkillId: 0
+    skillHitEffect: {fileID: 0}
+    hitEffectSurvivalTimeMs: 100
+    skillHitAudio: {fileID: 0}
+    showSkillPortrait: 0
+    skillPortraitObj: {fileID: 0}
+    skillDes: 
+  effectCfgList:
+  - skillEffect: {fileID: 1983390214506344, guid: bf7ca15f807f2d6418cde94c17c85eea, type: 3}
+    triggerFrame: 2
+    endFrame: 10
+    effectOffsetPos: {x: 0, y: 0, z: 0}
+    effectPosType: 0
+    isSetTransParent: 0
+    transParent: 0
+    gameEffectObj: {fileID: 0}
+  damageCfgList:
+  - triggerFrame: 2
+    endFrame: 3
+    triggerIntervalMS: 0
+    isFollowEffect: 0
+    damageType: 1
+    damageRate: 0
+    detectionMode: 1
+    boxSize: {x: 1.8, y: 1.5, z: 1}
+    boxOffset: {x: 2.45, y: 1.08, z: 0}
+    radius: 1
+    sphereOffset: {x: 0, y: 0.9, z: 0}
+    radiusHeight: 0
+    colliderPosType: 0
+    targetType: 0
+    addBuffs: 
+    triggerSkillId: 0

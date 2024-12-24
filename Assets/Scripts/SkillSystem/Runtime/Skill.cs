@@ -144,6 +144,7 @@ public partial class Skill
     private void SkillAfter()
     {
         skillState = SkillState.After;
+        OnReleaseAfter?.Invoke(this);
     }
 
     /// <summary>
