@@ -2,6 +2,7 @@ using FixIntPhysics;
 using FixMath;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMGC.Battle;
 
 public partial class Skill
 {
@@ -17,25 +18,33 @@ public partial class Skill
     /// <summary>
     /// 逻辑帧更新特效
     /// </summary>
-    public void OnLogicFrameUpdateDamage()
+    private void OnLogicFrameUpdateDamage()
     {
         if (mSkillDataConfig.damageCfgList != null && mSkillDataConfig.damageCfgList.Count > 0)
         {
             foreach (var skillData in mSkillDataConfig.damageCfgList)
             {
+                int hashcode = skillData.GetHashCode();
+                
                 if (mCurLogicFrame == skillData.triggerFrame)
                 {
                     DestroyCollider(skillData);
                     ColliderBehaviour collider = CreateCollider(skillData);
-                    mColliderDic.Add(skillData.GetHashCode(), collider);
+                    mColliderDic.Add(hashcode, collider);
+                    
+                    // 处理碰撞体伤害检测
+                    if (skillData.triggerIntervalMS == 0)
+                    {
+                        // 触发一次伤害
+                        if (mColliderDic.ContainsKey(hashcode))
+                        {
+                            TriggerColliderDamage(mColliderDic[hashcode], skillData);
+                        }
+                    }
                 }
                 
                 // 处理碰撞体伤害检测
-                if (skillData.triggerIntervalMS == 0)
-                {
-                    // 触发一次伤害
-                }
-                else
+                if (skillData.triggerIntervalMS != 0)
                 {
                     mCurDamageAccTime += LogicFrameConfig.LogicFrameIntervalMS;
                     // 如果累计时间大于间隔时间
@@ -43,6 +52,10 @@ public partial class Skill
                     {
                         // 触发一次伤害
                         mCurDamageAccTime = 0;
+                        if (mColliderDic.ContainsKey(hashcode))
+                        {
+                            TriggerColliderDamage(mColliderDic[hashcode], skillData);
+                        }
                     }
                 }
                 
@@ -60,37 +73,82 @@ public partial class Skill
     /// </summary>
     /// <param name="skillDamageConfig"> 伤害配置 </param>
     /// <returns> 碰撞体对象 </returns>
-    public ColliderBehaviour CreateCollider(SkillDamageConfig skillDamageConfig)
+    private ColliderBehaviour CreateCollider(SkillDamageConfig skillDamageConfig)
     {
         ColliderBehaviour collider = null;
         
         // 创建对应的定点数碰撞体
-        if (skillDamageConfig.detectionMode == DamageDetectionMode.Box3D)
+        switch (skillDamageConfig.detectionMode)
         {
-            FixIntVector3 boxSize = new FixIntVector3(skillDamageConfig.boxSize);
-            FixIntVector3 offset = new FixIntVector3(skillDamageConfig.boxOffset) * mSkillCreator.LogicXAxis;
-            offset.y = FixIntMath.Abs(offset.y);
-            collider = new FixIntBoxCollider(boxSize, offset);
-            collider.SetBoxData(offset, boxSize);
-            collider.UpdateColliderInfo(mSkillCreator.LogicPos, boxSize);
-        }
-        else if (skillDamageConfig.detectionMode == DamageDetectionMode.Sphere3D)
-        {
-            FixIntVector3 offset = new FixIntVector3(skillDamageConfig.sphereOffset) * mSkillCreator.LogicXAxis;
-            offset.y = FixIntMath.Abs(offset.y);
-            collider = new FixIntSphereCollider(skillDamageConfig.radius, offset);
-            collider.SetBoxData(skillDamageConfig.radius, offset);
-            collider.UpdateColliderInfo(mSkillCreator.LogicPos, FixIntVector3.zero, skillDamageConfig.radius);
+            case DamageDetectionMode.Box3D:
+                FixIntVector3 boxSize = new FixIntVector3(skillDamageConfig.boxSize);
+                FixIntVector3 boxOffset = new FixIntVector3(skillDamageConfig.boxOffset) * mSkillCreator.LogicXAxis;
+                boxOffset.y = FixIntMath.Abs(boxOffset.y);
+                collider = new FixIntBoxCollider(boxSize, boxOffset);
+                collider.SetBoxData(boxOffset, boxSize);
+                collider.UpdateColliderInfo(mSkillCreator.LogicPos, boxSize);
+                break;
+            case DamageDetectionMode.Sphere3D:
+                FixIntVector3 sphereOffset = new FixIntVector3(skillDamageConfig.sphereOffset) * mSkillCreator.LogicXAxis;
+                sphereOffset.y = FixIntMath.Abs(sphereOffset.y);
+                collider = new FixIntSphereCollider(skillDamageConfig.radius, sphereOffset);
+                collider.SetBoxData(skillDamageConfig.radius, sphereOffset);
+                collider.UpdateColliderInfo(mSkillCreator.LogicPos, FixIntVector3.zero, skillDamageConfig.radius);
+                break;
         }
         
         return collider;
     }
 
     /// <summary>
+    /// 碰撞体触发伤害
+    /// </summary>
+    /// <param name="collider"> 碰撞体对象 </param>
+    /// <param name="skillDamageConfig"> 伤害配置 </param>
+    private void TriggerColliderDamage(ColliderBehaviour collider, SkillDamageConfig skillDamageConfig)
+    {
+        // 1.根据攻击者获取敌人目标列表
+        List<LogicActor> enemyList = BattleWorld.GetExitsLogicCtrl<BattleLogicCtrl>().GetEnemyList(mSkillCreator.ObjectType);
+        
+        // 2.通过碰撞检测逻辑，去检测碰撞到的敌人
+        List<LogicActor> damageTargetList = new List<LogicActor>();
+        foreach (var target in enemyList)
+        {
+            switch (collider.ColliderType)
+            {
+                case ColliderType.Box:
+                    if (PhysicsManager.IsCollision(collider as FixIntBoxCollider, target.Collider))
+                    {
+                        damageTargetList.Add(target);
+                    }
+                    break;
+                case ColliderType.Shpere:
+                    if (PhysicsManager.IsCollision(target.Collider, collider as FixIntSphereCollider))
+                    {
+                        damageTargetList.Add(target);
+                    }
+                    break;
+            }
+        }
+        // 释放列表
+        enemyList.Clear();
+        // 3.获取到攻击目标后，对这些敌人造成伤害
+        foreach (var target in damageTargetList)
+        {
+            // 造成伤害
+            target.SkillDamage(9999, skillDamageConfig);
+            
+            // 添加 Buff TODO
+            // 添加击中特效 TODO
+            // 播放击中音效 TODO
+        }
+    }
+
+    /// <summary>
     /// 销毁对应配置伤害的碰撞体
     /// </summary>
     /// <param name="skillDamageConfig"> 伤害配置 </param>
-    public void DestroyCollider(SkillDamageConfig skillDamageConfig)
+    private void DestroyCollider(SkillDamageConfig skillDamageConfig)
     {
         ColliderBehaviour collider = null;
         int hashCode = skillDamageConfig.GetHashCode();

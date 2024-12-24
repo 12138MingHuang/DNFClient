@@ -30,6 +30,15 @@ public partial class LogicActor : LogicObject
         RenderObject.PlayAnim(characterAnim);
     }
 
+    /// <summary>
+    /// 角色技能伤害
+    /// </summary>
+    /// <param name="skillDamageConfig"> 技能伤害配置 </param>
+    public void SkillDamage(int damageValue, SkillDamageConfig skillDamageConfig)
+    {
+        Debug.Log("SkillDamage: " + damageValue);
+    }
+
     public override void OnDestroy()
     {
         base.OnDestroy();

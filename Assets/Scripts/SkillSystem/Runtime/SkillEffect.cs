@@ -12,7 +12,7 @@ public partial class Skill
     /// <summary>
     /// 逻辑帧更新特效
     /// </summary>
-    public void OnLogicFrameUpdateEffect()
+    private void OnLogicFrameUpdateEffect()
     {
         if (mSkillDataConfig.effectCfgList != null && mSkillDataConfig.effectCfgList.Count > 0)
         {
@@ -52,7 +52,7 @@ public partial class Skill
     /// 销毁对应配置生成的特效
     /// </summary>
     /// <param name="skillEffectConfig"> 特效配置 </param>
-    public void DestroyEffect(SkillEffectConfig skillEffectConfig)
+    private void DestroyEffect(SkillEffectConfig skillEffectConfig)
     {
         SkillEffectRender effect = null;
         int hashCode = skillEffectConfig.GetHashCode();
