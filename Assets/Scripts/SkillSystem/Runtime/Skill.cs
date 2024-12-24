@@ -126,6 +126,7 @@ public partial class Skill
         OnLogicFrameUpdateDamage();
         // 更新行动逻辑帧
         // 更新音效逻辑帧
+        OnLogicFrameUpdateAudio();
         // 更新子弹逻辑帧
         
         // 判断技能是否释放结束
