@@ -162,8 +162,21 @@ public partial class Skill
             target.SkillDamage(9999, skillDamageConfig);
             
             // 添加 Buff TODO
-            // 添加击中特效 TODO
+            // 添加击中特效
+            AddHitEffect(target);
             // 播放击中音效 TODO
+        }
+    }
+
+    /// <summary>
+    /// 添加击中特效
+    /// </summary>
+    /// <param name="targetObj"> 目标对象 </param>
+    public void AddHitEffect(LogicActor targetObj)
+    {
+        if (mSkillDataConfig.skillConfig.skillHitEffect != null)
+        {
+            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, mSkillCreator);
         }
     }
 

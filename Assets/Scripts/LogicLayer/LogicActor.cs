@@ -59,6 +59,17 @@ public partial class LogicActor : LogicObject
         }
     }
 
+    /// <summary>
+    /// 受击
+    /// </summary>
+    /// <param name="hitEffect"> 受击特效 </param>
+    /// <param name="hitEffectSurvivalTimeMs"> 受击特效存活时间 </param>
+    /// <param name="skillCreator"> 施法者 </param>
+    public void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator)
+    {
+        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator);
+    }
+    
     public override void OnDestroy()
     {
         base.OnDestroy();
