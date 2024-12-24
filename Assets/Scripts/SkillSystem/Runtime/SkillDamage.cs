@@ -4,6 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using ZMGC.Battle;
 
+/// <summary>
+/// 伤害来源
+/// </summary>
+public enum DamageSource
+{
+    /// <summary>
+    /// 无
+    /// </summary>
+    None,
+    /// <summary>
+    /// 技能伤害
+    /// </summary>
+    Skill,
+    /// <summary>
+    /// buff伤害
+    /// </summary>
+    Buff,
+    /// <summary>
+    /// 子弹伤害
+    /// </summary>
+    Bullet
+}
+
 public partial class Skill
 {
     /// <summary>

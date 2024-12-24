@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 /// <summary>
 /// 渲染对象
@@ -87,5 +88,17 @@ public class RenderObject : MonoBehaviour
     public virtual void PlayAnim(AnimationClip clip)
     {
         
+    }
+
+    /// <summary>
+    /// 受到伤害
+    /// </summary>
+    /// <param name="damageValue"> 伤害值 </param>
+    /// <param name="source"> 来源 </param>
+    public virtual void Damage(int damageValue, DamageSource source)
+    {
+        GameObject damageEffect = ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS + "DamageItem/DamageText", null);
+        DamageTextItem damageTextItem = damageEffect.GetComponent<DamageTextItem>();
+        damageTextItem.ShowDamageText(damageValue, this);
     }
 }

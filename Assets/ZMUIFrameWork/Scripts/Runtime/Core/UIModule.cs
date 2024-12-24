@@ -12,6 +12,13 @@ public class UIModule : Singleton<UIModule>
     /// UI 摄像机
     /// </summary>
     private Camera mUICamera;
+    /// <summary>
+    /// UI 摄像机
+    /// </summary>
+    public Camera UICamera
+    {
+        get { return mUICamera; }
+    }
 
     /// <summary>
     /// UI 根节点

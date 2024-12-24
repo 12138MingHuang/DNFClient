@@ -1,3 +1,4 @@
+using FixMath;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,9 +35,28 @@ public partial class LogicActor : LogicObject
     /// 角色技能伤害
     /// </summary>
     /// <param name="skillDamageConfig"> 技能伤害配置 </param>
-    public void SkillDamage(int damageValue, SkillDamageConfig skillDamageConfig)
+    public virtual void SkillDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
     {
         Debug.Log("SkillDamage: " + damageValue);
+        CalculateDamage(damageValue, DamageSource.Skill);
+    }
+    
+    /// <summary>
+    /// 计算伤害
+    /// </summary>
+    /// <param name="damage"> 伤害值 </param>
+    /// <param name="damageSource"> 伤害来源 </param>
+    private void CalculateDamage(FixInt damage, DamageSource damageSource)
+    {
+        if (ObjectState == LogicObjectState.Survival)
+        {
+            // 1.对象逻辑层血量减少 TODO
+            
+            // 2.判断对象是否死亡，如果死亡就处理死亡逻辑 TODO
+            
+            // 3.进行伤害飘字渲染
+            RenderObject.Damage(damage.RawInt, damageSource);
+        }
     }
 
     public override void OnDestroy()
