@@ -123,6 +123,7 @@ public partial class Skill
         // 更新特效逻辑帧
         OnLogicFrameUpdateEffect();
         // 更新伤害逻辑帧
+        OnLogicFrameUpdateDamage();
         // 更新行动逻辑帧
         // 更新音效逻辑帧
         // 更新子弹逻辑帧
