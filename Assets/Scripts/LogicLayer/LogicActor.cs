@@ -73,6 +73,5 @@ public partial class LogicActor : LogicObject
     public override void OnDestroy()
     {
         base.OnDestroy();
-        RenderObject.OnRelease();
     }
 }

@@ -26,4 +26,10 @@ public class SkillEffectLogic : LogicObject
             LogicPos = skillCreator.LogicPos + offsetPos;
         }
     }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        RenderObject.OnRelease();
+    }
 }
