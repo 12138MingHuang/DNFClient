@@ -25,6 +25,10 @@ public class SkillEffectLogic : LogicObject
             offsetPos.y = FixIntMath.Abs(offsetPos.y);
             LogicPos = skillCreator.LogicPos + offsetPos;
         }
+        else if (effectCfg.effectPosType == EffectPosType.Zero)
+        {
+            LogicPos = FixIntVector3.zero;
+        }
     }
 
     public override void OnDestroy()

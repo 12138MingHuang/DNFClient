@@ -21,8 +21,16 @@ public partial class Skill
                 if (skillData.skillEffect != null && mCurLogicFrame == skillData.triggerFrame)
                 {
                     DestroyEffect(skillData);
+
+                    Transform effectParent = null;
+                    if (skillData.isSetTransParent)
+                    {
+                        // 获取左手或右手节点
+                        effectParent = mSkillCreator.RenderObject.GetTransParent(skillData.transParent);
+                    }
+                    
                     // 技能特效生成
-                    GameObject effectObj = GameObject.Instantiate(skillData.skillEffect);
+                    GameObject effectObj = GameObject.Instantiate(skillData.skillEffect, effectParent);
                     effectObj.transform.localPosition = Vector3.zero;
                     effectObj.transform.localRotation = Quaternion.identity;
                     effectObj.transform.localScale = Vector3.one;
@@ -34,7 +42,7 @@ public partial class Skill
                     }
 
                     SkillEffectLogic effectLogic = new SkillEffectLogic(LogicObjectType.Effect, skillData, effectRender, mSkillCreator);
-                    effectRender.SetLogicObject(effectLogic);
+                    effectRender.SetLogicObject(effectLogic, skillData.effectPosType != EffectPosType.Zero);
 
                     mEffectDic.Add(skillData.GetHashCode(), effectLogic);
                 }

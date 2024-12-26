@@ -25,14 +25,21 @@ public class RenderObject : MonoBehaviour
     protected float m_SmoothPosSpeed = 10f;
     
     /// <summary>
+    /// 是否更新位置和旋转
+    /// </summary>
+    protected bool mIsUpdatePosAndRot = true;
+    
+    /// <summary>
     /// 设置逻辑对象
     /// </summary>
     /// <param name="logicObject"> 逻辑对象 </param>
-    public void SetLogicObject(LogicObject logicObject)
+    public void SetLogicObject(LogicObject logicObject, bool isUpdatePosAndRot = true)
     {
         this.logicObject = logicObject;
+        mIsUpdatePosAndRot = isUpdatePosAndRot;
         //初始化位置
         transform.position = logicObject.LogicPos.ToVector3();
+        if(!isUpdatePosAndRot) transform.localPosition = Vector3.zero;
         UpdateDir();
     }
 
@@ -66,6 +73,8 @@ public class RenderObject : MonoBehaviour
     /// </summary>
     private void UpdatePosition()
     {
+        if(!mIsUpdatePosAndRot) return;
+        
         // 对逻辑对象的位置进行平滑插值，流畅渲染对象移动
         transform.position = Vector3.Lerp(transform.position, logicObject.LogicPos.ToVector3(),
             Time.deltaTime * m_SmoothPosSpeed);
@@ -76,6 +85,8 @@ public class RenderObject : MonoBehaviour
     /// </summary>
     private void UpdateDir()
     {
+        if(!mIsUpdatePosAndRot) return;
+        
         transform.rotation = Quaternion.Euler(logicObject.LogicDir.ToVector3());
         mRenderForwardDir.x = logicObject.LogicXAxis >= 0f ? 0f : -20f;
         mRenderForwardDir.y = logicObject.LogicXAxis >= 0f ? 0f : 180f;
@@ -118,5 +129,15 @@ public class RenderObject : MonoBehaviour
             hitEffectObj.transform.localScale = skillCreator.LogicXAxis > 0 ? Vector3.one : new Vector3(-1f, 1f, 1f);
             Destroy(hitEffectObj, hitEffectSurvivalTimeMs * 1.0f / 1000f);
         }
+    }
+
+    /// <summary>
+    /// 获取父节点
+    /// </summary>
+    /// <param name="parentType"> 父节点类型 </param>
+    /// <returns> 父节点 </returns>
+    public virtual Transform GetTransParent(TransParentType parentType)
+    {
+        return null;
     }
 }

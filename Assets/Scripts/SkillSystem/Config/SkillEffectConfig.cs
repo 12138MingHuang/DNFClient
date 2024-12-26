@@ -131,7 +131,8 @@ public enum EffectPosType
     [LabelText("跟随角色方向")] FollowDir,
     [LabelText("屏幕中心位置")] CenterPos,
     [LabelText("引导位置")] GuidePos,
-    [LabelText("跟随特效移动位置")] FollowEffectMovePos
+    [LabelText("跟随特效移动位置")] FollowEffectMovePos,
+    [LabelText("位置归零")] Zero
 }
 
 public enum TransParentType

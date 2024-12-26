@@ -52,6 +52,14 @@ MonoBehaviour:
     isSetTransParent: 0
     transParent: 0
     gameEffectObj: {fileID: 0}
+  - skillEffect: {fileID: 1351735087442694, guid: f33f2e97566a7144794e63ee9b2fa4e2, type: 3}
+    triggerFrame: 2
+    endFrame: 10
+    effectOffsetPos: {x: 0, y: 0, z: 0}
+    effectPosType: 5
+    isSetTransParent: 1
+    transParent: 1
+    gameEffectObj: {fileID: 0}
   damageCfgList:
   - triggerFrame: 2
     endFrame: 3

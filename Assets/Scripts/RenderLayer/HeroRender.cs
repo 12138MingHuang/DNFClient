@@ -14,6 +14,15 @@ public class HeroRender : RenderObject
     /// 英雄逻辑层
     /// </summary>
     private HeroLogic mHeroLogic;
+
+    /// <summary>
+    /// 左手根部节点
+    /// </summary>
+    public Transform LeftHandRootTrans;
+    /// <summary>
+    /// 右手根部节点
+    /// </summary>
+    public Transform RightHandRootTrans;
     
     /// <summary>
     /// 角色动画
@@ -106,5 +115,18 @@ public class HeroRender : RenderObject
         }
         mAnim.clip = clip;
         PlayAnim(clip.name);
+    }
+
+    public override Transform GetTransParent(TransParentType parentType)
+    {
+        switch (parentType)
+        {
+            case TransParentType.LeftHand:
+                Debug.Log("Left Hand" + LeftHandRootTrans.name);
+                return LeftHandRootTrans;
+            case TransParentType.RightHand:
+                return RightHandRootTrans;
+        }
+        return null;
     }
 }
