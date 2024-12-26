@@ -122,7 +122,6 @@ public class HeroRender : RenderObject
         switch (parentType)
         {
             case TransParentType.LeftHand:
-                Debug.Log("Left Hand" + LeftHandRootTrans.name);
                 return LeftHandRootTrans;
             case TransParentType.RightHand:
                 return RightHandRootTrans;

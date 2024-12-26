@@ -84,11 +84,13 @@ namespace ZMGC.Battle
         {
             HeroLogicCtrl.OnLogicFrameUpdate();
             MonsterLogicCtrl.OnLogicFrameUpdate();
+            LogicActionController.Instance.OnLogicFrameUpdate();
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
+            LogicActionController.Instance.OnDestroy();
         }
 
         public override void OnDestroyPostProcess(object args)
