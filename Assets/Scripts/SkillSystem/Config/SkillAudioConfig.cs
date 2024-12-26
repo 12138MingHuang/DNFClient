@@ -13,13 +13,13 @@ public class SkillAudioConfig
     [BoxGroup("技能音效文件")] [LabelText("技能音效文件名称")] [ReadOnly, GUIColor("green")]
     public string audioName;
 
-    [BoxGroup("参数配置")] [LabelText("技能音效触发帧")] [ReadOnly, GUIColor("green")]
+    [BoxGroup("参数配置")] [LabelText("技能音效触发帧")] [GUIColor("green")]
     public int triggerFrame;
 
-    [ToggleGroup("IsLoop", "是否循环")]
+    [ToggleGroup("isLoop", "是否循环")]
     public bool isLoop = false;
     
-    [ToggleGroup("IsLoop", "结束帧")]
+    [ToggleGroup("isLoop", "结束帧")]
     public int endFrame;
     
     

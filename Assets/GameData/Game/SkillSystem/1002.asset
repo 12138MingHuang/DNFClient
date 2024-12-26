@@ -39,7 +39,7 @@ MonoBehaviour:
     combinationSkillId: 0
     skillHitEffect: {fileID: 5023627635078921320, guid: eebb9919fe1d53f4690a67203d880219, type: 3}
     hitEffectSurvivalTimeMs: 100
-    skillHitAudio: {fileID: 0}
+    skillHitAudio: {fileID: 8300000, guid: 433584d71effd7843a6cbd31f9ec76fa, type: 3}
     showSkillPortrait: 0
     skillPortraitObj: {fileID: 0}
     skillDes: 
@@ -69,3 +69,9 @@ MonoBehaviour:
     targetType: 0
     addBuffs: 
     triggerSkillId: 0
+  audioCfgList:
+  - skillAudio: {fileID: 8300000, guid: 38ea3ca6ede3d544daf16fbbc6866f8a, type: 3}
+    audioName: Swordsman_liguidj_huidao02
+    triggerFrame: 2
+    isLoop: 0
+    endFrame: 0

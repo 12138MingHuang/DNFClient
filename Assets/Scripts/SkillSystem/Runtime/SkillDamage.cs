@@ -164,7 +164,8 @@ public partial class Skill
             // 添加 Buff TODO
             // 添加击中特效
             AddHitEffect(target);
-            // 播放击中音效 TODO
+            // 播放击中音效
+            PlyHitAudio();
         }
     }
 
