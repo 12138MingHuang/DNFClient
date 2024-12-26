@@ -7,7 +7,7 @@ public partial class Skill
     /// <summary>
     /// 特效对象字典，key为特效配置的Hashcode value为特效对象
     /// </summary>
-    private Dictionary<int, SkillEffectRender> mEffectDic = new Dictionary<int, SkillEffectRender>();
+    private Dictionary<int, SkillEffectLogic> mEffectDic = new Dictionary<int, SkillEffectLogic>();
 
     /// <summary>
     /// 逻辑帧更新特效
@@ -36,7 +36,7 @@ public partial class Skill
                     SkillEffectLogic effectLogic = new SkillEffectLogic(LogicObjectType.Effect, skillData, effectRender, mSkillCreator);
                     effectRender.SetLogicObject(effectLogic);
 
-                    mEffectDic.Add(skillData.GetHashCode(), effectRender);
+                    mEffectDic.Add(skillData.GetHashCode(), effectLogic);
                 }
 
                 if (mCurLogicFrame == skillData.endFrame)
@@ -54,13 +54,13 @@ public partial class Skill
     /// <param name="skillEffectConfig"> 特效配置 </param>
     private void DestroyEffect(SkillEffectConfig skillEffectConfig)
     {
-        SkillEffectRender effect = null;
+        SkillEffectLogic effect = null;
         int hashCode = skillEffectConfig.GetHashCode();
         mEffectDic.TryGetValue(hashCode, out effect);
         if (effect != null)
         {
             mEffectDic.Remove(hashCode);
-            effect.OnRelease();
+            effect.OnDestroy();
         }
     }
 
