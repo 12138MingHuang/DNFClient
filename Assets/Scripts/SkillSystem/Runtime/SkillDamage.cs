@@ -49,10 +49,19 @@ public partial class Skill
             {
                 int hashcode = skillData.GetHashCode();
                 
+                if (skillData.colliderPosType == ColliderPosType.FollowPos)
+                {
+                    ColliderBehaviour damageCollider  = null;
+                    if (mColliderDic.TryGetValue(skillData.GetHashCode(), out damageCollider) && damageCollider != null)
+                    {
+                        CreateOrUpdateCollider(skillData, damageCollider);
+                    }
+                }
+                
                 if (mCurLogicFrame == skillData.triggerFrame)
                 {
                     DestroyCollider(skillData);
-                    ColliderBehaviour collider = CreateCollider(skillData);
+                    ColliderBehaviour collider = CreateOrUpdateCollider(skillData, null);
                     mColliderDic.Add(hashcode, collider);
                     
                     // 处理碰撞体伤害检测
@@ -96,9 +105,9 @@ public partial class Skill
     /// </summary>
     /// <param name="skillDamageConfig"> 伤害配置 </param>
     /// <returns> 碰撞体对象 </returns>
-    private ColliderBehaviour CreateCollider(SkillDamageConfig skillDamageConfig)
+    private ColliderBehaviour CreateOrUpdateCollider(SkillDamageConfig skillDamageConfig, ColliderBehaviour damageCollider)
     {
-        ColliderBehaviour collider = null;
+        ColliderBehaviour collider = damageCollider;
         
         // 创建对应的定点数碰撞体
         switch (skillDamageConfig.detectionMode)
@@ -107,14 +116,14 @@ public partial class Skill
                 FixIntVector3 boxSize = new FixIntVector3(skillDamageConfig.boxSize);
                 FixIntVector3 boxOffset = new FixIntVector3(skillDamageConfig.boxOffset) * mSkillCreator.LogicXAxis;
                 boxOffset.y = FixIntMath.Abs(boxOffset.y);
-                collider = new FixIntBoxCollider(boxSize, boxOffset);
+                if(damageCollider == null) collider = new FixIntBoxCollider(boxSize, boxOffset);
                 collider.SetBoxData(boxOffset, boxSize);
                 collider.UpdateColliderInfo(mSkillCreator.LogicPos, boxSize);
                 break;
             case DamageDetectionMode.Sphere3D:
                 FixIntVector3 sphereOffset = new FixIntVector3(skillDamageConfig.sphereOffset) * mSkillCreator.LogicXAxis;
                 sphereOffset.y = FixIntMath.Abs(sphereOffset.y);
-                collider = new FixIntSphereCollider(skillDamageConfig.radius, sphereOffset);
+                if(damageCollider == null) collider = new FixIntSphereCollider(skillDamageConfig.radius, sphereOffset);
                 collider.SetBoxData(skillDamageConfig.radius, sphereOffset);
                 collider.UpdateColliderInfo(mSkillCreator.LogicPos, FixIntVector3.zero, skillDamageConfig.radius);
                 break;

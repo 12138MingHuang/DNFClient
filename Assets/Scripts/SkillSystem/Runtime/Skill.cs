@@ -161,5 +161,9 @@ public partial class Skill
     {
         skillState = SkillState.End;
         OnReleaseSkillEnd?.Invoke(this, false);
+        if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
+        {
+            mSkillCreator.ReleaseSkill(mSkillDataConfig.skillConfig.combinationSkillId);
+        }
     }
 }

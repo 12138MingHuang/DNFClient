@@ -52,6 +52,7 @@ public class SkillCharacterConfig
             if (mTempCharacter == null)
             {
                 mTempCharacter = GameObject.Instantiate(skillCharacter);
+                mTempCharacter.name = mTempCharacter.name.Replace("(Clone)", "");
             }
         }
         
@@ -136,6 +137,7 @@ public class SkillCharacterConfig
             if (mTempCharacter == null)
             {
                 mTempCharacter = GameObject.Instantiate(skillCharacter);
+                mTempCharacter.name = mTempCharacter.name.Replace("(Clone)", "");
             }
         }
         // 判断模型身上是否有该动画，没有则添加

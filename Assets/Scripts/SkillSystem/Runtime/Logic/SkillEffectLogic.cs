@@ -31,6 +31,17 @@ public class SkillEffectLogic : LogicObject
         }
     }
 
+    public override void OnLogicFrameUpdate()
+    {
+        base.OnLogicFrameUpdate();
+        if (mEffectcfg.effectPosType == EffectPosType.FollowPosDir)
+        {
+            FixIntVector3 offsetPos = new FixIntVector3(mEffectcfg.effectOffsetPos) * LogicXAxis;
+            offsetPos.y = FixIntMath.Abs(offsetPos.y);
+            LogicPos = mSkillCreator.LogicPos + offsetPos;
+        }
+    }
+
     public override void OnDestroy()
     {
         base.OnDestroy();

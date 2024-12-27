@@ -27,7 +27,12 @@ public class SkillSystem
     {
         foreach (var skillId in skillIdArr)
         {
-            mSkillList.Add(new Skill(skillId, mSkillCreator));
+            Skill skill = new Skill(skillId, mSkillCreator);
+            mSkillList.Add(skill);
+            if(skill.SkillConfig.combinationSkillId != 0)
+            {
+                InitSkills(new int[] { skill.SkillConfig.combinationSkillId });
+            }
         }
         Debug.Log("技能初始化完成, 技能个数：" + skillIdArr.Length);
     }

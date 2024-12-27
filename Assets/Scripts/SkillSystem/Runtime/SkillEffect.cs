@@ -51,6 +51,12 @@ public partial class Skill
                 {
                     // 技能特效结束，技能特效销毁
                     DestroyEffect(skillData);
+                    continue;
+                }
+                SkillEffectLogic effectLogicObj = null;
+                if(mEffectDic.TryGetValue(skillData.GetHashCode(), out effectLogicObj) && effectLogicObj != null)
+                {
+                    effectLogicObj.OnLogicFrameUpdate();
                 }
             }
         }
