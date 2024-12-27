@@ -71,7 +71,7 @@ MonoBehaviour:
   damageCfgList:
   - triggerFrame: 1
     endFrame: 10
-    triggerIntervalMS: 0
+    triggerIntervalMS: 100
     isFollowEffect: 0
     damageType: 1
     damageRate: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     radius: 1
     sphereOffset: {x: 0, y: 0.9, z: 0}
     radiusHeight: 0
-    colliderPosType: 0
-    targetType: 0
+    colliderPosType: 1
+    targetType: 2
     addBuffs: 
     triggerSkillId: 0
   audioCfgList:
@@ -91,4 +91,11 @@ MonoBehaviour:
     triggerFrame: 1
     isLoop: 0
     endFrame: 0
-  actionCfgList: []
+  actionCfgList:
+  - triggerFrame: 1
+    moveActionType: 0
+    heightPos: {x: 0, y: 0, z: 0}
+    movePos: {x: 2, y: 0, z: 0}
+    durationMS: 200
+    actionFinishOperation: 0
+    actionFinishIdList: 
