@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1002
   m_EditorClassIdentifier: 
   character:
-    skillCharacter: {fileID: 0}
+    skillCharacter: {fileID: 7439582587569004764, guid: 961b52318dc24c242b7f2ddc2f1a2a37, type: 3}
     skillAnim: {fileID: 7400000, guid: c2c2c4731342e094f988a100cf233452, type: 2}
     animProgress: 100
     isLoopAnim: 0
@@ -83,3 +83,4 @@ MonoBehaviour:
     triggerFrame: 2
     isLoop: 0
     endFrame: 0
+  actionCfgList: []

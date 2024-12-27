@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1004
   m_EditorClassIdentifier: 
   character:
-    skillCharacter: {fileID: 0}
+    skillCharacter: {fileID: 7439582587569004764, guid: 961b52318dc24c242b7f2ddc2f1a2a37, type: 3}
     skillAnim: {fileID: 7400000, guid: 99a6a7b4f1da8734c9d5ee5e93e13a5d, type: 2}
     animProgress: 100
     isLoopAnim: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     skillShakeBeforeTimeMs: 280
     skillAttackDurationMs: 700
     skillShakeAfterMs: 80
-    skillCdTimeMs: 3000
+    skillCdTimeMs: 5000
     skillType: 0
     stockPileStageData: []
     skillGuideObj: {fileID: 0}
@@ -47,14 +47,14 @@ MonoBehaviour:
   - skillEffect: {fileID: 1289372591307044, guid: 882dd8f27215653418b39ec9bb6b87ff, type: 3}
     triggerFrame: 2
     endFrame: 9
-    effectOffsetPos: {x: 0, y: 0, z: 0}
+    effectOffsetPos: {x: 0.3, y: 8, z: 0}
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
     gameEffectObj: {fileID: 0}
   damageCfgList:
   - triggerFrame: 3
-    endFrame: 4
+    endFrame: 6
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
