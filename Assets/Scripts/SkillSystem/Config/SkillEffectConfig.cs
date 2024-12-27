@@ -23,6 +23,16 @@ public class SkillEffectConfig
     public bool isSetTransParent = false;
     [ToggleGroup("isSetTransParent", "节点类型")]
     public TransParentType transParent;
+    [ToggleGroup("isAttachDamage", "是否附加伤害")]
+    public bool isAttachDamage = false;
+    [ToggleGroup("isAttachDamage", "特效伤害配置")]
+    public SkillDamageConfig damageConfig;
+    [ToggleGroup("isAttachAction", "是否附加行动")]
+    public bool isAttachAction = false;
+    [ToggleGroup("isAttachAction", "特效行动配置")]
+    public SkillActionConfig actionConfig;
+    
+    
     /// <summary>
     /// 技能特效缓存对象
     /// </summary>

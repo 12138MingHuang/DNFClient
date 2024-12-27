@@ -105,27 +105,28 @@ public partial class Skill
     /// </summary>
     /// <param name="skillDamageConfig"> 伤害配置 </param>
     /// <returns> 碰撞体对象 </returns>
-    private ColliderBehaviour CreateOrUpdateCollider(SkillDamageConfig skillDamageConfig, ColliderBehaviour damageCollider)
+    public ColliderBehaviour CreateOrUpdateCollider(SkillDamageConfig skillDamageConfig, ColliderBehaviour damageCollider, LogicObject followObj = null)
     {
         ColliderBehaviour collider = damageCollider;
+        LogicObject followTargetObj = followObj == null ? mSkillCreator : followObj;
         
         // 创建对应的定点数碰撞体
         switch (skillDamageConfig.detectionMode)
         {
             case DamageDetectionMode.Box3D:
                 FixIntVector3 boxSize = new FixIntVector3(skillDamageConfig.boxSize);
-                FixIntVector3 boxOffset = new FixIntVector3(skillDamageConfig.boxOffset) * mSkillCreator.LogicXAxis;
+                FixIntVector3 boxOffset = new FixIntVector3(skillDamageConfig.boxOffset) * followTargetObj.LogicXAxis;
                 boxOffset.y = FixIntMath.Abs(boxOffset.y);
                 if(damageCollider == null) collider = new FixIntBoxCollider(boxSize, boxOffset);
                 collider.SetBoxData(boxOffset, boxSize);
-                collider.UpdateColliderInfo(mSkillCreator.LogicPos, boxSize);
+                collider.UpdateColliderInfo(followTargetObj.LogicPos, boxSize);
                 break;
             case DamageDetectionMode.Sphere3D:
-                FixIntVector3 sphereOffset = new FixIntVector3(skillDamageConfig.sphereOffset) * mSkillCreator.LogicXAxis;
+                FixIntVector3 sphereOffset = new FixIntVector3(skillDamageConfig.sphereOffset) * followTargetObj.LogicXAxis;
                 sphereOffset.y = FixIntMath.Abs(sphereOffset.y);
                 if(damageCollider == null) collider = new FixIntSphereCollider(skillDamageConfig.radius, sphereOffset);
                 collider.SetBoxData(skillDamageConfig.radius, sphereOffset);
-                collider.UpdateColliderInfo(mSkillCreator.LogicPos, FixIntVector3.zero, skillDamageConfig.radius);
+                collider.UpdateColliderInfo(followTargetObj.LogicPos, FixIntVector3.zero, skillDamageConfig.radius);
                 break;
         }
         
@@ -137,7 +138,7 @@ public partial class Skill
     /// </summary>
     /// <param name="collider"> 碰撞体对象 </param>
     /// <param name="skillDamageConfig"> 伤害配置 </param>
-    private void TriggerColliderDamage(ColliderBehaviour collider, SkillDamageConfig skillDamageConfig)
+    public void TriggerColliderDamage(ColliderBehaviour collider, SkillDamageConfig skillDamageConfig)
     {
         // 1.根据攻击者获取敌人目标列表
         List<LogicActor> enemyList = BattleWorld.GetExitsLogicCtrl<BattleLogicCtrl>().GetEnemyList(mSkillCreator.ObjectType);

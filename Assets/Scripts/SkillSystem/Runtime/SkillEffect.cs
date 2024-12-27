@@ -47,7 +47,7 @@ public partial class Skill
                     mEffectDic.Add(skillData.GetHashCode(), effectLogic);
                 }
 
-                if (mCurLogicFrame == skillData.endFrame)
+                if (mCurLogicFrame == skillData.endFrame && !skillData.isAttachAction)
                 {
                     // 技能特效结束，技能特效销毁
                     DestroyEffect(skillData);
@@ -56,7 +56,7 @@ public partial class Skill
                 SkillEffectLogic effectLogicObj = null;
                 if(mEffectDic.TryGetValue(skillData.GetHashCode(), out effectLogicObj) && effectLogicObj != null)
                 {
-                    effectLogicObj.OnLogicFrameUpdate();
+                    effectLogicObj.OnLogicFrameEffectUpdate(this, mCurLogicFrame);
                 }
             }
         }
@@ -66,7 +66,7 @@ public partial class Skill
     /// 销毁对应配置生成的特效
     /// </summary>
     /// <param name="skillEffectConfig"> 特效配置 </param>
-    private void DestroyEffect(SkillEffectConfig skillEffectConfig)
+    public void DestroyEffect(SkillEffectConfig skillEffectConfig)
     {
         SkillEffectLogic effect = null;
         int hashCode = skillEffectConfig.GetHashCode();

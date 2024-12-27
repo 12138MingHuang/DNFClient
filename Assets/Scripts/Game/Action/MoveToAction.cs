@@ -58,13 +58,13 @@ public class MoveToAction : ActionBehaviour
                 addDistance = mMoveDistance * mTimeScale;
                 break;
             case MoveType.X:
-                addDistance.x = mActionObj.LogicPos.x * mTimeScale;
+                addDistance.x = mMoveDistance.x * mTimeScale;
                 break;
             case MoveType.Y:
-                addDistance.y = mActionObj.LogicPos.y * mTimeScale;
+                addDistance.y = mMoveDistance.y * mTimeScale;
                 break;
             case MoveType.Z:
-                addDistance.z = mActionObj.LogicPos.z * mTimeScale;
+                addDistance.z = mMoveDistance.z * mTimeScale;
                 break;
         }
         mActionObj.LogicPos = mStartPos + addDistance;

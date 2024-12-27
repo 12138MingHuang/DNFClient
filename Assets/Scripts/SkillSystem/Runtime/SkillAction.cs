@@ -1,4 +1,5 @@
 using FixMath;
+using System;
 
 public partial class Skill
 {
@@ -23,7 +24,7 @@ public partial class Skill
     /// </summary>
     /// <param name="actionConfig"> 行动配置 </param>
     /// <param name="logicMoveObj"> 逻辑移动对象 </param>
-    private void AddMoveAction(SkillActionConfig actionConfig, LogicActor logicMoveObj)
+    public void AddMoveAction(SkillActionConfig actionConfig, LogicObject logicMoveObj, Action onMoveFinish = null)
     {
         FixIntVector3 movePos = new FixIntVector3(actionConfig.movePos);
         FixIntVector3 targetPos = logicMoveObj.LogicPos + movePos * logicMoveObj.LogicXAxis;
@@ -45,6 +46,7 @@ public partial class Skill
         // 构建行动
         MoveToAction action = new MoveToAction(logicMoveObj, logicMoveObj.LogicPos, targetPos, actionConfig.durationMS, () =>
         {
+            onMoveFinish?.Invoke();
             switch (actionConfig.actionFinishOperation)
             {
                 case MoveActionFinishOperation.None:
