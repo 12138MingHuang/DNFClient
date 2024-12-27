@@ -67,7 +67,7 @@ public class MoveToAction : ActionBehaviour
                 addDistance.z = mActionObj.LogicPos.z * mTimeScale;
                 break;
         }
-        mActionObj.LogicPos += addDistance;
+        mActionObj.LogicPos = mStartPos + addDistance;
     }
     
     public override void OnActionFinish()

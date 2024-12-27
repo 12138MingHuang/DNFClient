@@ -29,15 +29,15 @@ public partial class Skill
         FixIntVector3 targetPos = logicMoveObj.LogicPos + movePos * logicMoveObj.LogicXAxis;
         // 计算移动类型
         MoveType moveType = MoveType.Target;
-        if (movePos.x == FixInt.Zero && movePos.y != FixInt.Zero && movePos.z != FixInt.Zero)
+        if (movePos.x != FixInt.Zero && movePos.y == FixInt.Zero && movePos.z == FixInt.Zero)
         {
             moveType = MoveType.X;
         }
-        else if (movePos.x != FixInt.Zero && movePos.y == FixInt.Zero && movePos.z != FixInt.Zero)
+        else if (movePos.x == FixInt.Zero && movePos.y != FixInt.Zero && movePos.z == FixInt.Zero)
         {
             moveType = MoveType.Y;
         }
-        else if (movePos.x != FixInt.Zero && movePos.y != FixInt.Zero && movePos.z == FixInt.Zero)
+        else if (movePos.x == FixInt.Zero && movePos.y == FixInt.Zero && movePos.z != FixInt.Zero)
         {
             moveType = MoveType.Z;
         }
