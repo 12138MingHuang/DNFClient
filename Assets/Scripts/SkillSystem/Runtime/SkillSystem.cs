@@ -74,4 +74,22 @@ public class SkillSystem
             skill.OnLogicFrameUpdate();
         }
     }
+
+    /// <summary>
+    /// 获取技能
+    /// </summary>
+    /// <param name="skillId"> 技能id</param>
+    /// <returns> 技能</returns>
+    public Skill GetSkill(int skillId)
+    {
+        foreach (var skill in mSkillList)
+        {
+            if(skill.skillId == skillId)
+            {
+                return skill;
+            }
+        }
+        Debug.LogError("技能不存在, 配置中没找到");
+        return null;
+    }
 }

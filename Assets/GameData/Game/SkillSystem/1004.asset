@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908a0070e7d26094c8f4f8df1c331203, type: 3}
+  m_Name: 1004
+  m_EditorClassIdentifier: 
+  character:
+    skillCharacter: {fileID: 0}
+    skillAnim: {fileID: 7400000, guid: 99a6a7b4f1da8734c9d5ee5e93e13a5d, type: 2}
+    animProgress: 100
+    isLoopAnim: 0
+    animLoopCount: 0
+    logicFrame: 10
+    animLength: 0.70000005
+    skillDurationMS: 700
+  skillConfig:
+    showStockPileData: 0
+    showSkillGuide: 0
+    skillIcon: {fileID: 21300000, guid: bce8e18600ef9a14880b3bddc75334fc, type: 3}
+    skillId: 1004
+    skillName: "\u6280\u80FD1"
+    needMagicValue: 100
+    skillShakeBeforeTimeMs: 280
+    skillAttackDurationMs: 700
+    skillShakeAfterMs: 80
+    skillCdTimeMs: 3000
+    skillType: 0
+    stockPileStageData: []
+    skillGuideObj: {fileID: 0}
+    skillGuideRange: 0
+    combinationSkillId: 0
+    skillHitEffect: {fileID: 5023627635078921320, guid: eebb9919fe1d53f4690a67203d880219, type: 3}
+    hitEffectSurvivalTimeMs: 100
+    skillHitAudio: {fileID: 8300000, guid: a0a0952ba5d216a4bb7f7c06c16b5f79, type: 3}
+    showSkillPortrait: 0
+    skillPortraitObj: {fileID: 0}
+    skillDes: 
+  effectCfgList:
+  - skillEffect: {fileID: 1289372591307044, guid: 882dd8f27215653418b39ec9bb6b87ff, type: 3}
+    triggerFrame: 2
+    endFrame: 9
+    effectOffsetPos: {x: 0, y: 0, z: 0}
+    effectPosType: 0
+    isSetTransParent: 0
+    transParent: 0
+    gameEffectObj: {fileID: 0}
+  damageCfgList:
+  - triggerFrame: 3
+    endFrame: 4
+    triggerIntervalMS: 0
+    isFollowEffect: 0
+    damageType: 1
+    damageRate: 0
+    detectionMode: 1
+    boxSize: {x: 1.5, y: 2.55, z: 1}
+    boxOffset: {x: 1.21, y: 1.34, z: 0}
+    radius: 1
+    sphereOffset: {x: 0, y: 0.9, z: 0}
+    radiusHeight: 0
+    colliderPosType: 0
+    targetType: 0
+    addBuffs: 
+    triggerSkillId: 0
+  audioCfgList:
+  - skillAudio: {fileID: 8300000, guid: c80df3d8ac5cc2c4ea9e05d55999f4f9, type: 3}
+    audioName: Swordsman_hh_shangtiao
+    triggerFrame: 3
+    isLoop: 0
+    endFrame: 0
+  actionCfgList: []

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMGC.Battle;
 
 /// <summary>
 /// 处理逻辑对象技能
@@ -17,6 +18,10 @@ public partial class LogicActor
     /// 普通攻击技能id数组
     /// </summary>
     private int[] mNormalSkillIdArr = new int[] { 1001, 1002, 1003 };
+    /// <summary>
+    /// 技能id数组
+    /// </summary>
+    private int[] mSkillIdArr = new int[] { 1004 };
 
     /// <summary>
     /// 正在释放的技能列表
@@ -33,8 +38,12 @@ public partial class LogicActor
     /// </summary>
     public void InitActorSkill()
     {
+        HeroDataMgr heroData = BattleWorld.GetExitsDataMgr<HeroDataMgr>();
+        mNormalSkillIdArr = heroData.GetHeroNormalSkillIdArray(1000);
+        mSkillIdArr = heroData.GetHeroSkillIdArray(1000);
         mSkillSystem = new SkillSystem(this);
         mSkillSystem.InitSkills(mNormalSkillIdArr);
+        mSkillSystem.InitSkills(mSkillIdArr);
     }
 
     /// <summary>
@@ -115,5 +124,15 @@ public partial class LogicActor
     public void OnLogicFrameUpdateSkill()
     {
         mSkillSystem.OnLogicFrameUpdate();
+    }
+    
+    /// <summary>
+    /// 获取技能
+    /// </summary>
+    /// <param name="skillId"> 技能id </param>
+    /// <returns> 技能 </returns>
+    public Skill GetSkill(int skillId)
+    {
+        return mSkillSystem.GetSkill(skillId);
     }
 }

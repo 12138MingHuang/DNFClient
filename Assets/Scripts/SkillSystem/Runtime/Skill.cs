@@ -41,6 +41,11 @@ public partial class Skill
     /// 技能数据配置
     /// </summary>
     private SkillDataConfig mSkillDataConfig;
+    
+    /// <summary>
+    /// 技能配置
+    /// </summary>
+    public SkillConfig SkillConfig => mSkillDataConfig.skillConfig;
 
     /// <summary>
     /// 技能释放后摇
