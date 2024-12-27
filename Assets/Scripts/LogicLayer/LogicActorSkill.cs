@@ -72,6 +72,15 @@ public partial class LogicActor
     }
 
     /// <summary>
+    /// 触发蓄力技能
+    /// </summary>
+    /// <param name="skillId"> 技能id </param>
+    public void TriggerStockPileSkill(int skillId)
+    {
+        mSkillSystem.TriggerStockPileSkill(skillId);
+    }
+
+    /// <summary>
     /// 是否是普通攻击技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>

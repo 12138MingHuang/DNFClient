@@ -33,6 +33,15 @@ public class SkillSystem
             {
                 InitSkills(new int[] { skill.SkillConfig.combinationSkillId });
             }
+            
+            // 初始化蓄力技能
+            if(skill.SkillConfig.stockPileStageData.Count > 0)
+            {
+                foreach (var stage in skill.SkillConfig.stockPileStageData)
+                {
+                    InitSkills(new int[] {stage.skillId});
+                }
+            }
         }
         Debug.Log("技能初始化完成, 技能个数：" + skillIdArr.Length);
     }
@@ -67,6 +76,18 @@ public class SkillSystem
         
         Debug.LogError("skillId: " + skillId + " 技能不存在, 配置中没找到");
         return null;
+    }
+    /// <summary>
+    /// 触发蓄力技能效果
+    /// </summary>
+    /// <param name="skillId"> 技能id</param>
+    public void TriggerStockPileSkill(int skillId)
+    {
+        Skill skill = GetSkill(skillId);
+        if (skill != null)
+        {
+            skill.TriggerStockPileSkill();
+        }
     }
     
     /// <summary>

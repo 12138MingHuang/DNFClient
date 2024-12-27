@@ -48,7 +48,8 @@ public class SkillItem : MonoBehaviour
                 mSkillCreator.ReleaseSkill(skillId);
                 break;
             case SkillGuideType.LongPress:
-                // TODO: 蓄力技能释放逻辑
+                // 蓄力技能释放逻辑
+                mSkillCreator.TriggerStockPileSkill(skillId);
                 break;
             case SkillGuideType.Position:
                 // TODO: 位置引导技能释放逻辑
@@ -66,7 +67,16 @@ public class SkillItem : MonoBehaviour
     /// <param name="skillDirDis"> 技能方向距离</param>
     private void OnUpdateSkillGuide(SkillGuideType skillGuide, bool isCancel, Vector3 skillPos, int skillId, float skillDirDis)
     {
-        
+        switch (skillGuide)
+        {
+            case SkillGuideType.LongPress:
+                // 蓄力技能逻辑
+                mSkillCreator.TriggerStockPileSkill(skillId);
+                break;
+            case SkillGuideType.Position:
+                // TODO: 位置引导技能更新逻辑
+                break;
+        }
     }
     
     /// <summary>
