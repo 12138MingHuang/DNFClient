@@ -15,10 +15,10 @@ MonoBehaviour:
   character:
     skillCharacter: {fileID: 7439582587569004764, guid: 961b52318dc24c242b7f2ddc2f1a2a37, type: 3}
     skillAnim: {fileID: 7400000, guid: 974afe8d6d3b29a40aaa93c223c35e1a, type: 2}
-    animProgress: 100
+    animProgress: 56
     isLoopAnim: 0
     animLoopCount: 0
-    logicFrame: 10
+    logicFrame: 5
     animLength: 0.6666667
     skillDurationMS: 666
   skillConfig:
@@ -51,6 +51,33 @@ MonoBehaviour:
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
+    isAttachDamage: 0
+    damageConfig:
+      triggerFrame: 0
+      endFrame: 0
+      triggerIntervalMS: 0
+      isFollowEffect: 0
+      damageType: 0
+      damageRate: 0
+      detectionMode: 0
+      boxSize: {x: 1, y: 1, z: 1}
+      boxOffset: {x: 0, y: 0, z: 0}
+      radius: 1
+      sphereOffset: {x: 0, y: 0.9, z: 0}
+      radiusHeight: 0
+      colliderPosType: 0
+      targetType: 0
+      addBuffs: 
+      triggerSkillId: 0
+    isAttachAction: 0
+    actionConfig:
+      triggerFrame: 0
+      moveActionType: 0
+      heightPos: {x: 0, y: 0, z: 0}
+      movePos: {x: 0, y: 0, z: 0}
+      durationMS: 0
+      actionFinishOperation: 0
+      actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   - skillEffect: {fileID: 1274206666515356, guid: 0fae07aa37dff8049b55b2b9a36cee58, type: 3}
     triggerFrame: 1
@@ -59,6 +86,33 @@ MonoBehaviour:
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
+    isAttachDamage: 0
+    damageConfig:
+      triggerFrame: 0
+      endFrame: 0
+      triggerIntervalMS: 0
+      isFollowEffect: 0
+      damageType: 0
+      damageRate: 0
+      detectionMode: 0
+      boxSize: {x: 1, y: 1, z: 1}
+      boxOffset: {x: 0, y: 0, z: 0}
+      radius: 1
+      sphereOffset: {x: 0, y: 0.9, z: 0}
+      radiusHeight: 0
+      colliderPosType: 0
+      targetType: 0
+      addBuffs: 
+      triggerSkillId: 0
+    isAttachAction: 0
+    actionConfig:
+      triggerFrame: 0
+      moveActionType: 0
+      heightPos: {x: 0, y: 0, z: 0}
+      movePos: {x: 0, y: 0, z: 0}
+      durationMS: 0
+      actionFinishOperation: 0
+      actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   - skillEffect: {fileID: 1179082350114280, guid: 148c2512123296c4a8537fc8200fd0a6, type: 3}
     triggerFrame: 1
@@ -67,11 +121,38 @@ MonoBehaviour:
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
+    isAttachDamage: 0
+    damageConfig:
+      triggerFrame: 0
+      endFrame: 0
+      triggerIntervalMS: 0
+      isFollowEffect: 0
+      damageType: 0
+      damageRate: 0
+      detectionMode: 0
+      boxSize: {x: 1, y: 1, z: 1}
+      boxOffset: {x: 0, y: 0, z: 0}
+      radius: 1
+      sphereOffset: {x: 0, y: 0.9, z: 0}
+      radiusHeight: 0
+      colliderPosType: 0
+      targetType: 0
+      addBuffs: 
+      triggerSkillId: 0
+    isAttachAction: 0
+    actionConfig:
+      triggerFrame: 0
+      moveActionType: 0
+      heightPos: {x: 0, y: 0, z: 0}
+      movePos: {x: 0, y: 0, z: 0}
+      durationMS: 0
+      actionFinishOperation: 0
+      actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   damageCfgList:
   - triggerFrame: 1
-    endFrame: 10
-    triggerIntervalMS: 100
+    endFrame: 5
+    triggerIntervalMS: 150
     isFollowEffect: 0
     damageType: 1
     damageRate: 0

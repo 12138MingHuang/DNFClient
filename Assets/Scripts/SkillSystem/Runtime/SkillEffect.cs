@@ -78,4 +78,17 @@ public partial class Skill
         }
     }
 
+    /// <summary>
+    /// 销毁所有特效对象
+    /// </summary>
+    public void ReleaseAllEffect()
+    {
+        foreach (var skillEffect in mSkillDataConfig.effectCfgList)
+        {
+            if (!skillEffect.isAttachAction)
+            {
+                DestroyEffect(skillEffect);
+            }
+        }
+    }
 }

@@ -71,7 +71,7 @@ public class SkillItem : MonoBehaviour
         {
             case SkillGuideType.LongPress:
                 // 蓄力技能逻辑
-                mSkillCreator.TriggerStockPileSkill(skillId);
+                mSkillCreator.ReleaseSkill(skillId);
                 break;
             case SkillGuideType.Position:
                 // TODO: 位置引导技能更新逻辑

@@ -88,7 +88,7 @@ public class RenderObject : MonoBehaviour
         if(!mIsUpdatePosAndRot) return;
         
         transform.rotation = Quaternion.Euler(logicObject.LogicDir.ToVector3());
-        mRenderForwardDir.x = logicObject.LogicXAxis >= 0f ? 0f : -20f;
+        // mRenderForwardDir.x = logicObject.LogicXAxis >= 0f ? 0f : -20f;
         mRenderForwardDir.y = logicObject.LogicXAxis >= 0f ? 0f : 180f;
         transform.localEulerAngles = mRenderForwardDir;
     }

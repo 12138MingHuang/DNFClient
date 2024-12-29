@@ -106,6 +106,7 @@ public partial class Skill
         // 开始释放技能时候，初始化将数据
         mCurLogicFrame = 0;
         mCurLogicFrameAccTime = 0;
+        mAutoMatchStockStage = false;
     }
 
     /// <summary>
@@ -118,8 +119,7 @@ public partial class Skill
 
     public void OnLogicFrameUpdate()
     {
-        if(skillState == SkillState.None) return;
-        
+        if(skillState == SkillState.None || skillState == SkillState.End) return;
         // 计算累计运行时间
         mCurLogicFrameAccTime = mCurLogicFrame * LogicFrameConfig.LogicFrameIntervalMS;
         
@@ -197,6 +197,7 @@ public partial class Skill
     {
         skillState = SkillState.End;
         OnReleaseSkillEnd?.Invoke(this, false);
+        ReleaseAllEffect();
         if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
         {
             mSkillCreator.ReleaseSkill(mSkillDataConfig.skillConfig.combinationSkillId);
