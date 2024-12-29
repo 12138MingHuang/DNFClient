@@ -124,7 +124,7 @@ public partial class Skill
         mCurLogicFrameAccTime = mCurLogicFrame * LogicFrameConfig.LogicFrameIntervalMS;
         
         // 处理技能后摇
-        if (skillState == SkillState.Before && mCurLogicFrameAccTime >= mSkillDataConfig.skillConfig.skillShakeAfterMs)
+        if (skillState == SkillState.Before && mCurLogicFrameAccTime >= mSkillDataConfig.skillConfig.skillShakeAfterMs && mSkillDataConfig.skillConfig.skillType != SkillType.StockPile)
         {
             SkillAfter();
         }
@@ -196,7 +196,7 @@ public partial class Skill
     private void SkillEnd()
     {
         skillState = SkillState.End;
-        OnReleaseSkillEnd?.Invoke(this, false);
+        OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
         if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
         {
