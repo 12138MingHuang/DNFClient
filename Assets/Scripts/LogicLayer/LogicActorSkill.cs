@@ -68,6 +68,7 @@ public partial class LogicActor
             {
                 mCurNormalComboIndex = 0;
             }
+            ActionState = LogicObjectActionState.SkillReleasing;
         }
     }
 
@@ -123,6 +124,7 @@ public partial class LogicActor
         releasingSkillList.Remove(skill);
         if (releasingSkillList.Count == 0)
         {
+            ActionState = LogicObjectActionState.Idle;
             mCurNormalComboIndex = 0;
         }
     }
