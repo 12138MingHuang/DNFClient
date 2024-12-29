@@ -57,6 +57,28 @@ public class SkillEffectLogic : LogicObject
                 mCollider.OnRelease();
                 skill.DestroyEffect(mEffectcfg);
                 mCollider = null;
+            }, () =>
+            {
+                // 更新碰撞体位置
+                if (mEffectcfg.damageConfig.isFollowEffect)
+                {
+                    skill.CreateOrUpdateCollider(mEffectcfg.damageConfig, mCollider, this);
+                }
+
+                if (mEffectcfg.isAttachDamage)
+                {
+                    // 如果有间隔，则每隔一段时间触发一次
+                    if (mEffectcfg.damageConfig.triggerIntervalMS != 0 && mCollider != null)
+                    {
+                        mAccRunTime += LogicFrameConfig.LogicFrameIntervalMS;
+                        if (mAccRunTime >= mEffectcfg.damageConfig.triggerIntervalMS)
+                        {
+                            skill.TriggerColliderDamage(mCollider, mEffectcfg.damageConfig);
+                            mAccRunTime -= mEffectcfg.damageConfig.triggerIntervalMS;
+                        }
+                    }
+                }
+                
             });
         }
         
@@ -71,22 +93,6 @@ public class SkillEffectLogic : LogicObject
                 {
                     skill.TriggerColliderDamage(mCollider, mEffectcfg.damageConfig);
                 }
-            }
-            // 如果有间隔，则每隔一段时间触发一次
-            if (mEffectcfg.damageConfig.triggerIntervalMS != 0 && mCollider != null)
-            {
-                mAccRunTime += LogicFrameConfig.LogicFrameIntervalMS;
-                if (mAccRunTime >= mEffectcfg.damageConfig.triggerIntervalMS)
-                {
-                    skill.TriggerColliderDamage(mCollider, mEffectcfg.damageConfig);
-                    mAccRunTime -= mEffectcfg.damageConfig.triggerIntervalMS;
-                }
-            }
-                
-            // 更新碰撞体位置
-            if (mEffectcfg.damageConfig.isFollowEffect)
-            {
-                skill.CreateOrUpdateCollider(mEffectcfg.damageConfig, mCollider, this);
             }
         }
     }

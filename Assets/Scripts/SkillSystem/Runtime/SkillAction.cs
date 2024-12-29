@@ -24,7 +24,7 @@ public partial class Skill
     /// </summary>
     /// <param name="actionConfig"> 行动配置 </param>
     /// <param name="logicMoveObj"> 逻辑移动对象 </param>
-    public void AddMoveAction(SkillActionConfig actionConfig, LogicObject logicMoveObj, Action onMoveFinish = null)
+    public void AddMoveAction(SkillActionConfig actionConfig, LogicObject logicMoveObj, Action onMoveFinish = null, Action moveUpdateCallBack=null)
     {
         FixIntVector3 movePos = new FixIntVector3(actionConfig.movePos);
         FixIntVector3 targetPos = logicMoveObj.LogicPos + movePos * logicMoveObj.LogicXAxis;
@@ -61,7 +61,7 @@ public partial class Skill
                     // TODO: 添加Buff
                     break;
             }
-        }, null, moveType);
+        }, moveUpdateCallBack, moveType);
         
         LogicActionController.Instance.RunAction(action);
     }
