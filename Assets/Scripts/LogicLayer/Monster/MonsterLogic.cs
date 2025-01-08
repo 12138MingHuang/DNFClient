@@ -1,5 +1,6 @@
 using FixIntPhysics;
 using FixMath;
+using UnityEngine;
 
 public class MonsterLogic : LogicActor
 {
@@ -15,5 +16,11 @@ public class MonsterLogic : LogicActor
         Collider = boxCollider;
         LogicPos = logicPos;
         ObjectType = LogicObjectType.Monster;
+    }
+
+    public override void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator, FixInt logicXAxis)
+    {
+        base.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator, logicXAxis);
+        this.LogicXAxis = -logicXAxis;
     }
 }

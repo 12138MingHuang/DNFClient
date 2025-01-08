@@ -65,7 +65,8 @@ public partial class LogicActor : LogicObject
     /// <param name="hitEffect"> 受击特效 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 受击特效存活时间 </param>
     /// <param name="skillCreator"> 施法者 </param>
-    public void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator)
+    /// <param name="logicXAxis"> 逻辑x轴 </param>
+    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator, FixInt logicXAxis)
     {
         RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator);
     }

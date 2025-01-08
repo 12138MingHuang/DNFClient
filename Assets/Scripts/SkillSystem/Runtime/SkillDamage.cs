@@ -194,7 +194,7 @@ public partial class Skill
     {
         if (mSkillDataConfig.skillConfig.skillHitEffect != null)
         {
-            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, mSkillCreator);
+            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, mSkillCreator, mSkillCreator.LogicXAxis);
         }
     }
 
