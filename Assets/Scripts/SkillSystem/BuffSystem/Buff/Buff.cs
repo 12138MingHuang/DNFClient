@@ -130,7 +130,6 @@ public class Buff
                 UpdateBuffLogic();
                 break;
             case BuffState.End:
-                mBuffLogic.BuffEnd();
                 OnDestroy();
                 break;
         }
@@ -162,6 +161,7 @@ public class Buff
 
     public void OnDestroy()
     {
-        
+        mBuffLogic.BuffEnd();
+        BuffSystem.Instance.RemoveBuff(this);
     }
 }
