@@ -18,6 +18,7 @@ public partial class LogicActor
     /// </summary>
     public void OnLogicFrameUpdateMove()
     {
+        Collider?.UpdateColliderInfo(LogicPos, Collider.Size);
         if (ActionState != LogicObjectActionState.Idle && ActionState != LogicObjectActionState.Move)
             return;
         // 计算逻辑位置
