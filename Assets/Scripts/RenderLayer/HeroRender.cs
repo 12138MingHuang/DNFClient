@@ -14,6 +14,15 @@ public class HeroRender : RenderObject
     /// 英雄逻辑层
     /// </summary>
     private HeroLogic mHeroLogic;
+
+    /// <summary>
+    /// 左手根部节点
+    /// </summary>
+    public Transform LeftHandRootTrans;
+    /// <summary>
+    /// 右手根部节点
+    /// </summary>
+    public Transform RightHandRootTrans;
     
     /// <summary>
     /// 角色动画
@@ -43,14 +52,18 @@ public class HeroRender : RenderObject
     protected override void Update()
     {
         base.Update();
-        // 判断摇杆是否有值输入，如果没有就待机，如果有就播放移动动画
-        if (mInputMoveDir.x == 0 && mInputMoveDir.z == 0)
+
+        if (mHeroLogic.releasingSkillList == null || mHeroLogic.releasingSkillList.Count == 0)
         {
-            PlayAnim("Anim_Idle02");
-        }
-        else
-        {
-            PlayAnim("Anim_Run");
+            // 判断摇杆是否有值输入，如果没有就待机，如果有就播放移动动画
+            if (mInputMoveDir.x == 0 && mInputMoveDir.z == 0)
+            {
+                PlayAnim("Anim_Idle02");
+            }
+            else
+            {
+                PlayAnim("Anim_Run");
+            }
         }
     }
 
@@ -83,8 +96,36 @@ public class HeroRender : RenderObject
     /// 播放角色动画
     /// </summary>
     /// <param name="animName"></param>
-    public void PlayAnim(string animName)
+    private void PlayAnim(string animName)
     {
         mAnim.CrossFade(animName, 0.2f);
+    }
+
+    /// <summary>
+    /// 通过动画文件播放动画
+    /// </summary>
+    /// <param name="clip"> 动画片段 </param>
+    public override void PlayAnim(AnimationClip clip)
+    {
+        base.PlayAnim(clip);
+
+        if (mAnim.GetClip(clip.name) == null)
+        {
+            mAnim.AddClip(clip, clip.name);
+        }
+        mAnim.clip = clip;
+        PlayAnim(clip.name);
+    }
+
+    public override Transform GetTransParent(TransParentType parentType)
+    {
+        switch (parentType)
+        {
+            case TransParentType.LeftHand:
+                return LeftHandRootTrans;
+            case TransParentType.RightHand:
+                return RightHandRootTrans;
+        }
+        return null;
     }
 }

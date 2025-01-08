@@ -23,7 +23,22 @@ public class SkillEffectConfig
     public bool isSetTransParent = false;
     [ToggleGroup("isSetTransParent", "节点类型")]
     public TransParentType transParent;
-
+    [ToggleGroup("isAttachDamage", "是否附加伤害")]
+    public bool isAttachDamage = false;
+    [ToggleGroup("isAttachDamage", "特效伤害配置")]
+    public SkillDamageConfig damageConfig;
+    [ToggleGroup("isAttachAction", "是否附加行动")]
+    public bool isAttachAction = false;
+    [ToggleGroup("isAttachAction", "特效行动配置")]
+    public SkillActionConfig actionConfig;
+    
+    
+    /// <summary>
+    /// 技能特效缓存对象
+    /// </summary>
+    [HideInInspector]
+    public GameObject gameEffectObj;
+    
 #if UNITY_EDITOR
 
     // Editor模式下克隆的特效对象
@@ -126,7 +141,8 @@ public enum EffectPosType
     [LabelText("跟随角色方向")] FollowDir,
     [LabelText("屏幕中心位置")] CenterPos,
     [LabelText("引导位置")] GuidePos,
-    [LabelText("跟随特效移动位置")] FollowEffectMovePos
+    [LabelText("跟随特效移动位置")] FollowEffectMovePos,
+    [LabelText("位置归零")] Zero
 }
 
 public enum TransParentType

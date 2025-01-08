@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class AssetPathConfig
 {
-    //资源加载路径总结点
+    /// <summary>
+    /// 资源加载路径总结点
+    /// </summary>
     public const string GAMEDATA = "Assets/GameData/";
-    //游戏内资源路径
+    /// <summary>
+    /// 游戏内资源路径
+    /// </summary>
     public const string GAME = GAMEDATA + "Game/";
-    //游戏内预制体路径
+    /// <summary>
+    /// 游戏内预制体路径
+    /// </summary>
     public const string GAME_PREFABS = GAME + "Prefabs/";
-    //游戏内英雄预制体路径
+    /// <summary>
+    /// 游戏内英雄预制体路径
+    /// </summary>
     public const string GAME_PREFABS_HERO = GAME_PREFABS + "Hero/";
-    // 游戏内怪物预制体路径
+    /// <summary>
+    /// 游戏内怪物预制体路径
+    /// </summary>
     public const string GAME_PREFABS_MONSTER = GAME_PREFABS + "Monster/";
-    //游戏内大厅路径
+    /// <summary>
+    /// 游戏内大厅路径
+    /// </summary>
     public const string HALL = GAMEDATA + "Hall/";
+    /// <summary>
+    /// 游戏内技能路径
+    /// </summary>
+    public const string SKILL_DATA_PATH = GAME + "SkillSystem/";
+    
 }

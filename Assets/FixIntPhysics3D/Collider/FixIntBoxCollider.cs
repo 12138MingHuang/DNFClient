@@ -18,6 +18,13 @@ namespace FixIntPhysics
             this.Conter =new FixIntVector3(conter);
             ColliderType = ColliderType.Box;
         }
+        
+        public FixIntBoxCollider(FixIntVector3 size, FixIntVector3 conter)
+        {
+            this.Size = size;
+            this.Conter = conter;
+            ColliderType = ColliderType.Box;
+        }
 
         /// <summary>
         /// 更新碰撞体信息
@@ -59,20 +66,32 @@ namespace FixIntPhysics
         /// <param name="isFloowTarget">碰撞体绘制是否跟随</param>
         public override void SetBoxData(Vector3 conter, Vector3 size, bool isFloowTarget = false)
         {
+            SetBoxData(new FixIntVector3(conter), new FixIntVector3(size), isFloowTarget);
+        }
+
+        /// <summary>
+        /// 设置碰撞体数据
+        /// </summary>
+        /// <param name="conter">中心点</param>
+        /// <param name="size">宽度</param>
+        /// <param name="isFloowTarget">碰撞体绘制是否跟随</param>
+        public override void SetBoxData(FixIntVector3 conter, FixIntVector3 size, bool isFloowTarget = false)
+        {
             if (boxDraw == null)
             {
                 GameObject obj = new GameObject();
                 boxDraw = obj.AddComponent<BoxColliderGizmo>();
-                boxDraw.SetBoxData(conter, size, mIsFloowTarget);
+                boxDraw.SetBoxData(conter.ToVector3(), size.ToVector3(), mIsFloowTarget);
             }
 
             mIsFloowTarget = isFloowTarget;
-            this.Conter = new FixIntVector3(conter);
-            this.Size = new FixIntVector3(size);
+            this.Conter = conter;
+            this.Size = size;
 
             //boxDraw.transform.localScale = this.Conter.x >= 0 ? Vector3.one : new Vector3(-1,1,1);
-            boxDraw?.SetBoxData(conter, size, mIsFloowTarget);
+            boxDraw?.SetBoxData(conter.ToVector3(), size.ToVector3(), mIsFloowTarget);
         }
+        
         public override void OnRelease()
         {
             if (boxDraw != null && boxDraw.gameObject != null)
