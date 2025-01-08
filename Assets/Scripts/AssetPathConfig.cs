@@ -31,6 +31,10 @@ public class AssetPathConfig
     /// <summary>
     /// 游戏内技能路径
     /// </summary>
-    public const string SKILL_DATA_PATH = GAME + "SkillSystem/";
+    public const string SKILL_DATA_PATH = GAME + "SkillSystem/SkillData/";
+    /// <summary>
+    /// 游戏内BUFF路径
+    /// </summary>
+    public const string BUFF_DATA_PATH = GAME + "SkillSystem/BuffData/";
     
 }
