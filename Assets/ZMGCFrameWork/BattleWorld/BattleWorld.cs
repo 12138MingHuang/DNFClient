@@ -87,6 +87,7 @@ namespace ZMGC.Battle
             MonsterLogicCtrl.OnLogicFrameUpdate();
             LogicActionController.Instance.OnLogicFrameUpdate();
             BuffSystem.Instance.OnLogicFrameUpdate();
+            LogicTimerManager.Instance.OnLogicFrameUpdate();
         }
 
         public override void OnDestroy()
@@ -94,6 +95,7 @@ namespace ZMGC.Battle
             base.OnDestroy();
             LogicActionController.Instance.OnDestroy();
             BuffSystem.Instance.OnDestroy();
+            LogicTimerManager.Instance.OnDestroy();
         }
 
         public override void OnDestroyPostProcess(object args)
