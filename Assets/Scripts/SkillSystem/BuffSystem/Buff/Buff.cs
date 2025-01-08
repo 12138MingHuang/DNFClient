@@ -131,7 +131,9 @@ public class Buff
                 break;
             case BuffState.Start:
                 mBuffLogic.BuffStart();
+                BuffStart();
                 mBuffLogic.BuffTrigger();
+                BuffTrigger();
                 
                 // 判断Buff是否需要切换为更新状态，如果当前buff持续时间为有限或无限，才进入更新状态
                 buffState = (BuffConfig.buffDurationMS == -1 ||BuffConfig.buffDurationMS > 0) ? BuffState.Update : BuffState.End;
@@ -168,10 +170,35 @@ public class Buff
             buffState = BuffState.End;
         }
     }
+    
+    private void BuffStart()
+    {
+        attachTarget.AddBuff(this);
+    }
+
+    private void BuffTrigger()
+    {
+        switch (BuffConfig.buffTriggerAnim)
+        {
+            case ObjectAnimationState.BeHit:
+                attachTarget.PlayAnim(AnimationName.Anim_Beiji_01);
+                break;
+            case ObjectAnimationState.Stiff:
+                attachTarget.PlayAnim(AnimationName.Anim_Beiji_02);
+                break;
+        }
+        
+        // 处理音效
+        if (BuffConfig.buffAudio != null)
+        {
+            AudioController.Instance.PlaySoundByAudioClip(BuffConfig.buffAudio, false, 2);
+        }
+    }
 
     public void OnDestroy()
     {
         mBuffLogic.BuffEnd();
         BuffSystem.Instance.RemoveBuff(this);
+        attachTarget.RemoveBuff(this);
     }
 }

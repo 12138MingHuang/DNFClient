@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterRender : RenderObject
 {
     private Animation mAnim;
+    private string mCurAnimName;
         
     public override void OnCreate()
     {
@@ -29,8 +30,13 @@ public class MonsterRender : RenderObject
             return;
         
         if(logicObject.ObjectState == LogicObjectState.Death && !string.Equals(animName, AnimationName.Anim_Dead)) return;
-        
+        mCurAnimName = animName;
         mAnim.Play(animName);
+    }
+
+    public override string GetCurAnimName()
+    {
+        return mCurAnimName;
     }
 
     protected override void Update()

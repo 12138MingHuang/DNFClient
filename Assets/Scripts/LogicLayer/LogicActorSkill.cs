@@ -32,6 +32,11 @@ public partial class LogicActor
     /// 当前普通攻击技能组合索引
     /// </summary>
     private int mCurNormalComboIndex = 0;
+    
+    /// <summary>
+    /// 当前对象持有的所有buff列表
+    /// </summary>
+    private List<Buff> mBuffList = new List<Buff>();
 
     /// <summary>
     /// 初始化技能
@@ -145,5 +150,30 @@ public partial class LogicActor
     public Skill GetSkill(int skillId)
     {
         return mSkillSystem.GetSkill(skillId);
+    }
+
+    /// <summary>
+    /// 添加buff到对象身上
+    /// </summary>
+    /// <param name="buff"> buff </param>
+    public void AddBuff(Buff buff)
+    {
+        mBuffList.Add(buff);
+    }
+    
+    public void RemoveBuff(Buff buff)
+    {
+        if (mBuffList.Contains(buff))
+        {
+            mBuffList.Remove(buff);
+        }
+        
+        if(ObjectState == LogicObjectState.Death) return;
+
+        if (mBuffList.Count == 0 && RenderObject.GetCurAnimName() != AnimationName.Anim_Getup)
+        {
+            PlayAnim(AnimationName.Anim_Idle);
+            ActionState = LogicObjectActionState.Idle;
+        }
     }
 }

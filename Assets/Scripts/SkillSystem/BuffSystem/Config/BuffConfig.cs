@@ -41,10 +41,20 @@ public class BuffConfig : ScriptableObject
     [LabelText("Buff命中特效"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
     public GameObject buffHitEffectObj;
     [LabelText("Buff触发动画"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
-    public string buffTriggerAnim;
+    public ObjectAnimationState buffTriggerAnim = ObjectAnimationState.None;
     
     [Title("Buff描述："),HideLabel,MultiLineProperty(5)]
     public string buffDes;
+}
+
+/// <summary>
+/// 表示当前buff触发时所需要播放的动画
+/// </summary>
+public enum ObjectAnimationState
+{
+    [LabelText("无配置")] None,
+    [LabelText("受击")] BeHit,
+    [LabelText("僵直")] Stiff,
 }
 
 [Serializable]

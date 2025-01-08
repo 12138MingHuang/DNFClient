@@ -110,6 +110,15 @@ public class RenderObject : MonoBehaviour
     {
         
     }
+
+    /// <summary>
+    /// 获取当前播放的动画名称
+    /// </summary>
+    /// <returns> 动画名称 </returns>
+    public virtual string GetCurAnimName()
+    {
+        return "";
+    }
     
     /// <summary>
     /// 受到伤害
