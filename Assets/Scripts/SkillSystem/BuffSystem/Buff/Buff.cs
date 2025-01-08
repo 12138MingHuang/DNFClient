@@ -105,6 +105,9 @@ public class Buff
             case BuffType.Repel:
                 mBuffLogic = new RepelBuff(this);
                 break;
+            case BuffType.Floating:
+                mBuffLogic = new FloatingBuff(this);
+                break;
         }
         
         buffState = BuffConfig.buffDelay == 0 ? BuffState.Start : BuffState.Delay;

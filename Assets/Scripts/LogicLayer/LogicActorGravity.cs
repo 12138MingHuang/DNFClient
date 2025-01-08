@@ -35,16 +35,27 @@ public partial class LogicActor
     {
         if (isAddForce)
         {
-            velocity.y -= gravity * LogicFrameConfig.LogicFrameInterval;
+            velocity.y -= gravity * LogicFrameConfig.LogicFrameInterval * mRisingTime;
             // 计算要移动的新的位置
-            FixIntVector3 newPos = new FixIntVector3(LogicPos.x, FixIntMath.Clamp(LogicPos.y + velocity.y * LogicFrameConfig.LogicFrameInterval, 0, FixInt.MaxValue), LogicPos.z);
+            FixIntVector3 newPos = new FixIntVector3(LogicPos.x, FixIntMath.Clamp(LogicPos.y + velocity.y, 0, FixInt.MaxValue), LogicPos.z);
 
             if (newPos.y <= 0)
             {
                 isAddForce = false;
-                velocity = new FixIntVector3(0, 2, 0);
             }
             LogicPos = newPos;
         }
+    }
+    
+    /// <summary>
+    /// 添加上升力
+    /// </summary>
+    /// <param name="risingForceValue"> 上升力大小</param>
+    /// <param name="risingTime"> 上升时间</param>
+    public void AddRisingForce(FixInt risingForceValue, int risingTime)
+    {
+        velocity.y = risingForceValue;
+        mRisingTime = risingTime * 1.0f / 1000;
+        isAddForce = true;
     }
 }

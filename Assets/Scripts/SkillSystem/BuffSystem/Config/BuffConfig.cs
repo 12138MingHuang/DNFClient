@@ -117,5 +117,6 @@ public enum BuffAttachType
 public enum BuffType
 {
     [LabelText("无配置")] None = 0,
-    [LabelText("击退")] Repel
+    [LabelText("击退")] Repel,
+    [LabelText("浮空")] Floating
 }

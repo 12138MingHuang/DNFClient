@@ -51,6 +51,33 @@ MonoBehaviour:
     effectPosType: 0
     isSetTransParent: 0
     transParent: 0
+    isAttachDamage: 0
+    damageConfig:
+      triggerFrame: 0
+      endFrame: 0
+      triggerIntervalMS: 0
+      isFollowEffect: 0
+      damageType: 0
+      damageRate: 0
+      detectionMode: 0
+      boxSize: {x: 1, y: 1, z: 1}
+      boxOffset: {x: 0, y: 0, z: 0}
+      radius: 1
+      sphereOffset: {x: 0, y: 0.9, z: 0}
+      radiusHeight: 0
+      colliderPosType: 0
+      targetType: 0
+      addBuffs: 
+      triggerSkillId: 0
+    isAttachAction: 0
+    actionConfig:
+      triggerFrame: 0
+      moveActionType: 0
+      heightPos: {x: 0, y: 0, z: 0}
+      movePos: {x: 0, y: 0, z: 0}
+      durationMS: 0
+      actionFinishOperation: 0
+      actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   damageCfgList:
   - triggerFrame: 3
@@ -67,7 +94,7 @@ MonoBehaviour:
     radiusHeight: 0
     colliderPosType: 0
     targetType: 0
-    addBuffs: 
+    addBuffs: 38270000
     triggerSkillId: 0
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: c80df3d8ac5cc2c4ea9e05d55999f4f9, type: 3}
