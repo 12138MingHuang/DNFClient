@@ -41,6 +41,14 @@ public class MonsterLogic : LogicActor
         if (ObjectState != LogicObjectState.Death)
         {
             PlayAnim(AnimationName.Anim_Getup);
+            
+            //当怪物从地面完全站起的时候，需要播放待机动画
+            //通过逻辑帧延迟器延迟若干秒触发逻辑  
+            LogicTimerManager.Instance.DelayCall(0.5f, () =>
+            {
+                PlayAnim(AnimationName.Anim_Idle);
+                ActionState = LogicObjectActionState.Idle;
+            });
         }
         else
         {
