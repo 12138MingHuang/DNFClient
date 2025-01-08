@@ -171,7 +171,14 @@ public partial class Skill
             // 造成伤害
             target.SkillDamage(9999, skillDamageConfig);
             
-            // 添加 Buff TODO
+            // 添加 Buff
+            if (skillDamageConfig.addBuffs != null && skillDamageConfig.addBuffs.Length > 0)
+            {
+                foreach (var buffId in skillDamageConfig.addBuffs)
+                {
+                    BuffSystem.Instance.AttachBuff(buffId, mSkillCreator, target, this, null);
+                }
+            }
             // 添加击中特效
             AddHitEffect(target);
             // 播放击中音效

@@ -99,6 +99,13 @@ public class Buff
     public void OnCreate()
     {
         BuffConfig = ZMAssetsFrame.LoadScriptableObject<BuffConfig>(AssetPathConfig.BUFF_DATA_PATH + buffId.ToString() + ".asset");
+
+        switch (BuffConfig.buffType)
+        {
+            case BuffType.Repel:
+                mBuffLogic = new RepelBuff(this);
+                break;
+        }
         
         buffState = BuffConfig.buffDelay == 0 ? BuffState.Start : BuffState.Delay;
         mCurDelayTime = BuffConfig.buffDelay;
