@@ -23,4 +23,28 @@ public class MonsterLogic : LogicActor
         base.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator, logicXAxis);
         this.LogicXAxis = -logicXAxis;
     }
+
+    public override void Floating(bool isUping)
+    {
+        base.Floating(isUping);
+        string animName = isUping ? AnimationName.Anim_Float_up : AnimationName.Anim_Float_down;
+        PlayAnim(animName);
+
+        ActionState = LogicObjectActionState.Floating;
+    }
+
+    public override void TriggerGround()
+    {
+        base.TriggerGround();
+        
+        // 处理怪物落地的逻辑
+        if (ObjectState != LogicObjectState.Death)
+        {
+            PlayAnim(AnimationName.Anim_Getup);
+        }
+        else
+        {
+            PlayAnim(AnimationName.Anim_Dead);
+        }
+    }
 }

@@ -42,6 +42,19 @@ public partial class LogicActor
             if (newPos.y <= 0)
             {
                 isAddForce = false;
+                TriggerGround();
+            }
+            else
+            {
+                // 判断对象是否处于上升阶段
+                if (velocity.y > 0)
+                {
+                    Floating(true);
+                }
+                else
+                {
+                    Floating(false);
+                }
             }
             LogicPos = newPos;
         }

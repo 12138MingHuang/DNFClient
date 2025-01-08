@@ -30,6 +30,15 @@ public partial class LogicActor : LogicObject
     {
         RenderObject.PlayAnim(characterAnim);
     }
+    
+    /// <summary>
+    /// 播放动画
+    /// </summary>
+    /// <param name="animName"> 动画名称 </param>
+    public void PlayAnim(string animName)
+    {
+        RenderObject.PlayAnim(animName);
+    }
 
     /// <summary>
     /// 角色技能伤害
@@ -69,6 +78,23 @@ public partial class LogicActor : LogicObject
     public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator, FixInt logicXAxis)
     {
         RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator);
+    }
+    
+    /// <summary>
+    /// 浮动效果
+    /// </summary>
+    /// <param name="isUping"> 是否向上中 </param>
+    public virtual void Floating(bool isUping)
+    {
+        
+    }
+    
+    /// <summary>
+    /// 触发地面
+    /// </summary>
+    public virtual void TriggerGround()
+    {
+        
     }
     
     public override void OnDestroy()

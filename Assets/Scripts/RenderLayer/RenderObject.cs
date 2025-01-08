@@ -101,7 +101,16 @@ public class RenderObject : MonoBehaviour
     {
         
     }
-
+    
+    /// <summary>
+    /// 播放动画
+    /// </summary>
+    /// <param name="animName"> 动画名称 </param>
+    public virtual void PlayAnim(string animName)
+    {
+        
+    }
+    
     /// <summary>
     /// 受到伤害
     /// </summary>
