@@ -108,6 +108,9 @@ public class Buff
             case BuffType.Floating:
                 mBuffLogic = new FloatingBuff(this);
                 break;
+            case BuffType.Stiff:
+                mBuffLogic = new StiffBuff(this);
+                break;
         }
         
         buffState = BuffConfig.buffDelay == 0 ? BuffState.Start : BuffState.Delay;

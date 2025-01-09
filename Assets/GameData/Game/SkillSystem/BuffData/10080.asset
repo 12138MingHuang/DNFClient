@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8109a25f1589424f834b950a221403a, type: 3}
-  m_Name: 10010
+  m_Name: 10080
   m_EditorClassIdentifier: 
   buffIcon: {fileID: 0}
-  buffId: 10010
-  buffName: "\u51FB\u9000buff"
+  buffId: 10080
+  buffName: "\u5E7B\u5F71\u5251\u821E\u7B2C\u4E00\u6BB5\u50F5\u76F4buff"
   buffDelay: 0
   buffIntervalMS: 0
   buffDurationMS: 200
-  buffType: 1
+  buffType: 3
   attachType: 2
   buffPosType: 0
   damageType: 0
   damageRate: 0
-  buffParamsList:
-  - value: 0.3
-    des: "\u51FB\u9000\u8DDD\u79BB"
+  buffParamsList: []
   targetGrabData:
     garbMoveTargetPos: {x: 0, y: 0, z: 0}
     moveTimeMS: 0
@@ -35,5 +33,5 @@ MonoBehaviour:
     attachType: 0
     effectPosType: 0
   buffHitEffectObj: {fileID: 0}
-  buffTriggerAnim: 1
+  buffTriggerAnim: 2
   buffDes: 
