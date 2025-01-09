@@ -20,6 +20,22 @@ public class Main : MonoBehaviour
         WorldManager.CreateWorld<HallWorld>();
         //不允许销毁当前节点
         DontDestroyOnLoad(gameObject);
+
+        // LogicRandom random1 = new LogicRandom(10);
+        // string randomResult = "LogicRandom: ";
+        // for (int i = 0; i < 10; i++)
+        // {
+        //     randomResult += random1.Range(1, 360) + ",";
+        // }
+        // Debug.Log(randomResult);
+        //
+        // LogicRandom random2 = new LogicRandom(10);
+        // string randomResult2 = "LogicRandom: ";
+        // for (int i = 0; i < 10; i++)
+        // {
+        //     randomResult2 += random2.Range(1, 360) + ",";
+        // }
+        // Debug.Log(randomResult2);
     }
 
     public void StartGame()
