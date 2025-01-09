@@ -28,12 +28,12 @@ public partial class LogicActor
     /// 正在释放的技能列表
     /// </summary>
     public List<Skill> releasingSkillList = new List<Skill>();
-    
+
     /// <summary>
     /// 当前普通攻击技能组合索引
     /// </summary>
     private int mCurNormalComboIndex = 0;
-    
+
     /// <summary>
     /// 当前对象持有的所有buff列表
     /// </summary>
@@ -67,7 +67,14 @@ public partial class LogicActor
     /// <param name="releaseSkillCallBack"> 释放技能回调 </param>
     public void ReleaseSkill(int skillId, Action<bool> releaseSkillCallBack = null)
     {
-        Skill skill = mSkillSystem.ReleaseSkill(skillId, OnSkillReleaseAfter, OnSkillReleaseEnd);
+        Skill skill = mSkillSystem.ReleaseSkill(skillId, OnSkillReleaseAfter, (skill) =>
+        {
+            if (skill.SkillConfig.skillType == SkillType.StockPile)
+            {
+                releaseSkillCallBack?.Invoke(true);
+            }
+            OnSkillReleaseEnd(skill);
+        });
         if (skill != null)
         {
             releasingSkillList.Add(skill);
@@ -76,8 +83,15 @@ public partial class LogicActor
                 mCurNormalComboIndex = 0;
             }
             ActionState = LogicObjectActionState.SkillReleasing;
+            if (skill.SkillConfig.skillType != SkillType.StockPile)
+            {
+                releaseSkillCallBack?.Invoke(true);
+            }
         }
-        releaseSkillCallBack?.Invoke(skill != null);
+        else
+        {
+            releaseSkillCallBack?.Invoke(false);
+        }
     }
 
     /// <summary>
@@ -136,7 +150,7 @@ public partial class LogicActor
             mCurNormalComboIndex = 0;
         }
     }
-    
+
     /// <summary>
     /// 逻辑帧更新技能
     /// </summary>
@@ -144,7 +158,7 @@ public partial class LogicActor
     {
         mSkillSystem.OnLogicFrameUpdate();
     }
-    
+
     /// <summary>
     /// 获取技能
     /// </summary>
@@ -163,15 +177,15 @@ public partial class LogicActor
     {
         mBuffList.Add(buff);
     }
-    
+
     public void RemoveBuff(Buff buff)
     {
         if (mBuffList.Contains(buff))
         {
             mBuffList.Remove(buff);
         }
-        
-        if(ObjectState == LogicObjectState.Death) return;
+
+        if (ObjectState == LogicObjectState.Death) return;
 
         if (mBuffList.Count == 0 && RenderObject.GetCurAnimName() != AnimationName.Anim_Getup)
         {
