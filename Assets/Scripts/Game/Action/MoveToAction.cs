@@ -56,18 +56,21 @@ public class MoveToAction : ActionBehaviour
         {
             case MoveType.Target:
                 addDistance = mMoveDistance * mTimeScale;
+                mActionObj.LogicPos = mStartPos + addDistance;
                 break;
             case MoveType.X:
                 addDistance.x = mMoveDistance.x * mTimeScale;
+                mActionObj.LogicPos = new FixIntVector3(mStartPos.x + addDistance.x, mStartPos.y, mStartPos.z);
                 break;
             case MoveType.Y:
                 addDistance.y = mMoveDistance.y * mTimeScale;
+                mActionObj.LogicPos = new FixIntVector3(mStartPos.x, mStartPos.y + addDistance.y, mStartPos.z);
                 break;
             case MoveType.Z:
                 addDistance.z = mMoveDistance.z * mTimeScale;
+                mActionObj.LogicPos = new FixIntVector3(mStartPos.x, mStartPos.y, mStartPos.z + addDistance.z);
                 break;
         }
-        mActionObj.LogicPos = mStartPos + addDistance;
     }
     
     public override void OnActionFinish()
