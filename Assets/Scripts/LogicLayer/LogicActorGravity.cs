@@ -17,6 +17,11 @@ public partial class LogicActor
     /// 初始速度
     /// </summary>
     public FixIntVector3 velocity;
+    
+    /// <summary>
+    /// 初始速度
+    /// </summary>
+    private FixInt mVo;
 
     /// <summary>
     /// 上升时间
@@ -35,9 +40,15 @@ public partial class LogicActor
     {
         if (isAddForce)
         {
-            velocity.y -= gravity * LogicFrameConfig.LogicFrameInterval * mRisingTime;
+            float logicFrameInterval = LogicFrameConfig.LogicFrameInterval;
+            FixInt gt = gravity * logicFrameInterval;
+            // 计算上升或下降所需要的时间
+            FixInt risingForceTime = mVo / gt * logicFrameInterval;
+            // 获取时间缩放倍率
+            FixInt timeScale = risingForceTime * 2 / mRisingTime;
+            velocity.y -= gravity * LogicFrameConfig.LogicFrameInterval * timeScale;
             // 计算要移动的新的位置
-            FixIntVector3 newPos = new FixIntVector3(LogicPos.x, FixIntMath.Clamp(LogicPos.y + velocity.y, 0, FixInt.MaxValue), LogicPos.z);
+            FixIntVector3 newPos = new FixIntVector3(LogicPos.x, FixIntMath.Clamp(LogicPos.y + velocity.y * logicFrameInterval, 0, FixInt.MaxValue), LogicPos.z);
 
             if (newPos.y <= 0)
             {

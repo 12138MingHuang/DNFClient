@@ -115,7 +115,7 @@ public partial class LogicActor
         {
             mCurNormalComboIndex++;
             // 如果普通攻击技能组合索引大于等于普通攻击技能id数组长度，则重置为0
-            if (mCurNormalComboIndex >= mNormalSkillIdArr.Length)
+            if (mCurNormalComboIndex >= mNormalSkillIdArr.Length || skill.skillId == mNormalSkillIdArr[^1])
                 mCurNormalComboIndex = 0;
         }
     }
