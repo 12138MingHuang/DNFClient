@@ -18,6 +18,8 @@ public class SkillComplierWindow : OdinEditorWindow
     public List<SkillEffectConfig> effectList = new List<SkillEffectConfig>();
     [TabGroup("SkillComplier", "Audio", SdfIconType.OpticalAudio, TextColor = "blue")]
     public List<SkillAudioConfig> audioList = new List<SkillAudioConfig>();
+    [TabGroup("SkillComplier", "Bullet", SdfIconType.OpticalAudio, TextColor = "blue")]
+    public List<SkillBulletConfig> bulletList = new List<SkillBulletConfig>();
     [TabGroup("SkillComplier", "Action", SdfIconType.OpticalAudio, TextColor = "cyan")]
     public List<SkillActionConfig> actionList = new List<SkillActionConfig>();
     
@@ -39,7 +41,7 @@ public class SkillComplierWindow : OdinEditorWindow
     /// </summary>
     public void SaveSkillData()
     {
-        SkillDataConfig.SaveSkillData(character, skill, effectList, damageList, audioList, actionList);
+        SkillDataConfig.SaveSkillData(character, skill, effectList, damageList, audioList, bulletList, actionList);
     }
     
     /// <summary>
@@ -53,6 +55,7 @@ public class SkillComplierWindow : OdinEditorWindow
         effectList = skillData.effectCfgList;
         damageList = skillData.damageCfgList;
         audioList = skillData.audioCfgList;
+        bulletList = skillData.bulletCfgList;
         actionList = skillData.actionCfgList;
     }
     
