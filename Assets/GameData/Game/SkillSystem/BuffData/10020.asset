@@ -17,14 +17,14 @@ MonoBehaviour:
   buffName: "\u666E\u653B\u7B2C\u4E8C\u6BB5\u6D6E\u7A7Abuff"
   buffDelay: 0
   buffIntervalMS: 0
-  buffDurationMS: 300
+  buffDurationMS: 1000
   buffType: 2
   attachType: 2
   buffPosType: 0
   damageType: 0
   damageRate: 0
   buffParamsList:
-  - value: 0.8
+  - value: 8
     des: "\u6D6E\u7A7A\u4E0A\u5347\u4F4D\u7F6E"
   targetGrabData:
     garbMoveTargetPos: {x: 0, y: 0, z: 0}

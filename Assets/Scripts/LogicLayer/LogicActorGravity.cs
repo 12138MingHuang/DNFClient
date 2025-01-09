@@ -78,7 +78,7 @@ public partial class LogicActor
     /// <param name="risingTime"> 上升时间</param>
     public void AddRisingForce(FixInt risingForceValue, int risingTime)
     {
-        velocity.y = risingForceValue;
+        mVo = velocity.y = risingForceValue;
         mRisingTime = risingTime * 1.0f / 1000;
         isAddForce = true;
     }
