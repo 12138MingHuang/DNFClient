@@ -20,6 +20,8 @@ public partial class LogicActor : LogicObject
         OnLogicFrameUpdateSkill();
         // 更新重力帧
         OnLogicFrameUpdateGravity();
+        // 更新子弹帧
+        OnLogicFrameUpdateBullet();
     }
     
     /// <summary>
@@ -51,6 +53,15 @@ public partial class LogicActor : LogicObject
     }
     
     /// <summary>
+    /// 某个技能或buff会减少或阻挡子弹伤害
+    /// </summary>
+    public virtual void BulletDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
+    {
+        Debug.Log("BulletDamage: " + damageValue);
+        CalculateDamage(damageValue, DamageSource.Bullet);
+    }
+    
+    /// <summary>
     /// 计算伤害
     /// </summary>
     /// <param name="damage"> 伤害值 </param>
@@ -73,11 +84,11 @@ public partial class LogicActor : LogicObject
     /// </summary>
     /// <param name="hitEffect"> 受击特效 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 受击特效存活时间 </param>
-    /// <param name="skillCreator"> 施法者 </param>
+    /// <param name="source"> 施法者 </param>
     /// <param name="logicXAxis"> 逻辑x轴 </param>
-    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator, FixInt logicXAxis)
+    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
     {
-        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator);
+        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, source);
     }
     
     /// <summary>

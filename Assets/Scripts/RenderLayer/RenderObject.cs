@@ -71,7 +71,7 @@ public class RenderObject : MonoBehaviour
     /// <summary>
     /// 通用的位置更新逻辑
     /// </summary>
-    private void UpdatePosition()
+    public virtual void UpdatePosition()
     {
         if(!mIsUpdatePosAndRot) return;
         
@@ -83,7 +83,7 @@ public class RenderObject : MonoBehaviour
     /// <summary>
     /// 通用的方向更新逻辑
     /// </summary>
-    private void UpdateDir()
+    public virtual void UpdateDir()
     {
         if(!mIsUpdatePosAndRot) return;
         
@@ -137,14 +137,14 @@ public class RenderObject : MonoBehaviour
     /// </summary>
     /// <param name="hitEffect"> 技能命中特效 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 特效存活时间 </param>
-    /// <param name="skillCreator"> 技能创建者 </param>
-    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator)
+    /// <param name="source"> 技能创建者 </param>
+    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source)
     {
         if (hitEffect != null)
         {
             GameObject hitEffectObj = GameObject.Instantiate(hitEffect);
             hitEffectObj.transform.position = transform.position;
-            hitEffectObj.transform.localScale = skillCreator.LogicXAxis > 0 ? Vector3.one : new Vector3(-1f, 1f, 1f);
+            hitEffectObj.transform.localScale = source.LogicXAxis > 0 ? Vector3.one : new Vector3(-1f, 1f, 1f);
             Destroy(hitEffectObj, hitEffectSurvivalTimeMs * 1.0f / 1000f);
         }
     }

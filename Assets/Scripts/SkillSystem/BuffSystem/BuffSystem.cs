@@ -24,7 +24,7 @@ public class BuffSystem : Singleton<BuffSystem>
     /// <param name="attachTarget"> Buff附着目标</param>
     /// <param name="skill"> 隶属技能</param>
     /// <param name="paramsObjs"> Buff所需要的一些参数</param>
-    public Buff AttachBuff(int buffId, LogicActor releaser, LogicActor attachTarget, Skill skill, object[] paramsObjs)
+    public Buff AttachBuff(int buffId, LogicActor releaser, LogicActor attachTarget, Skill skill, object[] paramsObjs = null)
     {
         if (buffId == 0)
         {

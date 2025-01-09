@@ -107,6 +107,7 @@ public partial class Skill
         mCurLogicFrame = 0;
         mCurLogicFrameAccTime = 0;
         mAutoMatchStockStage = false;
+        OnBulletInit();
     }
 
     /// <summary>
@@ -139,6 +140,7 @@ public partial class Skill
         // 更新音效逻辑帧
         OnLogicFrameUpdateAudio();
         // 更新子弹逻辑帧
+        OnLogicFrameUpdateBullet();
         
         // 蓄力技能需要通过蓄力时间进行触发，所以和技能的结束逻辑分开处理
         if (mSkillDataConfig.skillConfig.skillType == SkillType.StockPile)
@@ -198,6 +200,7 @@ public partial class Skill
         skillState = SkillState.End;
         OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
+        OnBulletRelease();
         if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
         {
             mSkillCreator.ReleaseSkill(mSkillDataConfig.skillConfig.combinationSkillId);
