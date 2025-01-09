@@ -94,7 +94,7 @@ MonoBehaviour:
     radiusHeight: 0
     colliderPosType: 0
     targetType: 0
-    addBuffs: 
+    addBuffs: 204e0000
     triggerSkillId: 0
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 9d580328b1230bd48b578405d637d450, type: 3}

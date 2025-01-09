@@ -24,7 +24,7 @@ MonoBehaviour:
   skillConfig:
     showStockPileData: 0
     showSkillGuide: 0
-    skillIcon: {fileID: 21300000, guid: 1382a79c19a63034ab76855305100359, type: 3}
+    skillIcon: {fileID: 21300000, guid: 08ac9eed653dc1b4884322bcd843ddf6, type: 3}
     skillId: 1007
     skillName: "\u6280\u80FD3"
     needMagicValue: 100
