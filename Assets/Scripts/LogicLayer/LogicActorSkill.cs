@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,7 +64,8 @@ public partial class LogicActor
     /// 释放技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>
-    public void ReleaseSkill(int skillId)
+    /// <param name="releaseSkillCallBack"> 释放技能回调 </param>
+    public void ReleaseSkill(int skillId, Action<bool> releaseSkillCallBack = null)
     {
         Skill skill = mSkillSystem.ReleaseSkill(skillId, OnSkillReleaseAfter, OnSkillReleaseEnd);
         if (skill != null)
@@ -75,6 +77,7 @@ public partial class LogicActor
             }
             ActionState = LogicObjectActionState.SkillReleasing;
         }
+        releaseSkillCallBack?.Invoke(skill != null);
     }
 
     /// <summary>

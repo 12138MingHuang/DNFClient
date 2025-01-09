@@ -16,6 +16,19 @@ public class SkillItem : MonoBehaviour
     private LogicActor mSkillCreator;
     
     /// <summary>
+    /// 是否进入技能cd
+    /// </summary>
+    private bool mIsEnterSkillCd = false;
+    /// <summary>
+    /// 已经冷却的时间
+    /// </summary>
+    private float mAlreadyCdTime;
+    /// <summary>
+    /// 技能冷却时间
+    /// </summary>
+    private float mSkillCdTime;
+    
+    /// <summary>
     /// 设置技能数据，并初始化摇杆数据
     /// </summary>
     /// <param name="skillData"> 技能数据</param>
@@ -45,7 +58,7 @@ public class SkillItem : MonoBehaviour
         switch(skillGuideType)
         {
             case SkillGuideType.Click:
-                mSkillCreator.ReleaseSkill(skillId);
+                mSkillCreator.ReleaseSkill(skillId, releaseSkillCallBack: OnReleaseSkillCallBack);
                 break;
             case SkillGuideType.LongPress:
                 // 蓄力技能释放逻辑
@@ -71,7 +84,7 @@ public class SkillItem : MonoBehaviour
         {
             case SkillGuideType.LongPress:
                 // 蓄力技能逻辑
-                mSkillCreator.ReleaseSkill(skillId);
+                mSkillCreator.ReleaseSkill(skillId, releaseSkillCallBack: OnReleaseSkillCallBack);
                 break;
             case SkillGuideType.Position:
                 // TODO: 位置引导技能更新逻辑
@@ -102,6 +115,53 @@ public class SkillItem : MonoBehaviour
                 break;
         }
         return skillGuideType;
+    }
+
+    /// <summary>
+    /// 技能释放回调
+    /// </summary>
+    /// <param name="isReleaseSuccess"> 是否释放成功</param>
+    private void OnReleaseSkillCallBack(bool isReleaseSuccess)
+    {
+        if(isReleaseSuccess)
+            EnterSkillCd();
+    }
+
+    /// <summary>
+    /// 进入技能冷却时间
+    /// </summary>
+    private void EnterSkillCd()
+    {
+        cdText.gameObject.SetActive(true);
+        cdMaskImage.gameObject.SetActive(true);
+        mIsEnterSkillCd = true;
+        // 获取技能冷却时间
+        mSkillCdTime = mAlreadyCdTime = mSkillData.SkillConfig.skillCdTimeMs / 1000f;
+        cdText.text = mSkillCdTime.ToString();
+        int cdTime = mSkillData.SkillConfig.skillCdTimeMs / 1000;
+        // 启动逻辑帧计时器，更新当前技能冷却时间
+        LogicTimerManager.Instance.DelayCall(1, () =>
+        {
+            cdTime--;
+            if (cdTime <= 0)
+            {
+                cdText.gameObject.SetActive(false);
+                cdMaskImage.gameObject.SetActive(false);
+                mIsEnterSkillCd = false;
+            }
+            else
+            {
+                cdText.text = cdTime.ToString();
+            }
+        }, cdTime);
+    }
+
+    private void Update()
+    {
+        if (mIsEnterSkillCd)
+        {
+            cdMaskImage.fillAmount = (mAlreadyCdTime -= Time.deltaTime) / mSkillCdTime;
+        }
     }
 
     private void OnDestroy()

@@ -31,7 +31,7 @@ MonoBehaviour:
     skillShakeBeforeTimeMs: 100
     skillAttackDurationMs: 666
     skillShakeAfterMs: 666
-    skillCdTimeMs: 10000
+    skillCdTimeMs: 12000
     skillType: 0
     stockPileStageData: []
     skillGuideObj: {fileID: 0}
