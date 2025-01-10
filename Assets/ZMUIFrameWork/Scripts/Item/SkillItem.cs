@@ -14,6 +14,7 @@ public class SkillItem : MonoBehaviour
 
     private Skill mSkillData;
     private LogicActor mSkillCreator;
+    private HeroRender mHeroRender;
     
     /// <summary>
     /// 是否进入技能cd
@@ -37,6 +38,7 @@ public class SkillItem : MonoBehaviour
     {
         mSkillData = skillData;
         mSkillCreator = skillCreator;
+        mHeroRender = skillCreator.RenderObject as HeroRender;
         // 初始化技能摇杆数据
         skillJoystick.InitSkillData(GetSkillGuideType(skillData.SkillConfig.skillType), skillData.skillId, skillData.SkillConfig.skillGuideRange);
         skillJoystick.OnReleaseSkill += OnTriggerSkill;
@@ -66,6 +68,7 @@ public class SkillItem : MonoBehaviour
                 break;
             case SkillGuideType.Position:
                 // TODO: 位置引导技能释放逻辑
+                mHeroRender.OnGuideRelease();
                 break;
         }
     }
@@ -87,7 +90,7 @@ public class SkillItem : MonoBehaviour
                 mSkillCreator.ReleaseSkill(skillId, releaseSkillCallBack: OnReleaseSkillCallBack);
                 break;
             case SkillGuideType.Position:
-                // TODO: 位置引导技能更新逻辑
+                mHeroRender.UpdateSkillGuide(skillGuide, skillId, isCancel, skillPos, skillDirDis);
                 break;
         }
     }
