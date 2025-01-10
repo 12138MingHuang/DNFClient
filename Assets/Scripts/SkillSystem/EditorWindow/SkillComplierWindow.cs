@@ -74,6 +74,8 @@ public class SkillComplierWindow : OdinEditorWindow
     /// <returns> 角色位置 </returns>
     public static Vector3 GetCharacterPos()
     {
+        if(!HasOpenInstances<SkillComplierWindow>()) return Vector3.zero;
+        
         SkillComplierWindow window = GetWindow<SkillComplierWindow>();
         if(window.character.skillCharacter != null)
         {
