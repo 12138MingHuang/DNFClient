@@ -41,7 +41,7 @@ public partial class Skill
                         effectRender = effectObj.AddComponent<SkillEffectRender>();
                     }
 
-                    SkillEffectLogic effectLogic = new SkillEffectLogic(LogicObjectType.Effect, skillData, effectRender, mSkillCreator);
+                    SkillEffectLogic effectLogic = new SkillEffectLogic(LogicObjectType.Effect, skillData, effectRender, mSkillCreator, this);
                     effectRender.SetLogicObject(effectLogic, skillData.effectPosType != EffectPosType.Zero);
 
                     mEffectDic.Add(skillData.GetHashCode(), effectLogic);

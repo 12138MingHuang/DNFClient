@@ -1,3 +1,4 @@
+using FixMath;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,7 +68,10 @@ public class SkillItem : MonoBehaviour
                 mSkillCreator.TriggerStockPileSkill(skillId);
                 break;
             case SkillGuideType.Position:
-                // TODO: 位置引导技能释放逻辑
+                // 确保技能引导位置一定在地面上
+                skillPos.y = 0;
+                // 指定位置技能
+                mSkillCreator.ReleaseSkill(skillId, mSkillCreator.LogicPos + new FixIntVector3(skillPos), OnReleaseSkillCallBack);
                 mHeroRender.OnGuideRelease();
                 break;
         }

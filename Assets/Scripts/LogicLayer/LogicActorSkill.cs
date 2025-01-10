@@ -1,3 +1,4 @@
+using FixMath;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,10 +65,11 @@ public partial class LogicActor
     /// 释放技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>
+    /// <param name="guidePos"> 引导位置 </param>
     /// <param name="releaseSkillCallBack"> 释放技能回调 </param>
-    public void ReleaseSkill(int skillId, Action<bool> releaseSkillCallBack = null)
+    public void ReleaseSkill(int skillId, FixIntVector3 guidePos = default(FixIntVector3), Action<bool> releaseSkillCallBack = null)
     {
-        Skill skill = mSkillSystem.ReleaseSkill(skillId, OnSkillReleaseAfter, (skill) =>
+        Skill skill = mSkillSystem.ReleaseSkill(skillId, guidePos, OnSkillReleaseAfter, (skill) =>
         {
             if (skill.SkillConfig.skillType == SkillType.StockPile)
             {

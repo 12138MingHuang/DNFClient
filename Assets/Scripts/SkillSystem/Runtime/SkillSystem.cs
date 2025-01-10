@@ -1,3 +1,4 @@
+using FixMath;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,7 +57,7 @@ public class SkillSystem
         Debug.Log("技能初始化完成, 技能个数：" + skillIdArr.Length);
     }
 
-    public Skill ReleaseSkill(int skillId, Action<Skill> onReleaseAfter, Action<Skill> onReleaseSkillEnd)
+    public Skill ReleaseSkill(int skillId, FixIntVector3 guidePos, Action<Skill> onReleaseAfter, Action<Skill> onReleaseSkillEnd)
     {
         // 如果当前的技能不为空与当前技能为前摇或者释放的状态就不能释放其他技能
         if(mCurReleaseSkill != null && mCurReleaseSkill.skillState != SkillState.End && mCurReleaseSkill.skillState != SkillState.After)
@@ -83,7 +84,7 @@ public class SkillSystem
                 }
                 
                 // 释放技能
-                skill.ReleaseSkill(onReleaseAfter, (sk, isCombinationSkill) =>
+                skill.ReleaseSkill(onReleaseAfter, guidePos, (sk, isCombinationSkill) =>
                 {
                     // 技能释放完成回调
                     onReleaseSkillEnd?.Invoke(sk);

@@ -1,3 +1,4 @@
+using FixMath;
 using System;
 using UnityEngine;
 using ZMAssetFrameWork;
@@ -73,6 +74,11 @@ public partial class Skill
     private bool mAutoMatchStockStage;
     
     /// <summary>
+    /// 技能引导位置
+    /// </summary>
+    public FixIntVector3 skillGuidePos;
+    
+    /// <summary>
     /// 创建技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>
@@ -88,11 +94,13 @@ public partial class Skill
     /// 释放技能
     /// </summary>
     /// <param name="onReleaseAfter"> 技能后摇 </param>
+    /// <param name="guidePos"> 引导位置 </param>
     /// <param name="onReleaseSkillEnd"> 技能释放结束 </param>
-    public void ReleaseSkill(Action<Skill> onReleaseAfter, Action<Skill, bool> onReleaseSkillEnd)
+    public void ReleaseSkill(Action<Skill> onReleaseAfter, FixIntVector3 guidePos,  Action<Skill, bool> onReleaseSkillEnd)
     {
         OnReleaseAfter = onReleaseAfter;
         OnReleaseSkillEnd = onReleaseSkillEnd;
+        skillGuidePos = guidePos;
         SkillStart();
         skillState = SkillState.Before;
         PlayAnim();

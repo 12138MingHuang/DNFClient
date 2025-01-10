@@ -20,7 +20,7 @@ public class SkillEffectLogic : LogicObject
     /// </summary>
     private int mAccRunTime;
 
-    public SkillEffectLogic(LogicObjectType objType, SkillEffectConfig effectCfg, RenderObject renderObject, LogicActor skillCreator)
+    public SkillEffectLogic(LogicObjectType objType, SkillEffectConfig effectCfg, RenderObject renderObject, LogicActor skillCreator, Skill skill)
     {
         ObjectType = objType;
         mEffectcfg = effectCfg;
@@ -38,6 +38,12 @@ public class SkillEffectLogic : LogicObject
         {
             LogicPos = FixIntVector3.zero;
         }
+        else if (effectCfg.effectPosType == EffectPosType.GuidePos)
+        {
+            FixIntVector3 initPos = skill.skillGuidePos + mSkillCreator.LogicXAxis * new FixIntVector3(effectCfg.effectOffsetPos);
+            initPos.y = FixIntMath.Abs(initPos.y);
+            LogicPos = initPos;
+        }
     }
 
     public void OnLogicFrameEffectUpdate(Skill skill, int curLogicFrame)
@@ -52,9 +58,9 @@ public class SkillEffectLogic : LogicObject
         // 1.处理特效行动配置， 让特效也能随着配置移动
         if (mEffectcfg.isAttachAction && mEffectcfg.actionConfig.triggerFrame == curLogicFrame)
         {
-            skill.AddMoveAction(mEffectcfg.actionConfig, this, () =>
+            skill.AddMoveAction(mEffectcfg.actionConfig, this, mEffectcfg.effectOffsetPos,  () =>
             {
-                mCollider.OnRelease();
+                mCollider?.OnRelease();
                 skill.DestroyEffect(mEffectcfg);
                 mCollider = null;
             }, () =>
