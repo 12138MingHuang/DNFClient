@@ -131,7 +131,7 @@ MonoBehaviour:
   JoyPointTrans: {fileID: 409356092310099140}
   JoyBgTrans: {fileID: 3470815392901870390}
   CancelSkillTrans: {fileID: 4508777869763264089}
-  JoyPointMaxDir: 0
+  JoyPointMaxDir: 90
 --- !u!222 &1954320033648582742
 CanvasRenderer:
   m_ObjectHideFlags: 0

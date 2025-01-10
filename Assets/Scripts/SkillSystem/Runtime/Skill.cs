@@ -107,6 +107,9 @@ public partial class Skill
         mCurLogicFrame = 0;
         mCurLogicFrameAccTime = 0;
         mAutoMatchStockStage = false;
+        if (mSkillDataConfig.character.customLogicFame != 0)
+            mSkillDataConfig.character.logicFrame = mSkillDataConfig.character.customLogicFame;
+        
         OnBulletInit();
     }
 

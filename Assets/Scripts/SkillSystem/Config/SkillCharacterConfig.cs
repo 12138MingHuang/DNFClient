@@ -23,9 +23,15 @@ public class SkillCharacterConfig
     [BoxGroup("动画数据")] [LabelText("动画循环次数")] [ShowIf("isLoopAnim")]
     public int animLoopCount = 0;
 
-    [BoxGroup("动画数据")] [LabelText("逻辑帧数")]
+    [BoxGroup("动画数据")] [LabelText("逻辑帧数")] [HideIf("isSetCustomLogicFrame")]
     public int logicFrame = 0;
 
+    [BoxGroup("动画数据")] [LabelText("是否设置自定义逻辑帧数")]
+    public bool isSetCustomLogicFrame = false;
+    
+    [BoxGroup("动画数据")] [ShowIf("isSetCustomLogicFrame")] [LabelText("自定义逻辑帧数")]
+    public int customLogicFame = 0;
+    
     [BoxGroup("动画数据")] [LabelText("动画长度")]
     public float animLength = 0f;
 
