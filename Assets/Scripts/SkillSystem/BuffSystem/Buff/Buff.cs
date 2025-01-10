@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using ZMAssetFrameWork;
 
 public enum BuffState
@@ -70,6 +71,11 @@ public class Buff
     private BuffComposite mBuffLogic;
     
     /// <summary>
+    /// Buff渲染对象
+    /// </summary>
+    private BuffRender mBuffRender;
+    
+    /// <summary>
     /// Buff当前真实运行时间
     /// </summary>
     private int mCurRealRuntime;
@@ -136,9 +142,7 @@ public class Buff
                 }
                 break;
             case BuffState.Start:
-                mBuffLogic.BuffStart();
                 BuffStart();
-                mBuffLogic.BuffTrigger();
                 BuffTrigger();
                 
                 // 判断Buff是否需要切换为更新状态，如果当前buff持续时间为有限或无限，才进入更新状态
@@ -179,11 +183,35 @@ public class Buff
     
     private void BuffStart()
     {
+        CreateBuffEffect();
+        mBuffRender?.InitBuffRender(releaser, attachTarget, BuffConfig, skill.skillGuidePos);
+        mBuffLogic.BuffStart();
         attachTarget.AddBuff(this);
+    }
+    
+    /// <summary>
+    /// 创建Buff特效对象
+    /// </summary>
+    /// <returns></returns>
+    private BuffRender CreateBuffEffect()
+    {
+        if (BuffConfig.effectConfig != null && BuffConfig.effectConfig.effect != null)
+        {
+            GameObject buffEffect = GameObject.Instantiate(BuffConfig.effectConfig.effect);
+            mBuffRender = buffEffect.GetComponent<BuffRender>();
+            if (mBuffRender == null)
+            {
+                mBuffRender = buffEffect.AddComponent<BuffRender>();
+            }
+            return mBuffRender;
+        }
+        
+        return null;
     }
 
     private void BuffTrigger()
     {
+        mBuffLogic.BuffTrigger();
         switch (BuffConfig.buffTriggerAnim)
         {
             case ObjectAnimationState.BeHit:
@@ -194,15 +222,16 @@ public class Buff
                 break;
         }
         
-        // 处理音效
-        if (BuffConfig.buffAudio != null)
-        {
-            AudioController.Instance.PlaySoundByAudioClip(BuffConfig.buffAudio, false, 2);
-        }
+        // // 处理音效
+        // if (BuffConfig.buffAudio != null)
+        // {
+        //     AudioController.Instance.PlaySoundByAudioClip(BuffConfig.buffAudio, false, 2);
+        // }
     }
 
     public void OnDestroy()
     {
+        mBuffRender?.OnRelease();
         mBuffLogic.BuffEnd();
         BuffSystem.Instance.RemoveBuff(this);
         attachTarget.RemoveBuff(this);

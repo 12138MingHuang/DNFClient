@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8109a25f1589424f834b950a221403a, type: 3}
-  m_Name: 30210
+  m_Name: 30211
   m_EditorClassIdentifier: 
   buffIcon: {fileID: 0}
-  buffId: 30210
+  buffId: 30211
   buffName: 
-  buffDelay: 150
+  buffDelay: 0
   buffIntervalMS: 0
   buffDurationMS: 350
   buffType: 4
@@ -24,14 +24,14 @@ MonoBehaviour:
   damageType: 1
   damageRate: 0
   buffParamsList:
-  - value: 5000
+  - value: 6000
     des: "\u4F24\u5BB3\u503C"
   targetGrabData:
     garbMoveTargetPos: {x: 0, y: 0, z: 0}
     moveTimeMS: 0
-  buffAudio: {fileID: 8300000, guid: 675370802f743f14aa313e20bae41f68, type: 3}
+  buffAudio: {fileID: 0}
   effectConfig:
-    effect: {fileID: 1111494322501242, guid: 97557f3af91212e40b1589fe78919aa0, type: 3}
+    effect: {fileID: 1331792761227052, guid: 5ead298b6ede1b74dbe828abcf547c35, type: 3}
     attachType: 0
     effectPosType: 2
   buffHitEffectObj: {fileID: 0}

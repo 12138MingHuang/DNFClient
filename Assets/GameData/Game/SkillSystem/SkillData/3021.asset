@@ -79,7 +79,7 @@ MonoBehaviour:
       movePos: {x: 0, y: 0, z: 0}
       durationMS: 500
       actionFinishOperation: 2
-      actionFinishIdList: 02760000
+      actionFinishIdList: 0276000003760000
     gameEffectObj: {fileID: 0}
   damageCfgList: []
   audioCfgList:
