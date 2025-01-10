@@ -162,7 +162,7 @@ public class SKillBulletLogic : LogicObject
         }
         
         // 子弹位置更新
-        LogicPos += LogicDir * (FixInt)mBulletConfig.moveSpeed * (FixInt)LogicFrameConfig.LogicFrameIntervalMS;
+        LogicPos += LogicDir * (FixInt)mBulletConfig.moveSpeed * (FixInt)LogicFrameConfig.LogicFrameInterval;
         // 当前运行时间达到了子弹存活时间，就销毁子弹
         if (mCurLogicFrameAccTime >= mBulletConfig.survivalTimeMS)
         {
