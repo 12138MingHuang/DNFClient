@@ -53,7 +53,18 @@ public partial class LogicActor : LogicObject
     }
     
     /// <summary>
-    /// 某个技能或buff会减少或阻挡子弹伤害
+    /// buff伤害效果，比如冰冻，减速等效果造成的伤害
+    /// </summary>
+    /// <param name="damageValue"> 伤害值 </param>
+    /// <param name="skillDamageConfig"> 技能伤害配置 </param>
+    public virtual void BuffDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
+    {
+        Debug.Log("BuffDamage:" + damageValue);
+        CalculateDamage(damageValue, DamageSource.Skill);
+    }
+    
+    /// <summary>
+    /// 子弹伤害效果，比如子弹造成的伤害
     /// </summary>
     public virtual void BulletDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
     {

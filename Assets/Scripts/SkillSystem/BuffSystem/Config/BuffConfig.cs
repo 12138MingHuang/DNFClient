@@ -42,9 +42,22 @@ public class BuffConfig : ScriptableObject
     public GameObject buffHitEffectObj;
     [LabelText("Buff触发动画"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
     public ObjectAnimationState buffTriggerAnim = ObjectAnimationState.None;
+    [LabelText("目标配置")]
+    public TargetConfig targetConfig;
     
     [Title("Buff描述："),HideLabel,MultiLineProperty(5)]
     public string buffDes;
+}
+
+[Serializable] [TabGroup("目标配置")]
+public class TargetConfig
+{
+    [LabelText("是否启用")]
+    public bool isOpen = false;
+    [LabelText("作用目标")] [ShowIf("isOpen")]
+    public TargetType targetType;
+    [LabelText("伤害检测配置")] [ShowIf("isOpen")]
+    public SkillDamageConfig damageConfig;
 }
 
 /// <summary>
@@ -129,5 +142,6 @@ public enum BuffType
     [LabelText("无配置")] None = 0,
     [LabelText("击退")] Repel,
     [LabelText("浮空")] Floating,
-    [LabelText("僵直")] Stiff
+    [LabelText("僵直")] Stiff,
+    [LabelText("群体血量修改")] HP_Modify_Group,
 }

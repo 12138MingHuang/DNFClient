@@ -75,7 +75,11 @@ public partial class Skill
                     }
                     break;
                 case MoveActionFinishOperation.Buff:
-                    // TODO: 添加Buff
+                    skillGuidePos = logicMoveObj.LogicPos;
+                    foreach (var actionId in actionConfig.actionFinishIdList)
+                    {
+                        BuffSystem.Instance.AttachBuff(actionId, mSkillCreator, mSkillCreator, this);
+                    }
                     break;
             }
         }, moveUpdateCallBack, moveType);

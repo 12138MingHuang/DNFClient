@@ -111,6 +111,9 @@ public class Buff
             case BuffType.Stiff:
                 mBuffLogic = new StiffBuff(this);
                 break;
+            case BuffType.HP_Modify_Group:
+                mBuffLogic = new AttributeModify_Buff_Group(this);
+                break;
         }
         
         buffState = BuffConfig.buffDelay == 0 ? BuffState.Start : BuffState.Delay;
