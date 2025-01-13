@@ -32,7 +32,12 @@ public partial class LogicActor
     /// 是否添加力
     /// </summary>
     public bool isAddForce = false;
-    
+
+    /// <summary>
+    /// 是否忽略重力
+    /// </summary>
+    public bool IsIgnoreGravity { get; set; }
+
     /// <summary>
     /// 逻辑帧更新重力
     /// </summary>
