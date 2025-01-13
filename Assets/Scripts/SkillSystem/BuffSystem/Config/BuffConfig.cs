@@ -144,4 +144,6 @@ public enum BuffType
     [LabelText("浮空")] Floating,
     [LabelText("僵直")] Stiff,
     [LabelText("群体血量修改")] HP_Modify_Group,
+    [LabelText("抓取Buff")] Grab,
+    [LabelText("忽略重力")] IgnoreGravity,
 }

@@ -22,7 +22,7 @@ namespace ZMGC.Battle
 		private Dictionary<int, int[]> mHeroSkillCfgDic = new Dictionary<int, int[]>
 		{
 			{1000, new int[] { 1004, 1005, 1007, 1008, 1010, 1015 }}, // 英雄1的技能配置
-			{1001, new int[] { 3010, 3015, 3021, 3022 }}, // 英雄2的技能配置
+			{1001, new int[] { 3010, 3015, 3022, 3025 }}, // 英雄2的技能配置
 		};
 		
 		public void OnCreate()

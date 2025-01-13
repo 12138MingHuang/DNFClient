@@ -55,6 +55,12 @@ public partial class LogicActor
             // 计算要移动的新的位置
             FixIntVector3 newPos = new FixIntVector3(LogicPos.x, FixIntMath.Clamp(LogicPos.y + velocity.y * logicFrameInterval, 0, FixInt.MaxValue), LogicPos.z);
 
+            // 如果已经忽略了重力，就不进行重力位置更新
+            if (!IsIgnoreGravity)
+            {
+                LogicPos = newPos;
+            }
+            
             if (newPos.y <= 0)
             {
                 isAddForce = false;
