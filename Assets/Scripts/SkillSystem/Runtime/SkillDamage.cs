@@ -179,6 +179,12 @@ public partial class Skill
                     BuffSystem.Instance.AttachBuff(buffId, mSkillCreator, target, this, null);
                 }
             }
+            // 触发对应的后续技能
+            if (skillDamageConfig.triggerSkillId != 0)
+            {
+                // 预释放技能 这个技能会在当前技能释放完成后 立即进行释放
+                mCombinationSkillId = skillDamageConfig.triggerSkillId;
+            }
             // 添加击中特效
             AddHitEffect(target);
             // 播放击中音效

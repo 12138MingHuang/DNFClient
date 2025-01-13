@@ -53,6 +53,18 @@ public class SkillSystem
                     InitSkills(new int[] {stage.skillId});
                 }
             }
+            
+            // 初始化伤害后续技能
+            if(skill.DamageConfigList.Count > 0)
+            {
+                foreach (var damageConfig in skill.DamageConfigList)
+                {
+                    if(damageConfig.triggerSkillId != 0)
+                    {
+                        InitSkills(new int[] { damageConfig.triggerSkillId });
+                    }
+                }
+            }
         }
         Debug.Log("技能初始化完成, 技能个数：" + skillIdArr.Length);
     }

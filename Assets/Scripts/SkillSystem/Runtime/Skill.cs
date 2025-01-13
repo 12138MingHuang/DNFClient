@@ -1,5 +1,6 @@
 using FixMath;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using ZMAssetFrameWork;
 
@@ -77,6 +78,22 @@ public partial class Skill
     /// 技能引导位置
     /// </summary>
     public FixIntVector3 skillGuidePos;
+
+    /// <summary>
+    /// 组合技能ID
+    /// </summary>
+    private int mCombinationSkillId;
+    
+    /// <summary>
+    /// 技能伤害配置列表
+    /// </summary>
+    public List<SkillDamageConfig> DamageConfigList
+    {
+        get
+        {
+            return mSkillDataConfig.damageCfgList;
+        }
+    }
     
     /// <summary>
     /// 创建技能
@@ -115,6 +132,7 @@ public partial class Skill
         mCurLogicFrame = 0;
         mCurLogicFrameAccTime = 0;
         mAutoMatchStockStage = false;
+        mCombinationSkillId = mSkillDataConfig.skillConfig.combinationSkillId;
         if (mSkillDataConfig.character.customLogicFame != 0)
             mSkillDataConfig.character.logicFrame = mSkillDataConfig.character.customLogicFame;
         
@@ -212,9 +230,9 @@ public partial class Skill
         OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
         OnBulletRelease();
-        if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
+        if (mCombinationSkillId != 0)
         {
-            mSkillCreator.ReleaseSkill(mSkillDataConfig.skillConfig.combinationSkillId);
+            mSkillCreator.ReleaseSkill(mCombinationSkillId);
         }
     }
     
