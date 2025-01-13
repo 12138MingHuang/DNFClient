@@ -186,7 +186,7 @@ public partial class Skill
                 mCombinationSkillId = skillDamageConfig.triggerSkillId;
             }
             // 添加击中特效
-            AddHitEffect(target);
+            AddHitEffect(target, skillDamageConfig.targetType == TargetType.Self ? mSkillCreator : target);
             // 播放击中音效
             PlyHitAudio();
         }
@@ -196,11 +196,11 @@ public partial class Skill
     /// 添加击中特效
     /// </summary>
     /// <param name="targetObj"> 目标对象 </param>
-    public void AddHitEffect(LogicActor targetObj)
+    public void AddHitEffect(LogicActor targetObj, LogicActor source)
     {
         if (mSkillDataConfig.skillConfig.skillHitEffect != null)
         {
-            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, mSkillCreator, mSkillCreator.LogicXAxis);
+            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, source, mSkillCreator.LogicXAxis);
         }
     }
 

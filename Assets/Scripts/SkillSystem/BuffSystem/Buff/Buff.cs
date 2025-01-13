@@ -126,6 +126,13 @@ public class Buff
             case BuffType.IgnoreGravity:
                 mBuffLogic = new IgnoreGravityBuff(this);
                 break;
+            case BuffType.MoveSpeed_Modify_Single:
+                mBuffLogic = new AttributeModify_Buff_Single(this);
+                break;
+            case BuffType.AllowMove:
+            case BuffType.NotAllowDir:
+                mBuffLogic = new StatusModify_Buff_Single(this);
+                break;
         }
         
         buffState = BuffConfig.buffDelay == 0 ? BuffState.Start : BuffState.Delay;

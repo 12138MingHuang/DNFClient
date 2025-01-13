@@ -26,7 +26,7 @@ public class MoveToAction : ActionBehaviour
     {
         mActionObj = actionObj;
         mStartPos = startPos;
-        mMoveTime = time;
+        mMoveTime = time == FixInt.Zero ? 0.1f : time;
         mMoveType = moveType;
         OnMoveFinishAction = moveFinishCallBack;
         OnMoveUpdateAction = updateCallBack;

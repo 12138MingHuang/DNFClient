@@ -19,7 +19,7 @@ public partial class LogicActor
     public void OnLogicFrameUpdateMove()
     {
         Collider?.UpdateColliderInfo(LogicPos, Collider.Size);
-        if (ActionState != LogicObjectActionState.Idle && ActionState != LogicObjectActionState.Move)
+        if (ActionState != LogicObjectActionState.Idle && ActionState != LogicObjectActionState.Move && IsForceAllowMove == false)
             return;
         // 计算逻辑位置
         LogicPos += mInputMoveDir * LogicMoveSpeed * (FixInt)LogicFrameConfig.LogicFrameInterval;
@@ -30,7 +30,7 @@ public partial class LogicActor
             LogicDir = mInputMoveDir;
         }
         //计算逻辑轴向
-        if (LogicDir.x != FixInt.Zero)
+        if (LogicDir.x != FixInt.Zero && IsForceNotAllowModifyDir == false)
         {
             LogicXAxis = LogicDir.x > 0 ? 1 : -1;
         }

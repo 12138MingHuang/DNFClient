@@ -146,4 +146,7 @@ public enum BuffType
     [LabelText("群体血量修改")] HP_Modify_Group,
     [LabelText("抓取Buff")] Grab,
     [LabelText("忽略重力")] IgnoreGravity,
+    [LabelText("单体移动速度修改")] MoveSpeed_Modify_Single,
+    [LabelText("是否允许强制移动")] AllowMove,
+    [LabelText("是否不允许修改方向")] NotAllowDir,
 }

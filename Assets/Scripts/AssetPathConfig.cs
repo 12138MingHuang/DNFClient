@@ -36,5 +36,9 @@ public class AssetPathConfig
     /// 游戏内BUFF路径
     /// </summary>
     public const string BUFF_DATA_PATH = GAME + "SkillSystem/BuffData/";
+    /// <summary>
+    /// 游戏内音效路径
+    /// </summary>
+    public const string GAME_AUIDO_PATH = GAME + "Sound/";
     
 }

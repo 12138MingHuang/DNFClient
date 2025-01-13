@@ -56,6 +56,7 @@ public class CreateRoleWindow : WindowBase
 	public void OnEnterGameButtonClick()
 	{
 		Debug.Log("点击开始游戏");
+		dataCompt.EnterGameButton.interactable = false;
 		HallWorld.EnterBattleWorld();
 	}
 
