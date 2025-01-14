@@ -30,6 +30,29 @@ public partial class Skill
     /// <param name="moveUpdateCallBack"> 移动更新回调 </param>
     public void AddMoveAction(SkillActionConfig actionConfig, LogicObject logicMoveObj, Vector3 offset = default(Vector3), Action onMoveFinish = null, Action moveUpdateCallBack=null)
     {
+        void OnActionFinish()
+        {
+            onMoveFinish?.Invoke();
+            switch (actionConfig.actionFinishOperation)
+            {
+                case MoveActionFinishOperation.None:
+                    break;
+                case MoveActionFinishOperation.Skill:
+                    foreach (var skillActionId in actionConfig.actionFinishIdList)
+                    {
+                        mSkillCreator.ReleaseSkill(skillActionId);
+                    }
+                    break;
+                case MoveActionFinishOperation.Buff:
+                    skillGuidePos = logicMoveObj.LogicPos;
+                    foreach (var actionId in actionConfig.actionFinishIdList)
+                    {
+                        BuffSystem.Instance.AttachBuff(actionId, mSkillCreator, mSkillCreator, this);
+                    }
+                    break;
+            }
+        }
+        
         FixIntVector3 movePos = new FixIntVector3(actionConfig.movePos);
         FixIntVector3 targetPos = logicMoveObj.LogicPos + movePos * logicMoveObj.LogicXAxis;
         FixIntVector3 startPos = logicMoveObj.LogicPos;
@@ -57,32 +80,25 @@ public partial class Skill
                 startPos.y = FixIntMath.Abs(startPos.y);
                 break;
             case MoveActionType.BezierPos:
-                break;
+                // 计算起始位置
+                startPos = mSkillCreator.LogicPos + mSkillCreator.LogicXAxis * new FixIntVector3(offset);
+                startPos.y = FixIntMath.Abs(startPos.y);
+                // 计算高度位置
+                FixIntVector3 heightPosOffset = new FixIntVector3(actionConfig.heightPos) * mSkillCreator.LogicXAxis;
+                heightPosOffset.y = FixIntMath.Abs(heightPosOffset.y);
+                FixIntVector3 heightPos = mSkillCreator.LogicPos + heightPosOffset;
+                // 计算结束位置
+                FixIntVector3 endPosOffset = new FixIntVector3(actionConfig.movePos) * mSkillCreator.LogicXAxis;
+                endPosOffset.y = FixIntMath.Abs(endPosOffset.y);
+                targetPos = mSkillCreator.LogicPos + endPosOffset;
+                // 构建贝塞尔运动
+                MoveBezierAction moveBezierAction = new MoveBezierAction(logicMoveObj, startPos, heightPos, targetPos, actionConfig.durationMS, OnActionFinish, moveUpdateCallBack);
+                LogicActionController.Instance.RunAction(moveBezierAction);
+                return;
         }
 
-        // 构建行动
-        MoveToAction action = new MoveToAction(logicMoveObj, startPos, targetPos, actionConfig.durationMS, () =>
-        {
-            onMoveFinish?.Invoke();
-            switch (actionConfig.actionFinishOperation)
-            {
-                case MoveActionFinishOperation.None:
-                    break;
-                case MoveActionFinishOperation.Skill:
-                    foreach (var skillActionId in actionConfig.actionFinishIdList)
-                    {
-                        mSkillCreator.ReleaseSkill(skillActionId);
-                    }
-                    break;
-                case MoveActionFinishOperation.Buff:
-                    skillGuidePos = logicMoveObj.LogicPos;
-                    foreach (var actionId in actionConfig.actionFinishIdList)
-                    {
-                        BuffSystem.Instance.AttachBuff(actionId, mSkillCreator, mSkillCreator, this);
-                    }
-                    break;
-            }
-        }, moveUpdateCallBack, moveType);
+        // 构建普通直线行动
+        MoveToAction action = new MoveToAction(logicMoveObj, startPos, targetPos, actionConfig.durationMS, OnActionFinish, moveUpdateCallBack, moveType);
         
         LogicActionController.Instance.RunAction(action);
     }
