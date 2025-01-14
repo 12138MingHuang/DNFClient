@@ -69,7 +69,7 @@ public partial class LogicActor
             else
             {
                 // 判断对象是否处于上升阶段
-                if (velocity.y > 0)
+                if (velocity.y >= 0)
                 {
                     Floating(true);
                 }

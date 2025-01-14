@@ -239,7 +239,7 @@ public partial class Skill
         OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
         OnBulletRelease();
-        OnInitDamage();
+        OnDamageRelease();
         if (mCombinationSkillId != 0)
         {
             mSkillCreator.ReleaseSkill(mCombinationSkillId);

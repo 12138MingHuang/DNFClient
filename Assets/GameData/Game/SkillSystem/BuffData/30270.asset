@@ -15,7 +15,7 @@ MonoBehaviour:
   buffIcon: {fileID: 0}
   buffId: 30270
   buffName: "BBQ\u6D6E\u7A7A"
-  buffDelay: 0
+  buffDelay: 100
   buffIntervalMS: 0
   buffDurationMS: 1200
   buffType: 2

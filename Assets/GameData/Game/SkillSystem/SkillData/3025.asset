@@ -63,6 +63,7 @@ MonoBehaviour:
     targetType: 0
     addBuffs: 2a7600003e7600003f760000
     triggerSkillId: 3026
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: a6983060121b71a4c92015adb0ecf73c, type: 3}
     audioName: gunman_hh_BBQ02
