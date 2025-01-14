@@ -42,8 +42,8 @@ MonoBehaviour:
     skillHitEffect: {fileID: 0}
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 0}
-    showSkillPortrait: 0
-    skillPortraitObj: {fileID: 0}
+    showSkillPortrait: 1
+    skillPortraitObj: {fileID: 2820098208712261571, guid: c5e894c238e73e545b7dea7a594011c3, type: 3}
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 1019778347080694, guid: defe7adc774bbd54e898dbb5ba3176b4, type: 3}

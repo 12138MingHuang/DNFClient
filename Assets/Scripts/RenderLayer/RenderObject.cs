@@ -158,4 +158,14 @@ public class RenderObject : MonoBehaviour
     {
         return null;
     }
+
+    /// <summary>
+    /// 显示技能立绘
+    /// </summary>
+    /// <param name="portraitObj"> 立绘对象 </param>
+    public virtual void ShowSkillPortrait(GameObject portraitObj)
+    {
+        GameObject portraitGo = GameObject.Instantiate(portraitObj);
+        GameObject.Destroy(portraitGo, 3f);
+    }
 }

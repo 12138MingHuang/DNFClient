@@ -210,6 +210,12 @@ public partial class Skill
                 SkillEnd();
             }
         }
+
+        // 显示技能立绘
+        if (mSkillDataConfig.skillConfig.showSkillPortrait && mCurLogicFrame == 0)
+        {
+            mSkillCreator.RenderObject.ShowSkillPortrait(mSkillDataConfig.skillConfig.skillPortraitObj);
+        }
         
         // 逻辑帧自增
         mCurLogicFrame++;
