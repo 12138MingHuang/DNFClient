@@ -20,6 +20,8 @@ public partial class LogicActor : LogicObject
         OnLogicFrameUpdateSkill();
         // 更新重力帧
         OnLogicFrameUpdateGravity();
+        // 更新子弹帧
+        OnLogicFrameUpdateBullet();
     }
     
     /// <summary>
@@ -30,6 +32,15 @@ public partial class LogicActor : LogicObject
     {
         RenderObject.PlayAnim(characterAnim);
     }
+    
+    /// <summary>
+    /// 播放动画
+    /// </summary>
+    /// <param name="animName"> 动画名称 </param>
+    public void PlayAnim(string animName)
+    {
+        RenderObject.PlayAnim(animName);
+    }
 
     /// <summary>
     /// 角色技能伤害
@@ -39,6 +50,26 @@ public partial class LogicActor : LogicObject
     {
         Debug.Log("SkillDamage: " + damageValue);
         CalculateDamage(damageValue, DamageSource.Skill);
+    }
+    
+    /// <summary>
+    /// buff伤害效果，比如冰冻，减速等效果造成的伤害
+    /// </summary>
+    /// <param name="damageValue"> 伤害值 </param>
+    /// <param name="skillDamageConfig"> 技能伤害配置 </param>
+    public virtual void BuffDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
+    {
+        Debug.Log("BuffDamage:" + damageValue);
+        CalculateDamage(damageValue, DamageSource.Skill);
+    }
+    
+    /// <summary>
+    /// 子弹伤害效果，比如子弹造成的伤害
+    /// </summary>
+    public virtual void BulletDamage(FixInt damageValue, SkillDamageConfig skillDamageConfig)
+    {
+        Debug.Log("BulletDamage: " + damageValue);
+        CalculateDamage(damageValue, DamageSource.Bullet);
     }
     
     /// <summary>
@@ -64,10 +95,28 @@ public partial class LogicActor : LogicObject
     /// </summary>
     /// <param name="hitEffect"> 受击特效 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 受击特效存活时间 </param>
-    /// <param name="skillCreator"> 施法者 </param>
-    public void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicActor skillCreator)
+    /// <param name="source"> 施法者 </param>
+    /// <param name="logicXAxis"> 逻辑x轴 </param>
+    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
     {
-        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, skillCreator);
+        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, source);
+    }
+    
+    /// <summary>
+    /// 浮动效果
+    /// </summary>
+    /// <param name="isUping"> 是否向上中 </param>
+    public virtual void Floating(bool isUping)
+    {
+        
+    }
+    
+    /// <summary>
+    /// 触发地面
+    /// </summary>
+    public virtual void TriggerGround()
+    {
+        
     }
     
     public override void OnDestroy()

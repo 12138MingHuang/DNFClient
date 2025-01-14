@@ -1,4 +1,6 @@
+using FixMath;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using ZMAssetFrameWork;
 
@@ -73,6 +75,27 @@ public partial class Skill
     private bool mAutoMatchStockStage;
     
     /// <summary>
+    /// 技能引导位置
+    /// </summary>
+    public FixIntVector3 skillGuidePos;
+
+    /// <summary>
+    /// 组合技能ID
+    /// </summary>
+    private int mCombinationSkillId;
+    
+    /// <summary>
+    /// 技能伤害配置列表
+    /// </summary>
+    public List<SkillDamageConfig> DamageConfigList
+    {
+        get
+        {
+            return mSkillDataConfig.damageCfgList;
+        }
+    }
+    
+    /// <summary>
     /// 创建技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>
@@ -88,11 +111,13 @@ public partial class Skill
     /// 释放技能
     /// </summary>
     /// <param name="onReleaseAfter"> 技能后摇 </param>
+    /// <param name="guidePos"> 引导位置 </param>
     /// <param name="onReleaseSkillEnd"> 技能释放结束 </param>
-    public void ReleaseSkill(Action<Skill> onReleaseAfter, Action<Skill, bool> onReleaseSkillEnd)
+    public void ReleaseSkill(Action<Skill> onReleaseAfter, FixIntVector3 guidePos,  Action<Skill, bool> onReleaseSkillEnd)
     {
         OnReleaseAfter = onReleaseAfter;
         OnReleaseSkillEnd = onReleaseSkillEnd;
+        skillGuidePos = guidePos;
         SkillStart();
         skillState = SkillState.Before;
         PlayAnim();
@@ -107,6 +132,12 @@ public partial class Skill
         mCurLogicFrame = 0;
         mCurLogicFrameAccTime = 0;
         mAutoMatchStockStage = false;
+        mCombinationSkillId = mSkillDataConfig.skillConfig.combinationSkillId;
+        if (mSkillDataConfig.character.customLogicFame != 0)
+            mSkillDataConfig.character.logicFrame = mSkillDataConfig.character.customLogicFame;
+        
+        OnBulletInit();
+        OnInitDamage();
     }
 
     /// <summary>
@@ -139,6 +170,9 @@ public partial class Skill
         // 更新音效逻辑帧
         OnLogicFrameUpdateAudio();
         // 更新子弹逻辑帧
+        OnLogicFrameUpdateBullet();
+        // 更新蓄力技能buff逻辑帧
+        OnLogicFrameUpdateBuff();
         
         // 蓄力技能需要通过蓄力时间进行触发，所以和技能的结束逻辑分开处理
         if (mSkillDataConfig.skillConfig.skillType == SkillType.StockPile)
@@ -176,6 +210,12 @@ public partial class Skill
                 SkillEnd();
             }
         }
+
+        // 显示技能立绘
+        if (mSkillDataConfig.skillConfig.showSkillPortrait && mCurLogicFrame == 0)
+        {
+            mSkillCreator.RenderObject.ShowSkillPortrait(mSkillDataConfig.skillConfig.skillPortraitObj);
+        }
         
         // 逻辑帧自增
         mCurLogicFrame++;
@@ -198,9 +238,11 @@ public partial class Skill
         skillState = SkillState.End;
         OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
-        if (mSkillDataConfig.skillConfig.combinationSkillId != 0)
+        OnBulletRelease();
+        OnDamageRelease();
+        if (mCombinationSkillId != 0)
         {
-            mSkillCreator.ReleaseSkill(mSkillDataConfig.skillConfig.combinationSkillId);
+            mSkillCreator.ReleaseSkill(mCombinationSkillId);
         }
     }
     

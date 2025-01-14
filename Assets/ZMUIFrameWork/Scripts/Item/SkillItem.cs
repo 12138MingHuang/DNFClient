@@ -1,3 +1,4 @@
+using FixMath;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,20 @@ public class SkillItem : MonoBehaviour
 
     private Skill mSkillData;
     private LogicActor mSkillCreator;
+    private HeroRender mHeroRender;
+    
+    /// <summary>
+    /// 是否进入技能cd
+    /// </summary>
+    private bool mIsEnterSkillCd = false;
+    /// <summary>
+    /// 已经冷却的时间
+    /// </summary>
+    private float mAlreadyCdTime;
+    /// <summary>
+    /// 技能冷却时间
+    /// </summary>
+    private float mSkillCdTime;
     
     /// <summary>
     /// 设置技能数据，并初始化摇杆数据
@@ -24,6 +39,7 @@ public class SkillItem : MonoBehaviour
     {
         mSkillData = skillData;
         mSkillCreator = skillCreator;
+        mHeroRender = skillCreator.RenderObject as HeroRender;
         // 初始化技能摇杆数据
         skillJoystick.InitSkillData(GetSkillGuideType(skillData.SkillConfig.skillType), skillData.skillId, skillData.SkillConfig.skillGuideRange);
         skillJoystick.OnReleaseSkill += OnTriggerSkill;
@@ -45,14 +61,18 @@ public class SkillItem : MonoBehaviour
         switch(skillGuideType)
         {
             case SkillGuideType.Click:
-                mSkillCreator.ReleaseSkill(skillId);
+                mSkillCreator.ReleaseSkill(skillId, releaseSkillCallBack: OnReleaseSkillCallBack);
                 break;
             case SkillGuideType.LongPress:
                 // 蓄力技能释放逻辑
                 mSkillCreator.TriggerStockPileSkill(skillId);
                 break;
             case SkillGuideType.Position:
-                // TODO: 位置引导技能释放逻辑
+                // 确保技能引导位置一定在地面上
+                skillPos.y = 0;
+                // 指定位置技能
+                mSkillCreator.ReleaseSkill(skillId, mSkillCreator.LogicPos + new FixIntVector3(skillPos), OnReleaseSkillCallBack);
+                mHeroRender.OnGuideRelease();
                 break;
         }
     }
@@ -71,10 +91,10 @@ public class SkillItem : MonoBehaviour
         {
             case SkillGuideType.LongPress:
                 // 蓄力技能逻辑
-                mSkillCreator.ReleaseSkill(skillId);
+                mSkillCreator.ReleaseSkill(skillId, releaseSkillCallBack: OnReleaseSkillCallBack);
                 break;
             case SkillGuideType.Position:
-                // TODO: 位置引导技能更新逻辑
+                mHeroRender.UpdateSkillGuide(skillGuide, skillId, isCancel, skillPos, skillDirDis);
                 break;
         }
     }
@@ -102,6 +122,53 @@ public class SkillItem : MonoBehaviour
                 break;
         }
         return skillGuideType;
+    }
+
+    /// <summary>
+    /// 技能释放回调
+    /// </summary>
+    /// <param name="isReleaseSuccess"> 是否释放成功</param>
+    private void OnReleaseSkillCallBack(bool isReleaseSuccess)
+    {
+        if(isReleaseSuccess)
+            EnterSkillCd();
+    }
+
+    /// <summary>
+    /// 进入技能冷却时间
+    /// </summary>
+    private void EnterSkillCd()
+    {
+        cdText.gameObject.SetActive(true);
+        cdMaskImage.gameObject.SetActive(true);
+        mIsEnterSkillCd = true;
+        // 获取技能冷却时间
+        mSkillCdTime = mAlreadyCdTime = mSkillData.SkillConfig.skillCdTimeMs / 1000f;
+        cdText.text = mSkillCdTime.ToString();
+        int cdTime = mSkillData.SkillConfig.skillCdTimeMs / 1000;
+        // 启动逻辑帧计时器，更新当前技能冷却时间
+        LogicTimerManager.Instance.DelayCall(1, () =>
+        {
+            cdTime--;
+            if (cdTime <= 0)
+            {
+                cdText.gameObject.SetActive(false);
+                cdMaskImage.gameObject.SetActive(false);
+                mIsEnterSkillCd = false;
+            }
+            else
+            {
+                cdText.text = cdTime.ToString();
+            }
+        }, cdTime);
+    }
+
+    private void Update()
+    {
+        if (mIsEnterSkillCd)
+        {
+            cdMaskImage.fillAmount = (mAlreadyCdTime -= Time.deltaTime) / mSkillCdTime;
+        }
     }
 
     private void OnDestroy()

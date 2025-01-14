@@ -25,6 +25,13 @@ public class WorldManager
     /// <typeparam name="T">游戏世界类型</typeparam>
     public static void CreateWorld<T>() where T: World, new()
     {
+        // 不允许重复构建世界
+        if (DefaultGameWorld != null && DefaultGameWorld.GetType().Name == typeof(T).Name)
+        {
+            Debug.LogError($"重复构建世界{typeof(T).Name}");
+            return;
+        }
+        
         T world = new T();
         DefaultGameWorld = world;
         

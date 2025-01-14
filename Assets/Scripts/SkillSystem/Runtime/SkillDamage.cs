@@ -34,10 +34,21 @@ public partial class Skill
     /// </summary>
     private Dictionary<int, ColliderBehaviour> mColliderDic = new Dictionary<int, ColliderBehaviour>();
     /// <summary>
-    /// 当前累计的伤害时间
+    /// 当前所有伤害累加时间列表
     /// </summary>
-    private int mCurDamageAccTime;
+    private List<int> mCurDamageAccTimeList = new List<int>();
 
+    private void OnInitDamage()
+    {
+        if (mSkillDataConfig.damageCfgList != null && mSkillDataConfig.damageCfgList.Count > 0)
+        {
+            for (int i = 0; i < mSkillDataConfig.damageCfgList.Count; ++i)
+            {
+                mCurDamageAccTimeList.Add(0);
+            }
+        }
+    }
+    
     /// <summary>
     /// 逻辑帧更新特效
     /// </summary>
@@ -45,8 +56,9 @@ public partial class Skill
     {
         if (mSkillDataConfig.damageCfgList != null && mSkillDataConfig.damageCfgList.Count > 0)
         {
-            foreach (var skillData in mSkillDataConfig.damageCfgList)
+            for (int i = 0; i < mSkillDataConfig.damageCfgList.Count; ++i)
             {
+                SkillDamageConfig skillData = mSkillDataConfig.damageCfgList[i];
                 int hashcode = skillData.GetHashCode();
                 
                 if (skillData.colliderPosType == ColliderPosType.FollowPos)
@@ -78,12 +90,13 @@ public partial class Skill
                 // 处理碰撞体伤害检测
                 if (skillData.triggerIntervalMS != 0)
                 {
-                    mCurDamageAccTime += LogicFrameConfig.LogicFrameIntervalMS;
+                    // int mCurDamageAccTime = mCurDamageAccTimeList[i]; // 是个坑，值拷贝，不能用这个 
+                    mCurDamageAccTimeList[i] += LogicFrameConfig.LogicFrameIntervalMS;
                     // 如果累计时间大于间隔时间
-                    if (mCurDamageAccTime >= skillData.triggerIntervalMS)
+                    if (mCurDamageAccTimeList[i] >= skillData.triggerIntervalMS)
                     {
                         // 触发一次伤害
-                        mCurDamageAccTime = 0;
+                        mCurDamageAccTimeList[i] = 0;
                         if (mColliderDic.ContainsKey(hashcode))
                         {
                             TriggerColliderDamage(mColliderDic[hashcode], skillData);
@@ -171,9 +184,22 @@ public partial class Skill
             // 造成伤害
             target.SkillDamage(9999, skillDamageConfig);
             
-            // 添加 Buff TODO
+            // 添加 Buff
+            if (skillDamageConfig.addBuffs != null && skillDamageConfig.addBuffs.Length > 0)
+            {
+                foreach (var buffId in skillDamageConfig.addBuffs)
+                {
+                    BuffSystem.Instance.AttachBuff(buffId, mSkillCreator, target, this, null);
+                }
+            }
+            // 触发对应的后续技能
+            if (skillDamageConfig.triggerSkillId != 0)
+            {
+                // 预释放技能 这个技能会在当前技能释放完成后 立即进行释放
+                mCombinationSkillId = skillDamageConfig.triggerSkillId;
+            }
             // 添加击中特效
-            AddHitEffect(target);
+            AddHitEffect(target, skillDamageConfig.targetType == TargetType.Self ? mSkillCreator : target);
             // 播放击中音效
             PlyHitAudio();
         }
@@ -183,11 +209,11 @@ public partial class Skill
     /// 添加击中特效
     /// </summary>
     /// <param name="targetObj"> 目标对象 </param>
-    public void AddHitEffect(LogicActor targetObj)
+    public void AddHitEffect(LogicActor targetObj, LogicActor source)
     {
         if (mSkillDataConfig.skillConfig.skillHitEffect != null)
         {
-            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, mSkillCreator);
+            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, source, mSkillCreator.LogicXAxis);
         }
     }
 
@@ -205,5 +231,10 @@ public partial class Skill
             mColliderDic.Remove(hashCode);
             collider.OnRelease();
         }
+    }
+
+    public void OnDamageRelease()
+    {
+        mCurDamageAccTimeList.Clear();
     }
 }

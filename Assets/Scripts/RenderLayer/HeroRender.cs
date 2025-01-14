@@ -23,6 +23,11 @@ public class HeroRender : RenderObject
     /// 右手根部节点
     /// </summary>
     public Transform RightHandRootTrans;
+
+    /// <summary>
+    /// 技能引导特效对象
+    /// </summary>
+    private GameObject mSkillGuideEffectObj;
     
     /// <summary>
     /// 角色动画
@@ -127,5 +132,52 @@ public class HeroRender : RenderObject
                 return RightHandRootTrans;
         }
         return null;
+    }
+
+    /// <summary>
+    /// 初始化技能引导特效对象
+    /// </summary>
+    /// <param name="skillId"> 技能ID </param>
+    private void InitSkillGuide(int skillId)
+    {
+        if (mSkillGuideEffectObj == null)
+        {
+            Skill skill = mHeroLogic.GetSkill(skillId);
+            mSkillGuideEffectObj = GameObject.Instantiate(skill.SkillConfig.skillGuideObj);
+            mSkillGuideEffectObj.transform.localScale = Vector3.one;
+        }
+    }
+
+    /// <summary>
+    /// 更新技能引导特效对象位置和朝向
+    /// </summary>
+    /// <param name="skillGuideType"></param>
+    /// <param name="skillId"></param>
+    /// <param name="isPress"></param>
+    /// <param name="pos"></param>
+    /// <param name="skillRange"></param>
+    public void UpdateSkillGuide(SkillGuideType skillGuideType, int skillId, bool isPress, Vector3 pos, float skillRange)
+    {
+        // 初始化引导特效
+        InitSkillGuide(skillId);
+        // 更新引导特效位置
+        if (skillGuideType == SkillGuideType.Position)
+        {
+            Vector3 skillGuidePos = transform.position + pos;
+            // 限制当前位置的z轴不能超过地图
+            skillGuidePos = new Vector3(skillGuidePos.x, 0, Mathf.Clamp(skillGuidePos.z, -1f, 8.6f));
+            mSkillGuideEffectObj.transform.position = skillGuidePos;
+        }
+    }
+
+    /// <summary>
+    /// 释放技能引导特效对象
+    /// </summary>
+    public void OnGuideRelease()
+    {
+        if (mSkillGuideEffectObj != null)
+        {
+            GameObject.Destroy(mSkillGuideEffectObj);
+        }
     }
 }

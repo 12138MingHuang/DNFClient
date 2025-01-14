@@ -1,3 +1,5 @@
+using FixMath;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,11 +29,16 @@ public partial class LogicActor
     /// 正在释放的技能列表
     /// </summary>
     public List<Skill> releasingSkillList = new List<Skill>();
-    
+
     /// <summary>
     /// 当前普通攻击技能组合索引
     /// </summary>
     private int mCurNormalComboIndex = 0;
+
+    /// <summary>
+    /// 当前对象持有的所有buff列表
+    /// </summary>
+    private List<Buff> mBuffList = new List<Buff>();
 
     /// <summary>
     /// 初始化技能
@@ -39,8 +46,8 @@ public partial class LogicActor
     public void InitActorSkill()
     {
         HeroDataMgr heroData = BattleWorld.GetExitsDataMgr<HeroDataMgr>();
-        mNormalSkillIdArr = heroData.GetHeroNormalSkillIdArray(1000);
-        mSkillIdArr = heroData.GetHeroSkillIdArray(1000);
+        mNormalSkillIdArr = heroData.GetHeroNormalSkillIdArray(1001);
+        mSkillIdArr = heroData.GetHeroSkillIdArray(1001);
         mSkillSystem = new SkillSystem(this);
         mSkillSystem.InitSkills(mNormalSkillIdArr);
         mSkillSystem.InitSkills(mSkillIdArr);
@@ -58,9 +65,18 @@ public partial class LogicActor
     /// 释放技能
     /// </summary>
     /// <param name="skillId"> 技能id </param>
-    public void ReleaseSkill(int skillId)
+    /// <param name="guidePos"> 引导位置 </param>
+    /// <param name="releaseSkillCallBack"> 释放技能回调 </param>
+    public void ReleaseSkill(int skillId, FixIntVector3 guidePos = default(FixIntVector3), Action<bool> releaseSkillCallBack = null)
     {
-        Skill skill = mSkillSystem.ReleaseSkill(skillId, OnSkillReleaseAfter, OnSkillReleaseEnd);
+        Skill skill = mSkillSystem.ReleaseSkill(skillId, guidePos, OnSkillReleaseAfter, (skill) =>
+        {
+            if (skill.SkillConfig.skillType == SkillType.StockPile)
+            {
+                releaseSkillCallBack?.Invoke(true);
+            }
+            OnSkillReleaseEnd(skill);
+        });
         if (skill != null)
         {
             releasingSkillList.Add(skill);
@@ -69,6 +85,14 @@ public partial class LogicActor
                 mCurNormalComboIndex = 0;
             }
             ActionState = LogicObjectActionState.SkillReleasing;
+            if (skill.SkillConfig.skillType != SkillType.StockPile)
+            {
+                releaseSkillCallBack?.Invoke(true);
+            }
+        }
+        else
+        {
+            releaseSkillCallBack?.Invoke(false);
         }
     }
 
@@ -110,7 +134,7 @@ public partial class LogicActor
         {
             mCurNormalComboIndex++;
             // 如果普通攻击技能组合索引大于等于普通攻击技能id数组长度，则重置为0
-            if (mCurNormalComboIndex >= mNormalSkillIdArr.Length)
+            if (mCurNormalComboIndex >= mNormalSkillIdArr.Length || skill.skillId == mNormalSkillIdArr[^1])
                 mCurNormalComboIndex = 0;
         }
     }
@@ -128,7 +152,7 @@ public partial class LogicActor
             mCurNormalComboIndex = 0;
         }
     }
-    
+
     /// <summary>
     /// 逻辑帧更新技能
     /// </summary>
@@ -136,7 +160,7 @@ public partial class LogicActor
     {
         mSkillSystem.OnLogicFrameUpdate();
     }
-    
+
     /// <summary>
     /// 获取技能
     /// </summary>
@@ -145,5 +169,30 @@ public partial class LogicActor
     public Skill GetSkill(int skillId)
     {
         return mSkillSystem.GetSkill(skillId);
+    }
+
+    /// <summary>
+    /// 添加buff到对象身上
+    /// </summary>
+    /// <param name="buff"> buff </param>
+    public void AddBuff(Buff buff)
+    {
+        mBuffList.Add(buff);
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        if (mBuffList.Contains(buff))
+        {
+            mBuffList.Remove(buff);
+        }
+
+        if (ObjectState == LogicObjectState.Death) return;
+
+        if (mBuffList.Count == 0 && RenderObject.GetCurAnimName() != AnimationName.Anim_Getup)
+        {
+            PlayAnim(AnimationName.Anim_Idle);
+            ActionState = LogicObjectActionState.Idle;
+        }
     }
 }
