@@ -34,10 +34,21 @@ public partial class Skill
     /// </summary>
     private Dictionary<int, ColliderBehaviour> mColliderDic = new Dictionary<int, ColliderBehaviour>();
     /// <summary>
-    /// 当前累计的伤害时间
+    /// 当前所有伤害累加时间列表
     /// </summary>
-    private int mCurDamageAccTime;
+    private List<int> mCurDamageAccTimeList = new List<int>();
 
+    private void OnInitDamage()
+    {
+        if (mSkillDataConfig.damageCfgList != null && mSkillDataConfig.damageCfgList.Count > 0)
+        {
+            for (int i = 0; i < mSkillDataConfig.damageCfgList.Count; ++i)
+            {
+                mCurDamageAccTimeList.Add(0);
+            }
+        }
+    }
+    
     /// <summary>
     /// 逻辑帧更新特效
     /// </summary>
@@ -45,8 +56,9 @@ public partial class Skill
     {
         if (mSkillDataConfig.damageCfgList != null && mSkillDataConfig.damageCfgList.Count > 0)
         {
-            foreach (var skillData in mSkillDataConfig.damageCfgList)
+            for (int i = 0; i < mSkillDataConfig.damageCfgList.Count; ++i)
             {
+                SkillDamageConfig skillData = mSkillDataConfig.damageCfgList[i];
                 int hashcode = skillData.GetHashCode();
                 
                 if (skillData.colliderPosType == ColliderPosType.FollowPos)
@@ -78,12 +90,13 @@ public partial class Skill
                 // 处理碰撞体伤害检测
                 if (skillData.triggerIntervalMS != 0)
                 {
-                    mCurDamageAccTime += LogicFrameConfig.LogicFrameIntervalMS;
+                    // int mCurDamageAccTime = mCurDamageAccTimeList[i]; // 是个坑，值拷贝，不能用这个 
+                    mCurDamageAccTimeList[i] += LogicFrameConfig.LogicFrameIntervalMS;
                     // 如果累计时间大于间隔时间
-                    if (mCurDamageAccTime >= skillData.triggerIntervalMS)
+                    if (mCurDamageAccTimeList[i] >= skillData.triggerIntervalMS)
                     {
                         // 触发一次伤害
-                        mCurDamageAccTime = 0;
+                        mCurDamageAccTimeList[i] = 0;
                         if (mColliderDic.ContainsKey(hashcode))
                         {
                             TriggerColliderDamage(mColliderDic[hashcode], skillData);
@@ -218,5 +231,10 @@ public partial class Skill
             mColliderDic.Remove(hashCode);
             collider.OnRelease();
         }
+    }
+
+    public void OnDamageRelease()
+    {
+        mCurDamageAccTimeList.Clear();
     }
 }

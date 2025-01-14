@@ -137,6 +137,7 @@ public partial class Skill
             mSkillDataConfig.character.logicFrame = mSkillDataConfig.character.customLogicFame;
         
         OnBulletInit();
+        OnInitDamage();
     }
 
     /// <summary>
@@ -232,6 +233,7 @@ public partial class Skill
         OnReleaseSkillEnd?.Invoke(this, mSkillDataConfig.skillConfig.combinationSkillId != 0);
         ReleaseAllEffect();
         OnBulletRelease();
+        OnInitDamage();
         if (mCombinationSkillId != 0)
         {
             mSkillCreator.ReleaseSkill(mCombinationSkillId);
