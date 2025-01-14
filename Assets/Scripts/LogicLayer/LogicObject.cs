@@ -12,7 +12,7 @@ public abstract class LogicObject
     private FixIntVector3 m_LogicPos; //逻辑对象逻辑位置
     private FixIntVector3 m_LogicDir; //逻辑对象朝向
     private FixIntVector3 m_LogicAngle; //逻辑对象旋转角度
-    private FixInt m_LogicMoveSpeed = 2; //逻辑对象移动速度
+    private FixInt m_LogicMoveSpeed = 3; //逻辑对象移动速度
     private FixInt _mLogicXXAxis; //逻辑轴向
     private bool m_IsActive; //逻辑对象是否激活
     private bool isForceAllowMove = false; //是否强制允许移动
