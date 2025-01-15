@@ -44,5 +44,9 @@ public class AssetPathConfig
     /// 游戏内数据路径
     /// </summary>
     public const string GAME_DATA_PATH = GAME + "Data/";
+    /// <summary>
+    /// 游戏内纹理路径
+    /// </summary>
+    public const string GAME_TEXTURES_PATH = GAME + "Textures/";
     
 }

@@ -1,3 +1,10 @@
+public enum MonsterType
+{ 
+	Normal = 1,
+	Elite = 2,
+	Boss = 5,
+}
+
 [System.Serializable]
 public class MonsterCfg
 {
