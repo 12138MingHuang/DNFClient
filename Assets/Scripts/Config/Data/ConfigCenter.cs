@@ -38,9 +38,9 @@ public class ConfigCenter : Singleton<ConfigCenter>
 
         // 反序列化Json
         List<T> configList = JsonConvert.DeserializeObject<List<T>>(textAsset.text);
-        mConfigDic.Add(fileName, configList);
+        mConfigDic.Add(fileName.Replace(".json", ""), configList);
 
-        Debug.LogError($"LoadConfig Success for {fileName}, Count: {configList.Count}");
+        Debug.Log($"LoadConfig Success for {fileName}, Count: {configList.Count}");
     }
     #endregion
 
@@ -48,13 +48,15 @@ public class ConfigCenter : Singleton<ConfigCenter>
     /// <summary>
     /// 通过配置文件名称和ID获取配置数据
     /// </summary>
-    public T GetConfigById<T>(string fileName, int id)
+    public T GetConfigById<T>(int id)
     {
+        string fileName = typeof(T).Name;
+        
         if (!mConfigDic.ContainsKey(fileName))
         {
-            Debug.LogError($"Config for {fileName} not loaded! Load it first!");
+            Debug.Log($"Config for {fileName} not loaded! Load it first!");
             LoadConfig<T>(fileName);
-            GetConfigById<T>(fileName, id);
+            GetConfigById<T>(id);
         }
 
         var configList = mConfigDic[fileName] as List<T>;
@@ -62,8 +64,8 @@ public class ConfigCenter : Singleton<ConfigCenter>
         {
             foreach (var config in configList)
             {
-                var property = config.GetType().GetProperty("id");
-                if (property != null && property.GetValue(config).Equals(id))
+                var field = config.GetType().GetField("id");
+                if (field != null && field.GetValue(config).Equals(id))
                 {
                     return config;
                 }

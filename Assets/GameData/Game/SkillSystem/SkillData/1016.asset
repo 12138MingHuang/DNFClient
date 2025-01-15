@@ -19,6 +19,8 @@ MonoBehaviour:
     isLoopAnim: 0
     animLoopCount: 0
     logicFrame: 28
+    isSetCustomLogicFrame: 0
+    customLogicFame: 0
     animLength: 1.9000002
     skillDurationMS: 1900
   skillConfig:
@@ -155,7 +157,7 @@ MonoBehaviour:
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
-    damageRate: 300
+    damageRate: 400
     detectionMode: 1
     boxSize: {x: 13, y: 10, z: 20}
     boxOffset: {x: 0, y: 1, z: 0}
@@ -166,10 +168,12 @@ MonoBehaviour:
     targetType: 1
     addBuffs: b0270000b1270000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: efcc2118b426112438db1c80cbb14b7c, type: 3}
     audioName: Swordsman_hh_mingyanzkl_zhanji
     triggerFrame: 15
     isLoop: 0
     endFrame: 0
+  bulletCfgList: []
   actionCfgList: []

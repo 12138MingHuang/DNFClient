@@ -18,6 +18,12 @@ public class MonsterLogic : LogicActor
         ObjectType = LogicObjectType.Monster;
     }
 
+    public override void OnCreate()
+    {
+        base.OnCreate();
+        InitMonsterAttribute();
+    }
+
     public override void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
     {
         base.OnHit(hitEffect, hitEffectSurvivalTimeMs, source, logicXAxis);
@@ -54,5 +60,33 @@ public class MonsterLogic : LogicActor
         {
             PlayAnim(AnimationName.Anim_Dead);
         }
+    }
+
+    private void InitMonsterAttribute()
+    {
+        MonsterCfg dataCfg = ConfigCenter.Instance.GetConfigById<MonsterCfg>(MonsterId);
+        if (dataCfg == null)
+        {
+            Debug.LogError($"怪物配置不存在，怪物ID：{MonsterId}");
+            return;
+        }
+        
+        hp = dataCfg.hp;
+        mp = dataCfg.mp;
+        ap = dataCfg.ap;
+        ad = dataCfg.ad;
+        adDef = dataCfg.adDef;
+        apDef = dataCfg.apDef;
+        pct = dataCfg.pct;
+        mct = dataCfg.mct;
+        adPctRate = dataCfg.adPctRate;
+        apMctRate = dataCfg.apMctRate;
+        str = dataCfg.str;
+        sta = dataCfg.sta;
+        Int = dataCfg.Int;
+        spi = dataCfg.spi;
+        agl = dataCfg.agl;
+        
+        Debug.Log($"初始化怪物属性成功，ID:{MonsterId}");
     }
 }

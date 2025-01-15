@@ -19,6 +19,8 @@ MonoBehaviour:
     isLoopAnim: 0
     animLoopCount: 0
     logicFrame: 9
+    isSetCustomLogicFrame: 0
+    customLogicFame: 0
     animLength: 0.63333344
     skillDurationMS: 633
   skillConfig:
@@ -120,7 +122,7 @@ MonoBehaviour:
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 100
     detectionMode: 1
     boxSize: {x: 1.5, y: 2, z: 1}
     boxOffset: {x: 1, y: 1.2, z: 0}
@@ -131,10 +133,12 @@ MonoBehaviour:
     targetType: 0
     addBuffs: 24270000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 38ea3ca6ede3d544daf16fbbc6866f8a, type: 3}
     audioName: Swordsman_liguidj_huidao02
     triggerFrame: 2
     isLoop: 0
     endFrame: 0
+  bulletCfgList: []
   actionCfgList: []

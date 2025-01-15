@@ -117,6 +117,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   damageCfgList: []
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 9bd8f95d7ea6912429ac051e4da1c435, type: 3}
     audioName: gunman_hh_liangzibd02

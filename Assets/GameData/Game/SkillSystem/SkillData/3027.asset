@@ -82,6 +82,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   damageCfgList: []
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 8ee8730ab61f7aa4db3e4e177c414ae5, type: 3}
     audioName: Gunman_BBQ
@@ -115,7 +116,7 @@ MonoBehaviour:
       triggerIntervalMS: 0
       isFollowEffect: 1
       damageType: 1
-      damageRate: 0
+      damageRate: 100
       detectionMode: 1
       boxSize: {x: 0.5, y: 0.5, z: 0.5}
       boxOffset: {x: 0, y: 0, z: 0}

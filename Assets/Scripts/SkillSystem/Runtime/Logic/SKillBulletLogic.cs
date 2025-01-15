@@ -95,7 +95,7 @@ public class SKillBulletLogic : LogicObject
         foreach (LogicActor target in mHitTargetList)
         {
             // 造成子弹伤害
-            target.BulletDamage(9999, mBulletConfig.damageConfig);
+            target.BulletDamage(DamageCalculateCenter.CalculateDamage(mBulletConfig.damageConfig, mFireLogicActor, target), mBulletConfig.damageConfig);
             // 播放击中效果
             target.OnHit(mBulletConfig.hitEffect, mBulletConfig.hitEffectSurvivalTimeMS, this, LogicXAxis);
             // 处理击中音效

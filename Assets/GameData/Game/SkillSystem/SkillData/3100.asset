@@ -542,7 +542,7 @@ MonoBehaviour:
     triggerIntervalMS: 200
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 200
     detectionMode: 1
     boxSize: {x: 10, y: 5, z: 5}
     boxOffset: {x: 5, y: 1, z: 0}
@@ -558,7 +558,7 @@ MonoBehaviour:
     triggerIntervalMS: 100
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 300
     detectionMode: 1
     boxSize: {x: 10, y: 5, z: 5}
     boxOffset: {x: 5, y: 1, z: 0}
@@ -574,7 +574,7 @@ MonoBehaviour:
     triggerIntervalMS: 300
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 400
     detectionMode: 1
     boxSize: {x: 15, y: 3, z: 1}
     boxOffset: {x: 7.65, y: 1, z: 0}

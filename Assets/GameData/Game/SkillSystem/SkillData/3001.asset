@@ -117,6 +117,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   damageCfgList: []
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: a85920d7e824ddd41922a250ed4b40d4, type: 3}
     audioName: paning_01
@@ -155,7 +156,7 @@ MonoBehaviour:
       triggerIntervalMS: 0
       isFollowEffect: 0
       damageType: 1
-      damageRate: 0
+      damageRate: 130
       detectionMode: 1
       boxSize: {x: 0.3, y: 1, z: 1}
       boxOffset: {x: 0, y: 0, z: 0}
