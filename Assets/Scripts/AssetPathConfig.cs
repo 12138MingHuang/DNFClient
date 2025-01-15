@@ -40,5 +40,9 @@ public class AssetPathConfig
     /// 游戏内音效路径
     /// </summary>
     public const string GAME_AUIDO_PATH = GAME + "Sound/";
+    /// <summary>
+    /// 游戏内数据路径
+    /// </summary>
+    public const string GAME_DATA_PATH = GAME + "Data/";
     
 }

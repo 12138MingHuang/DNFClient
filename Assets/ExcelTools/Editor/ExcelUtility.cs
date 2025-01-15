@@ -194,6 +194,16 @@ public class ExcelUtility
             //读取第1行数据作为表头字段
             string fieldName = mSheet.Rows[1][i].ToString();
             string fieldType = mSheet.Rows[2][i].ToString();
+            // 读取第0行数据作为字段的注释
+            string fieldComment = mSheet.Rows[0][i].ToString();
+
+            // 如果字段有注释，添加注释
+            if (!string.IsNullOrEmpty(fieldComment))
+            {
+                sb.AppendLine($"\t/// <summary>");
+                sb.AppendLine($"\t/// {fieldComment}");
+                sb.AppendLine($"\t/// </summary>");
+            }
             sb.AppendLine($"\tpublic {fieldType} {fieldName};");
         }
         sb.AppendLine("}");
