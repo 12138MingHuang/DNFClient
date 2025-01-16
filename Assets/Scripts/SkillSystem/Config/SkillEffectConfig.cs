@@ -7,9 +7,10 @@ using UnityEngine;
 [Serializable] [HideMonoScript]
 public class SkillEffectConfig
 {
-    [AssetList] [LabelText("技能特效对象")] [PreviewField(70, ObjectFieldAlignment.Left)]
+    [AssetList] [LabelText("技能特效对象")] [PreviewField(70, ObjectFieldAlignment.Left)] [OnValueChanged("GetObjectPath")]
     public GameObject skillEffect;
-    
+    [ReadOnly]
+    public string skillEffectPath;
     [Title("当技能为蓄力技能时候，特效存活时间跟随技能持续时间，触发帧功能保留，其他配置全部无效")]
     [LabelText("触发帧")]
     public int triggerFrame = 0;
@@ -40,6 +41,11 @@ public class SkillEffectConfig
     public GameObject gameEffectObj;
     
 #if UNITY_EDITOR
+
+    public void GetObjectPath(GameObject obj)
+    {
+        skillEffectPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+    }
 
     // Editor模式下克隆的特效对象
     private GameObject mCloneEffect;
