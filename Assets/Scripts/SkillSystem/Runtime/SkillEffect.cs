@@ -1,6 +1,7 @@
 using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 public partial class Skill
 {
@@ -30,10 +31,11 @@ public partial class Skill
                     }
                     
                     // 技能特效生成
-                    GameObject effectObj = GameObject.Instantiate(skillData.skillEffect, effectParent);
+                    GameObject effectObj = ZMAssetsFrame.Instantiate(skillData.skillEffectPath, effectParent, Vector3.zero, Vector3.one, Quaternion.identity);
                     effectObj.transform.localPosition = Vector3.zero;
-                    effectObj.transform.localRotation = Quaternion.identity;
                     effectObj.transform.localScale = Vector3.one;
+                    effectObj.transform.rotation = Quaternion.identity;
+                    effectObj.transform.localEulerAngles = Vector3.zero;
 
                     SkillEffectRender effectRender = effectObj.GetComponent<SkillEffectRender>();
                     if (effectRender == null)

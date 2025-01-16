@@ -97,13 +97,13 @@ public partial class LogicActor : LogicObject
     /// <summary>
     /// 受击
     /// </summary>
-    /// <param name="hitEffect"> 受击特效 </param>
+    /// <param name="hitEffectPath"> 受击特效路径 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 受击特效存活时间 </param>
     /// <param name="source"> 施法者 </param>
     /// <param name="logicXAxis"> 逻辑x轴 </param>
-    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
+    public virtual void OnHit(string hitEffectPath, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
     {
-        RenderObject.OnHit(hitEffect, hitEffectSurvivalTimeMs, source);
+        RenderObject.OnHit(hitEffectPath, hitEffectSurvivalTimeMs, source);
     }
     
     /// <summary>

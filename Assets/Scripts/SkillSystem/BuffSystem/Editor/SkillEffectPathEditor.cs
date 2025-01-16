@@ -36,6 +36,8 @@ public class SkillEffectPathEditor
                         bulletCfg.GetBulletObjectPath(bulletCfg.bulletPrefab);
                         bulletCfg.GetHitEffectObjectPath(bulletCfg.hitEffect);
                     }
+                    
+                    skillData.SaveAssets();
                 }
                 else // Buff数据路径处理逻辑
                 {
@@ -44,10 +46,12 @@ public class SkillEffectPathEditor
                     
                     if(buffCfg.effectConfig !=null)
                         buffCfg.effectConfig.GetObjectPath(buffCfg.effectConfig.effect);
+                    
+                    buffCfg.SaveAssets();
                 }
             }
             
-            // AssetDatabase.SaveAssets();
+            AssetDatabase.SaveAssets();
         }
     }
 }

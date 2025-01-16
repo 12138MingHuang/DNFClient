@@ -56,6 +56,12 @@ public class BuffConfig : ScriptableObject
     {
         buffHitEffectObjPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
     }
+    
+    public void SaveAssets()
+    {
+        UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.AssetDatabase.SaveAssets();
+    }
 
 #endif
 }

@@ -47,9 +47,9 @@ public class MonsterRender : RenderObject
         return mCurAnimName;
     }
 
-    public override void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source)
+    public override void OnHit(string hitEffectPath, int hitEffectSurvivalTimeMs, LogicObject source)
     {
-        base.OnHit(hitEffect, hitEffectSurvivalTimeMs, source);
+        base.OnHit(hitEffectPath, hitEffectSurvivalTimeMs, source);
         //通过怪物配置文件，配置怪物的信息，如怪物的id、基础血量、攻击力、移动速度、受击音效、攻击音效等 Excel
         //加载怪物的时候读取配置，播放音效也是读配置的。
         //临时代码

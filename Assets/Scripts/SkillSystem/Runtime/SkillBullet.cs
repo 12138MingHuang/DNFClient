@@ -1,6 +1,7 @@
 using FixMath;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 public partial class Skill
 {
@@ -69,7 +70,7 @@ public partial class Skill
     /// <param name="bulletCfg"> 子弹配置 </param>
     private void CreateBullet(SkillBulletConfig bulletCfg)
     {
-        GameObject bulletObj = GameObject.Instantiate(bulletCfg.bulletPrefab);
+        GameObject bulletObj = ZMAssetsFrame.Instantiate(bulletCfg.bulletPrefabPath, null);
         // 处理渲染层
         SkillBulletRender bulletRender = bulletObj.GetComponent<SkillBulletRender>();
         if (bulletRender == null)

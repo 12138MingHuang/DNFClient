@@ -1,4 +1,5 @@
 using UnityEngine;
+using ZMAssetFrameWork;
 
 public class SkillEffectRender : RenderObject
 {
@@ -10,6 +11,6 @@ public class SkillEffectRender : RenderObject
     public override void OnRelease()
     {
         base.OnRelease();
-        GameObject.Destroy(gameObject);
+        ZMAssetsFrame.Release(gameObject);
     }
 }

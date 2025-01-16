@@ -88,6 +88,12 @@ public class SkillDataConfig : ScriptableObject
         SkillComplierWindow window = SkillComplierWindow.ShowWindow();
         window.LoadSkillData(this);
     }
+
+    public void SaveAssets()
+    {
+        EditorUtility.SetDirty(this);
+        AssetDatabase.SaveAssets();
+    }
     
 #endif
     

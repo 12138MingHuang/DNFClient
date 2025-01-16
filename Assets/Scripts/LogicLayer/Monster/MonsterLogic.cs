@@ -79,9 +79,9 @@ public class MonsterLogic : LogicActor
         }
     }
 
-    public override void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
+    public override void OnHit(string hitEffectPath, int hitEffectSurvivalTimeMs, LogicObject source, FixInt logicXAxis)
     {
-        base.OnHit(hitEffect, hitEffectSurvivalTimeMs, source, logicXAxis);
+        base.OnHit(hitEffectPath, hitEffectSurvivalTimeMs, source, logicXAxis);
         this.LogicXAxis = -logicXAxis;
     }
 

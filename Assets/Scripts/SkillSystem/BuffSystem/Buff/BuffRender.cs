@@ -1,6 +1,7 @@
 using FixMath;
 using System;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 public class BuffRender : RenderObject
 {
@@ -89,6 +90,6 @@ public class BuffRender : RenderObject
         base.OnRelease();
         mBuffConfig = null;
         mAttachTarget = null;
-        GameObject.Destroy(gameObject);
+        ZMAssetsFrame.Release(gameObject);
     }
 }

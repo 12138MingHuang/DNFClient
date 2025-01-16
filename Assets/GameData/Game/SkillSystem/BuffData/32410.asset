@@ -32,9 +32,11 @@ MonoBehaviour:
   buffAudio: {fileID: 8300000, guid: 73144af8bef24c34f9de4c888bfee8f0, type: 3}
   effectConfig:
     effect: {fileID: 1000012949227160, guid: 555f4e930f571fa4ebcfc2ef86830ca2, type: 3}
+    effectPath: Assets/GameData/Game/Effects/Hero_Gunman/Shoulei/Prefab/Eff_Shoulei_bomb_guo.prefab
     attachType: 0
     effectPosType: 0
   buffHitEffectObj: {fileID: 0}
+  buffHitEffectObjPath: 
   buffTriggerAnim: 0
   targetConfig:
     isOpen: 1
