@@ -9,6 +9,7 @@ public class MonsterRender : RenderObject
     private string mCurAnimName;
     private int mMonsterId;
     private MonsterLogic mMonsterLogic;
+    private MonsterCfg mMonsterCfg;
         
     public override void OnCreate()
     {
@@ -16,16 +17,17 @@ public class MonsterRender : RenderObject
         mAnim = GetComponentInChildren<Animation>();
         mMonsterLogic = (logicObject as MonsterLogic);
         mMonsterId = mMonsterLogic.MonsterId;
-    }
-
-    public override void OnRelease()
-    {
-        base.OnRelease();
+        mMonsterCfg = ConfigCenter.Instance.GetConfigById<MonsterCfg>(mMonsterId);
     }
 
     private void Start()
     {
         
+    }
+    
+    public override void OnRelease()
+    {
+        base.OnRelease();
     }
 
     public override void PlayAnim(string animName)
@@ -64,6 +66,23 @@ public class MonsterRender : RenderObject
             AudioController.Instance.PlaySoundByAudioClip(audioClip, false, 2);
         }
         
+    }
+
+    public override void Damage(int damageValue, DamageSource source)
+    {
+        base.Damage(damageValue, source);
+        BattleWindow window = UIModule.Instance.GetWindow<BattleWindow>();
+        window.ShowMonsterDamage(mMonsterCfg, gameObject.GetInstanceID(), mMonsterLogic.HP + damageValue, damageValue);
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        PlayAnim(AnimationName.Anim_Dead);
+        LogicTimerManager.Instance.DelayCall(1.5f, () =>
+        {
+            ZMAssetsFrame.Release(gameObject);
+        });
     }
 
     protected override void Update()

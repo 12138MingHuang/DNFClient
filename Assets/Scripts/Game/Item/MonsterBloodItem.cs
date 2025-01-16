@@ -30,6 +30,12 @@ public class MonsterBloodItem : MonoBehaviour
     [HideInInspector]
     public int curShowMonsterInsId;
 
+    /// <summary>
+    /// 初始化血条数据，包括血量、怪物头像和类型图标等。
+    /// </summary>
+    /// <param name="monsterCfg"> 怪物配置 </param>
+    /// <param name="curHp"> 当前血量 </param>
+    /// <param name="insId"> 怪物实例ID </param>
     public void InitBloodData(MonsterCfg monsterCfg, int curHp, int insId)
     {
         curShowMonsterInsId = insId;
@@ -38,6 +44,8 @@ public class MonsterBloodItem : MonoBehaviour
         // 2.通过配置去加载怪物的头像和怪物的类型图标
         headImage.sprite = ZMAssetsFrame.LoadSprite(AssetPathConfig.GAME_TEXTURES_PATH + "HeadIcon/" + monsterCfg.id);
         monsterTypeImage.sprite = ZMAssetsFrame.LoadPNGAtlasSprite(AssetPathConfig.GAME_TEXTURES_PATH + "BttlePEV/p_UI_Battle_Pve", GetMonsterTypeName(monsterCfg));
+        // 3.设置怪物名称
+        nameText.text = monsterCfg.name;
     }
     private string GetMonsterTypeName(MonsterCfg monsterCfg)
     {
@@ -52,5 +60,14 @@ public class MonsterBloodItem : MonoBehaviour
         }
         
         return "";
+    }
+    
+    /// <summary>
+    /// 怪物受到伤害时调用此方法更新血条
+    /// </summary>
+    /// <param name="damage"> 伤害值 </param>
+    public void Damage(int damage)
+    {
+        bloodBars.ChangeBlood(damage);
     }
 }

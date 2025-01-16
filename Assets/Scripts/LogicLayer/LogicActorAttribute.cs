@@ -223,4 +223,14 @@ public partial class LogicActor
     public FixInt AGL { get { return addAgl + agl; } }
     
     #endregion
+
+    /// <summary>
+    /// 减少血量
+    /// </summary>
+    /// <param name="reduceHp"> 减少的血量 </param>
+    public void ReduceHP(FixInt reduceHp)
+    {
+        hp -= reduceHp;
+        if (hp <= 0) hp = 0;
+    }
 }

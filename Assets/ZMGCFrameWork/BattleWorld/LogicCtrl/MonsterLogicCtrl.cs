@@ -26,12 +26,14 @@ namespace ZMGC.Battle
 		private Vector3[] m_MonsterPosArr = new[]
 		{
 			new Vector3(-1, 0, 0),
-			new Vector3(-3, 0 ,0)
+			new Vector3(-3, 0 ,0),
+			new Vector3(0, 0, 5),
 		};
 		private int[] m_MonsterIdArr = new[]
 		{
 			20001,
-			20005
+			20005,
+			30001
 		};
 		
 		public void OnCreate()

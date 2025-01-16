@@ -148,6 +148,14 @@ public class RenderObject : MonoBehaviour
             Destroy(hitEffectObj, hitEffectSurvivalTimeMs * 1.0f / 1000f);
         }
     }
+    
+    /// <summary>
+    /// 死亡逻辑
+    /// </summary>
+    public virtual void OnDeath()
+    {
+        
+    }
 
     /// <summary>
     /// 获取父节点
