@@ -34,7 +34,9 @@ namespace ZMGC.Battle
 			heroRender.SetLogicObject(heroLogic);
 			// 初始化英雄逻辑层和渲染层
 			heroLogic.OnCreate();
-			heroRender.OnCreate(); 
+			heroRender.OnCreate();
+			
+			GameObject.Find("Main Camera").GetComponent<CameraFollow>().target = heroObj.transform;
 		}
 		
 		public void OnLogicFrameUpdate()
