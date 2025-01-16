@@ -45,6 +45,7 @@ namespace ZMGC.Battle
             MonsterLogicCtrl.InitMonster();
 
             UIModule.PopUpWindow<BattleWindow>();
+            AudioController.Instance.PlayMusicFade(AssetPathConfig.GAME_AUIDO_PATH + "BG/jizhou.mp3", 2);
             Debug.Log("BattleWorld OnCreate");
             BuffSystem.Instance.OnCreate();
         }

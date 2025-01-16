@@ -34,7 +34,7 @@ public class AudioController : MonoBehaviour
     /// <summary>
     /// 音乐音量
     /// </summary>
-    private float mMusicVolume = -1;
+    private float mMusicVolume = 0.5f;
     /// <summary>
     /// 音源控制器单例
     /// </summary>
