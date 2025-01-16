@@ -2,7 +2,7 @@
  *-------------------------
  *Title:UI自动化组件生成代码工具
  *Author:ZHANGBIN
- *Date:2024/12/3 22:30:07
+ *Date:2025/1/16 14:54:40
  *Description:需要查找的变量要以[变量类型]变量名的形式命名，例如[Text]textName,然后右键窗口UI物体根结点，一键生成UI数据组件脚本即可
  *注意：以下文件是自动生成的，任何手动修改都会被下次生成覆盖，若手动修改，尽量避免自动生成
  *--------------------------
@@ -14,7 +14,7 @@ namespace ZMUIFrameWork
 {
 	public class CreateRoleWindowDataComponent : MonoBehaviour
 	{
-		public Button CloseButton;
+		public Transform RolePortraitRootTransform;
 
 		public Image RoleNameImage;
 
@@ -22,13 +22,17 @@ namespace ZMUIFrameWork
 
 		public InputField NameInputField;
 
+		public Transform ContentTransform;
+
+		public Button CloseButton;
+
 		public void InitComponent(WindowBase target)
 		{
 			//组件事件绑定
 			CreateRoleWindow mWindow = (CreateRoleWindow)target;
-			target.AddButtonClickListener(CloseButton, mWindow.OnCloseButtonClick);
 			target.AddButtonClickListener(EnterGameButton, mWindow.OnEnterGameButtonClick);
 			target.AddInputFieldListener(NameInputField, mWindow.OnNameInputChange, mWindow.OnNameInputEnd);
+			target.AddButtonClickListener(CloseButton, mWindow.OnCloseButtonClick);
 		}
 	}
 }

@@ -43,11 +43,12 @@ public partial class LogicActor
     /// <summary>
     /// 初始化技能
     /// </summary>
-    public void InitActorSkill()
+    /// <param name="roleId"> 角色id </param>
+    public void InitActorSkill(int roleId)
     {
         HeroDataMgr heroData = BattleWorld.GetExitsDataMgr<HeroDataMgr>();
-        mNormalSkillIdArr = heroData.GetHeroNormalSkillIdArray(1001);
-        mSkillIdArr = heroData.GetHeroSkillIdArray(1001);
+        mNormalSkillIdArr = heroData.GetHeroNormalSkillIdArray(roleId);
+        mSkillIdArr = heroData.GetHeroSkillIdArray(roleId);
         mSkillSystem = new SkillSystem(this);
         mSkillSystem.InitSkills(mNormalSkillIdArr);
         mSkillSystem.InitSkills(mSkillIdArr);

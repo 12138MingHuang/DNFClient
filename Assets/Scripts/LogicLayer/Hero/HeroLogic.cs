@@ -18,6 +18,7 @@ public class HeroLogic : LogicActor
     public override void OnCreate()
     {
         base.OnCreate();
+        InitActorSkill(HeroId);
         InitHeroAttribute();
     }
     /// <summary>

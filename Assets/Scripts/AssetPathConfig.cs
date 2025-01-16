@@ -48,5 +48,17 @@ public class AssetPathConfig
     /// 游戏内纹理路径
     /// </summary>
     public const string GAME_TEXTURES_PATH = GAME + "Textures/";
+    /// <summary>
+    /// 大厅纹理路径
+    /// </summary>
+    public const string Hall_TEXTURES_PATH = HALL + "Textures/";
+    /// <summary>
+    /// 大厅预制体路径
+    /// </summary>
+    public const string HALL_PREFABS_ITEM_PATH = HALL + "Prefabs/Item/";
+    /// <summary>
+    /// 大厅特效路径
+    /// </summary>
+    public const string Hall_EFFECTS_PATH = HALL + "Effects/";
     
 }
