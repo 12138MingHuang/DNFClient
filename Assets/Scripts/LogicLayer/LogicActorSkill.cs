@@ -159,7 +159,7 @@ public partial class LogicActor
     /// </summary>
     public void OnLogicFrameUpdateSkill()
     {
-        mSkillSystem.OnLogicFrameUpdate();
+        mSkillSystem?.OnLogicFrameUpdate();
     }
 
     /// <summary>

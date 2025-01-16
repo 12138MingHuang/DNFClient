@@ -38,6 +38,7 @@ public class MonsterRender : RenderObject
         
         if(logicObject.ObjectState == LogicObjectState.Death && !string.Equals(animName, AnimationName.Anim_Dead)) return;
         mCurAnimName = animName;
+        if(!mAnim.GetClip(animName)) return;
         mAnim.Play(animName);
     }
 
