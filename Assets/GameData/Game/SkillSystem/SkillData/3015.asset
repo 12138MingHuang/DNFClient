@@ -40,6 +40,7 @@ MonoBehaviour:
     skillGuideRange: 0
     combinationSkillId: 3016
     skillHitEffect: {fileID: 0}
+    skillHitEffectPath: 
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 0}
     showSkillPortrait: 0
@@ -47,6 +48,7 @@ MonoBehaviour:
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 132250, guid: 2d88c740571350c44bc6cb02b6728d63, type: 3}
+    skillEffectPath: Assets/GameData/Game/Arts/Actor/Hero_Gunman/Weapon/Prefabs/p_MachineGun_01_skin.prefab
     triggerFrame: 1
     endFrame: 6
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -98,6 +100,7 @@ MonoBehaviour:
     targetType: 2
     addBuffs: c7750000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 78a0483d95e82f94a9710c53aef51749, type: 3}
     audioName: Gunman_gelinjq_jiashe

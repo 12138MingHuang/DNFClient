@@ -210,7 +210,7 @@ public class Buff
     {
         if (BuffConfig.effectConfig != null && BuffConfig.effectConfig.effect != null)
         {
-            GameObject buffEffect = GameObject.Instantiate(BuffConfig.effectConfig.effect);
+            GameObject buffEffect = ZMAssetsFrame.Instantiate(BuffConfig.effectConfig.effectPath,null);
             mBuffRender = buffEffect.GetComponent<BuffRender>();
             if (mBuffRender == null)
             {

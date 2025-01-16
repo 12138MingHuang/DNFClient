@@ -38,8 +38,10 @@ public class BuffConfig : ScriptableObject
     public AudioClip buffAudio;
     [LabelText("Buff触发特效"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
     public BuffEffectConfig effectConfig;
-    [LabelText("Buff命中特效"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
+    [LabelText("Buff命中特效"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")] [OnValueChanged("GetObjectPath")]
     public GameObject buffHitEffectObj;
+    [ReadOnly]
+    public string buffHitEffectObjPath;
     [LabelText("Buff触发动画"), TitleGroup("技能表现", "所有的表现数据会在Buff释放时和Buff触发时触发")]
     public ObjectAnimationState buffTriggerAnim = ObjectAnimationState.None;
     [LabelText("目标配置")]
@@ -47,6 +49,21 @@ public class BuffConfig : ScriptableObject
     
     [Title("Buff描述："),HideLabel,MultiLineProperty(5)]
     public string buffDes;
+    
+#if UNITY_EDITOR
+
+    public void GetObjectPath(GameObject obj)
+    {
+        buffHitEffectObjPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+    }
+    
+    public void SaveAssets()
+    {
+        UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.AssetDatabase.SaveAssets();
+    }
+
+#endif
 }
 
 [Serializable] [TabGroup("目标配置")]
@@ -73,12 +90,23 @@ public enum ObjectAnimationState
 [Serializable]
 public class BuffEffectConfig
 {
-    [LabelText("Buff特效对象")]
+    [LabelText("Buff特效对象")] [OnValueChanged("GetObjectPath")]
     public GameObject effect;
+    [ReadOnly]
+    public string effectPath;
     [LabelText("特效附着类型")]
     public EffectAttachType attachType;
     [LabelText("特效位置类型")]
     public BuffEffectPosType effectPosType;
+    
+#if UNITY_EDITOR
+
+    public void GetObjectPath(GameObject obj)
+    {
+        effectPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+    }
+    
+#endif
 }
 
 [LabelText("Buff特效位置类型")]

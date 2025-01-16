@@ -19,6 +19,8 @@ MonoBehaviour:
     isLoopAnim: 0
     animLoopCount: 0
     logicFrame: 28
+    isSetCustomLogicFrame: 0
+    customLogicFame: 0
     animLength: 1.9000002
     skillDurationMS: 1900
   skillConfig:
@@ -38,6 +40,7 @@ MonoBehaviour:
     skillGuideRange: 0
     combinationSkillId: 0
     skillHitEffect: {fileID: 1616054244234058, guid: 6fa2ce608b2382e46a49e7e06745afea, type: 3}
+    skillHitEffectPath: Assets/GameData/Game/Effects/Hero_Jianhun/Eff_jianhun_juexing/Prefeb/Eff_jianhun_juexing_die.prefab
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 0}
     showSkillPortrait: 0
@@ -45,6 +48,7 @@ MonoBehaviour:
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 1729168272619954, guid: 6c02a40ad3baa5944b3ff36cf129ea94, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Jianhun/Eff_jianhun_juexing/Prefeb/Eff_jianhun_juexing_chajian.prefab
     triggerFrame: 17
     endFrame: 28
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -80,6 +84,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   - skillEffect: {fileID: 1782029685683990, guid: 5a85782219e031243b013e061320293d, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Jianhun/Eff_jianhun_juexing/Prefeb/Eff_jianhun_juexing_henkan.prefab
     triggerFrame: 20
     endFrame: 28
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -115,6 +120,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   - skillEffect: {fileID: 1497242364561560, guid: a187897b1a95992458b8bcf3a81d1c69, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Jianhun/Eff_jianhun_juexing/Prefeb/Eff_UI_jianhunjuexing_baipingout.prefab
     triggerFrame: 20
     endFrame: 28
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -155,7 +161,7 @@ MonoBehaviour:
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
-    damageRate: 300
+    damageRate: 400
     detectionMode: 1
     boxSize: {x: 13, y: 10, z: 20}
     boxOffset: {x: 0, y: 1, z: 0}
@@ -166,10 +172,12 @@ MonoBehaviour:
     targetType: 1
     addBuffs: b0270000b1270000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: efcc2118b426112438db1c80cbb14b7c, type: 3}
     audioName: Swordsman_hh_mingyanzkl_zhanji
     triggerFrame: 15
     isLoop: 0
     endFrame: 0
+  bulletCfgList: []
   actionCfgList: []

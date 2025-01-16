@@ -40,6 +40,7 @@ MonoBehaviour:
     skillGuideRange: 6
     combinationSkillId: 0
     skillHitEffect: {fileID: 0}
+    skillHitEffectPath: 
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 0}
     showSkillPortrait: 0
@@ -47,6 +48,7 @@ MonoBehaviour:
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 1251718671737700, guid: dc457486a43c7d342ad38db2c24bd2ec, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Qiangpao/Liangzi/Prefab/Eff_Liangzi_dan.prefab
     triggerFrame: 1
     endFrame: 0
     effectOffsetPos: {x: -5, y: 5, z: 0}
@@ -82,6 +84,7 @@ MonoBehaviour:
       actionFinishIdList: 0276000003760000
     gameEffectObj: {fileID: 0}
   damageCfgList: []
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 3f674b82c4524d54dbfc190fd71f081f, type: 3}
     audioName: gunman_hh_liangzibd01

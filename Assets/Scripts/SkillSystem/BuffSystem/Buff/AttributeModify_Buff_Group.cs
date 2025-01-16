@@ -46,8 +46,8 @@ public class AttributeModify_Buff_Group : BuffComposite
                 if (targetActor.ObjectState != LogicObjectState.Death)
                 {
                     // 造成伤害
-                    targetActor.BuffDamage(configValue, buff.BuffConfig.targetConfig.damageConfig);
-                    targetActor.OnHit(buff.BuffConfig.buffHitEffectObj, 1, buff.releaser, buff.releaser.LogicXAxis);
+                    targetActor.BuffDamage(DamageCalculateCenter.CalculateDamage(buff.BuffConfig, buff.releaser, targetActor), buff.BuffConfig.targetConfig.damageConfig);
+                    targetActor.OnHit(buff.BuffConfig.buffHitEffectObjPath, 1, buff.releaser, buff.releaser.LogicXAxis);
                     // 处理造成伤害后的Buff的附加
                     int[] buffidArr = buff.BuffConfig.targetConfig.damageConfig.addBuffs;
                     if (buffidArr != null && buffidArr.Length > 0)

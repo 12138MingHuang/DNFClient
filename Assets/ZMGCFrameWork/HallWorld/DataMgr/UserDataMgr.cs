@@ -7,6 +7,7 @@
 * 注意:以下文件为自动生成，强制再次生成将会覆盖
 ----------------------------------------------------------------------------------------*/
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZMGC.Hall
@@ -14,6 +15,15 @@ namespace ZMGC.Hall
     public class UserDataMgr : IDataBehaviour
     {
         public string UserName { get; set; }
+
+        /// <summary>
+        /// 创建的角色ID列表
+        /// </summary>
+        public List<int> CreateRoleIdList { get; private set; } = new List<int>() { 1000, 1001 };
+        /// <summary>
+        /// 当前角色ID
+        /// </summary>
+        public int RoleId { get; set; }
             
         public void OnCreate()
         {

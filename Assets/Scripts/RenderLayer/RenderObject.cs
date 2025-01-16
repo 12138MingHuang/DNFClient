@@ -135,18 +135,26 @@ public class RenderObject : MonoBehaviour
     /// <summary>
     /// 技能命中受击
     /// </summary>
-    /// <param name="hitEffect"> 技能命中特效 </param>
+    /// <param name="hitEffectPath"> 技能命中特效路径 </param>
     /// <param name="hitEffectSurvivalTimeMs"> 特效存活时间 </param>
     /// <param name="source"> 技能创建者 </param>
-    public virtual void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source)
+    public virtual void OnHit(string hitEffectPath, int hitEffectSurvivalTimeMs, LogicObject source)
     {
-        if (hitEffect != null)
+        if (!string.IsNullOrEmpty(hitEffectPath))
         {
-            GameObject hitEffectObj = GameObject.Instantiate(hitEffect);
+            GameObject hitEffectObj = ZMAssetsFrame.Instantiate(hitEffectPath, null);
             hitEffectObj.transform.position = transform.position;
             hitEffectObj.transform.localScale = source.LogicXAxis > 0 ? Vector3.one : new Vector3(-1f, 1f, 1f);
             Destroy(hitEffectObj, hitEffectSurvivalTimeMs * 1.0f / 1000f);
         }
+    }
+    
+    /// <summary>
+    /// 死亡逻辑
+    /// </summary>
+    public virtual void OnDeath()
+    {
+        
     }
 
     /// <summary>

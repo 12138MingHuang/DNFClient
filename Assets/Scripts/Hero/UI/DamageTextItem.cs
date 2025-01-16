@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
+using ZMAssetFrameWork;
 
 public class DamageTextItem : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class DamageTextItem : MonoBehaviour
 
     public async void ShowDamageText(int damageValue, RenderObject target)
     {
+        DamageText.color = Color.white;
+        _canvasGroup.alpha = 1;
         BattleWindow window = UIModule.Instance.GetWindow<BattleWindow>();
         transform.SetParent(window.transform);
         transform.localScale = Vector3.one;
@@ -35,6 +38,6 @@ public class DamageTextItem : MonoBehaviour
         await transform.DOMoveY(transform.position.y + 1f, 0.2f).AsyncWaitForCompletion();
         _canvasGroup.DOKill();
         transform.DOKill();
-        Destroy(gameObject);
+        ZMAssetsFrame.Release(gameObject);
     }
 }

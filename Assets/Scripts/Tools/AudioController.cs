@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ZMAssetFrameWork;
 
 /// <summary>
 /// 音效播放器(优先级)
@@ -33,7 +34,7 @@ public class AudioController : MonoBehaviour
     /// <summary>
     /// 音乐音量
     /// </summary>
-    private float mMusicVolume = -1;
+    private float mMusicVolume = 0.5f;
     /// <summary>
     /// 音源控制器单例
     /// </summary>
@@ -77,6 +78,7 @@ public class AudioController : MonoBehaviour
         {
             //clip = Resources.Load<AudioClip>("Audio/" + name);//同一个声音反复加载，能不能存起来，不要加载
             //clip = ("Audios/V3/DeepRoomSound.mp3");
+            clip = ZMAssetsFrame.LoadAudio(audiopath);
             //放入字典
             soundAudioDic.Add(audiopath, clip);
             //soundAudioDic.Clear();

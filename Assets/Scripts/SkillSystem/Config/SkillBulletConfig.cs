@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable] [HideMonoScript]
 public class SkillBulletConfig
 {
-    [AssetList, LabelText("子弹特效"), PreviewField(70, ObjectFieldAlignment.Left)]
+    [AssetList, LabelText("子弹特效"), PreviewField(70, ObjectFieldAlignment.Left)] [OnValueChanged("GetBulletObjectPath")]
     public GameObject bulletPrefab;
     [ReadOnly]
     public string bulletPrefabPath;
@@ -35,7 +35,7 @@ public class SkillBulletConfig
     public Vector3 angle;
     [LabelText("子弹击中后是否销毁")]
     public bool isHitDestroy;
-    [AssetList, LabelText("子弹击中特效"), PreviewField(70, ObjectFieldAlignment.Left)]
+    [AssetList, LabelText("子弹击中特效"), PreviewField(70, ObjectFieldAlignment.Left)] [OnValueChanged("GetHitEffectObjectPath")]
     public GameObject hitEffect;
     [ReadOnly]
     public string hitEffectPath;
@@ -47,4 +47,17 @@ public class SkillBulletConfig
     public bool isAttachDamage = false;
     [ToggleGroup("isAttachDamage", "附加伤害配置")]
     public SkillDamageConfig damageConfig;
+    
+#if UNITY_EDITOR
+    
+    public void GetBulletObjectPath(GameObject obj)
+    {
+        bulletPrefabPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+    }
+    public void GetHitEffectObjectPath(GameObject obj)
+    {
+        hitEffectPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+    }
+    
+#endif
 }

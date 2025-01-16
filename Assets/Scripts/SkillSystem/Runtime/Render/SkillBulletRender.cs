@@ -1,4 +1,5 @@
 using UnityEngine;
+using ZMAssetFrameWork;
 
 public class SkillBulletRender : RenderObject
 {
@@ -26,6 +27,6 @@ public class SkillBulletRender : RenderObject
     public override void OnRelease()
     {
         base.OnRelease();
-        GameObject.Destroy(this.gameObject);
+        ZMAssetsFrame.Release(gameObject);
     }
 }

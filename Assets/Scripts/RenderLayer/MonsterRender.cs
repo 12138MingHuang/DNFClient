@@ -9,6 +9,7 @@ public class MonsterRender : RenderObject
     private string mCurAnimName;
     private int mMonsterId;
     private MonsterLogic mMonsterLogic;
+    private MonsterCfg mMonsterCfg;
         
     public override void OnCreate()
     {
@@ -16,16 +17,17 @@ public class MonsterRender : RenderObject
         mAnim = GetComponentInChildren<Animation>();
         mMonsterLogic = (logicObject as MonsterLogic);
         mMonsterId = mMonsterLogic.MonsterId;
-    }
-
-    public override void OnRelease()
-    {
-        base.OnRelease();
+        mMonsterCfg = ConfigCenter.Instance.GetConfigById<MonsterCfg>(mMonsterId);
     }
 
     private void Start()
     {
         
+    }
+    
+    public override void OnRelease()
+    {
+        base.OnRelease();
     }
 
     public override void PlayAnim(string animName)
@@ -36,6 +38,7 @@ public class MonsterRender : RenderObject
         
         if(logicObject.ObjectState == LogicObjectState.Death && !string.Equals(animName, AnimationName.Anim_Dead)) return;
         mCurAnimName = animName;
+        if(!mAnim.GetClip(animName)) return;
         mAnim.Play(animName);
     }
 
@@ -44,9 +47,9 @@ public class MonsterRender : RenderObject
         return mCurAnimName;
     }
 
-    public override void OnHit(GameObject hitEffect, int hitEffectSurvivalTimeMs, LogicObject source)
+    public override void OnHit(string hitEffectPath, int hitEffectSurvivalTimeMs, LogicObject source)
     {
-        base.OnHit(hitEffect, hitEffectSurvivalTimeMs, source);
+        base.OnHit(hitEffectPath, hitEffectSurvivalTimeMs, source);
         //通过怪物配置文件，配置怪物的信息，如怪物的id、基础血量、攻击力、移动速度、受击音效、攻击音效等 Excel
         //加载怪物的时候读取配置，播放音效也是读配置的。
         //临时代码
@@ -64,6 +67,23 @@ public class MonsterRender : RenderObject
             AudioController.Instance.PlaySoundByAudioClip(audioClip, false, 2);
         }
         
+    }
+
+    public override void Damage(int damageValue, DamageSource source)
+    {
+        base.Damage(damageValue, source);
+        BattleWindow window = UIModule.Instance.GetWindow<BattleWindow>();
+        window.ShowMonsterDamage(mMonsterCfg, gameObject.GetInstanceID(), mMonsterLogic.HP + damageValue, damageValue);
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        PlayAnim(AnimationName.Anim_Dead);
+        LogicTimerManager.Instance.DelayCall(1.5f, () =>
+        {
+            ZMAssetsFrame.Release(gameObject);
+        });
     }
 
     protected override void Update()

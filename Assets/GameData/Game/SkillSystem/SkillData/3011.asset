@@ -40,6 +40,7 @@ MonoBehaviour:
     skillGuideRange: 0
     combinationSkillId: 0
     skillHitEffect: {fileID: 0}
+    skillHitEffectPath: 
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 0}
     showSkillPortrait: 0
@@ -47,6 +48,7 @@ MonoBehaviour:
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 1260345263929180, guid: c7c505829f64b5045a71b3ada1cb3791, type: 3}
+    skillEffectPath: Assets/GameData/Game/Arts/Actor/Weapon/Weapon_Gun/Weapon_Gun_Jiguangpao_1/Weapon_Gun_Jiguangpao_1/Prefabs/p_Hero_GunMan_weapon_Jiguangpao_1.prefab
     triggerFrame: 0
     endFrame: 9
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -82,6 +84,7 @@ MonoBehaviour:
       actionFinishIdList: 
     gameEffectObj: {fileID: 0}
   - skillEffect: {fileID: 7023820621642612246, guid: 0c809fc689cbe6344931b2301164e30b, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Qiangpao/Jiguangpao/Prefab/Eff_Jiguangpao_jiguang_smal.prefab
     triggerFrame: 1
     endFrame: 9
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -122,7 +125,7 @@ MonoBehaviour:
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 250
     detectionMode: 1
     boxSize: {x: 17, y: 2, z: 1}
     boxOffset: {x: 10, y: 1, z: 0}
@@ -133,6 +136,7 @@ MonoBehaviour:
     targetType: 2
     addBuffs: 204e0000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 7d359cffc27843347b25b6a309fe40af, type: 3}
     audioName: Gunman_jiguangp_fashe

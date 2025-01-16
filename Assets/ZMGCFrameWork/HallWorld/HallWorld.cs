@@ -12,6 +12,7 @@ namespace ZMGC.Hall
         {
             base.OnCreate();
             UIModule.Instance.PopUpWindow<CreateRoleWindow>();
+            AudioController.Instance.PlayMusicFade(AssetPathConfig.GAME_AUIDO_PATH + "BG/Login.mp3", 2);
             Debug.Log("HallWorld OnCreate>>>");
         }
 

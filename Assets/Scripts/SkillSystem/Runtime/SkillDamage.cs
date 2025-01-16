@@ -182,7 +182,7 @@ public partial class Skill
         foreach (var target in damageTargetList)
         {
             // 造成伤害
-            target.SkillDamage(9999, skillDamageConfig);
+            target.SkillDamage(DamageCalculateCenter.CalculateDamage(skillDamageConfig, mSkillCreator, target), skillDamageConfig);
             
             // 添加 Buff
             if (skillDamageConfig.addBuffs != null && skillDamageConfig.addBuffs.Length > 0)
@@ -213,7 +213,7 @@ public partial class Skill
     {
         if (mSkillDataConfig.skillConfig.skillHitEffect != null)
         {
-            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffect, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, source, mSkillCreator.LogicXAxis);
+            targetObj.OnHit(mSkillDataConfig.skillConfig.skillHitEffectPath, mSkillDataConfig.skillConfig.hitEffectSurvivalTimeMs, source, mSkillCreator.LogicXAxis);
         }
     }
 

@@ -19,6 +19,8 @@ MonoBehaviour:
     isLoopAnim: 0
     animLoopCount: 0
     logicFrame: 9
+    isSetCustomLogicFrame: 0
+    customLogicFame: 0
     animLength: 0.6
     skillDurationMS: 600
   skillConfig:
@@ -38,6 +40,7 @@ MonoBehaviour:
     skillGuideRange: 0
     combinationSkillId: 0
     skillHitEffect: {fileID: 5023627635078921320, guid: eebb9919fe1d53f4690a67203d880219, type: 3}
+    skillHitEffectPath: Assets/GameData/Game/Effects/Eff_Jianhun_Hit/Eff_jianhun_Hit.prefab
     hitEffectSurvivalTimeMs: 100
     skillHitAudio: {fileID: 8300000, guid: 17ee30fc61d38614b9d605976ec2c129, type: 3}
     showSkillPortrait: 0
@@ -45,6 +48,7 @@ MonoBehaviour:
     skillDes: 
   effectCfgList:
   - skillEffect: {fileID: 1729188287788238, guid: f11cfb3214305634796805a084b4d5d5, type: 3}
+    skillEffectPath: Assets/GameData/Game/Effects/Hero_Jianhun/Eff_Jianhun_Badaozhan/Prefab/Eff_Hero_Jianhun_Bdz_guangjian.prefab
     triggerFrame: 1
     endFrame: 9
     effectOffsetPos: {x: 0, y: 0, z: 0}
@@ -85,7 +89,7 @@ MonoBehaviour:
     triggerIntervalMS: 0
     isFollowEffect: 0
     damageType: 1
-    damageRate: 0
+    damageRate: 200
     detectionMode: 2
     boxSize: {x: 1, y: 1, z: 1}
     boxOffset: {x: 0, y: 0, z: 0}
@@ -96,10 +100,12 @@ MonoBehaviour:
     targetType: 0
     addBuffs: 204e0000
     triggerSkillId: 0
+  buffCfgList: []
   audioCfgList:
   - skillAudio: {fileID: 8300000, guid: 9d580328b1230bd48b578405d637d450, type: 3}
     audioName: Swordsman_lieboz_huidao
     triggerFrame: 0
     isLoop: 0
     endFrame: 0
+  bulletCfgList: []
   actionCfgList: []

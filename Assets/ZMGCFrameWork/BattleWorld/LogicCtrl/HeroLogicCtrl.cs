@@ -9,12 +9,14 @@
 
 using UnityEngine;
 using ZMAssetFrameWork;
+using ZMGC.Hall;
 
 namespace ZMGC.Battle
 {
 	public class HeroLogicCtrl : ILogicBehaviour
 	{
 		public HeroLogic HeroLogic { get; private set; }
+		public int HeroId { get; private set; }
 		
 		public void OnCreate()
 		{
@@ -26,15 +28,18 @@ namespace ZMGC.Battle
 		/// </summary>
 		public void InitHero()
 		{
-			GameObject heroObj =  ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS_HERO + "1001", null);
+			HeroId = HallWorld.GetExitsDataMgr<UserDataMgr>().RoleId;
+			GameObject heroObj =  ZMAssetsFrame.Instantiate(AssetPathConfig.GAME_PREFABS_HERO + HeroId, null);
 			// 获取英雄渲染层
 			HeroRender heroRender = heroObj.GetComponent<HeroRender>();
-			global::HeroLogic heroLogic = new global::HeroLogic(1001, heroRender);
+			global::HeroLogic heroLogic = new global::HeroLogic(HeroId, heroRender);
 			HeroLogic = heroLogic;
 			heroRender.SetLogicObject(heroLogic);
 			// 初始化英雄逻辑层和渲染层
 			heroLogic.OnCreate();
-			heroRender.OnCreate(); 
+			heroRender.OnCreate();
+			
+			GameObject.Find("Main Camera").GetComponent<CameraFollow>().target = heroObj.transform;
 		}
 		
 		public void OnLogicFrameUpdate()

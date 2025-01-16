@@ -32,9 +32,11 @@ MonoBehaviour:
   buffAudio: {fileID: 0}
   effectConfig:
     effect: {fileID: 1287281474023808, guid: ab728979132ca86408ba1aa0a7cb3a16, type: 3}
+    effectPath: Assets/GameData/Game/Effects/Hero_Qiangpao/Liangzi/Prefab/Eff_Liangzi_baozha_dimian.prefab
     attachType: 0
     effectPosType: 2
   buffHitEffectObj: {fileID: 0}
+  buffHitEffectObjPath: 
   buffTriggerAnim: 0
   targetConfig:
     isOpen: 1
@@ -44,8 +46,8 @@ MonoBehaviour:
       endFrame: 0
       triggerIntervalMS: 0
       isFollowEffect: 0
-      damageType: 1
-      damageRate: 0
+      damageType: 2
+      damageRate: 100
       detectionMode: 2
       boxSize: {x: 1, y: 1, z: 1}
       boxOffset: {x: 0, y: 0, z: 0}
